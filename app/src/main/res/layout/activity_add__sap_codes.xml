@@ -21,4 +21,13 @@
         app:layout_constraintVertical_bias="0.94"
         app:srcCompat="@android:drawable/ic_input_add" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sap_code_rcv"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="219dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
