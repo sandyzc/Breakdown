@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Breakdown</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_data_input">Data_input</string>
+    <string name="equipment_name">Equipment Name :</string>
+
+    <string-array name="Stoppage_Category">
+        <item>Maintenance Dept</item>
+        <item>Operation</item>
+        <item>Utility</item>
+        <item>Process</item>
+    </string-array>
+
+    <string-array name="Problem_Category">
+        <item>Mechanical</item>
+        <item>Electrical</item>
+        <item>Plant Engineering</item>
+        <item>Electronics/Robotics</item>
+
+    </string-array>
+
+    <string-array name="Equipment_list">
+        <item>Hot Box</item>
+    </string-array>
+
+    <string-array name="Work_Type">
+        <item>Breakdown</item>
+        <item>Corrective Measure</item>
+        <item>Planned</item>
+        <item>Modification</item>
+        <item>Preventive Maintenance</item>
+        <item>Predective Maintenance</item>
+    </string-array>
+
+    <string-array name="Operation">
+        <item>Table UP / Down</item>
+        <item>Ejector Up / Down</item>
+        <item>Core Picker</item>
+        <item>Burner Top</item>
+        <item>Burner Bottom</item>
+        <item>Mone rail</item>
+        <item>Blowing</item>
+        <item>Exhaust</item>
+        <item>Sand Call</item>
+    </string-array>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="problem_description">Problem Description :</string>
+</resources>

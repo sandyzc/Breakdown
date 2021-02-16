@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "506364332044",
+    "project_id": "breakdown-app-118c1",
+    "storage_bucket": "breakdown-app-118c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506364332044:android:dfff9a5be731191e2f8629",
+        "android_client_info": {
+          "package_name": "com.sandyzfeaklab.Breakdown_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506364332044-6upngedmr40dvb9sj9tf6sogrq7ugs1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA17uBgFDo0nL4TEOqIf3SrxHByPbXlmq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506364332044-6upngedmr40dvb9sj9tf6sogrq7ugs1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
