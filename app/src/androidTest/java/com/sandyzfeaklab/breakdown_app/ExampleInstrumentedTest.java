@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.Breakdown_app;
+package com.sandyzfeaklab.breakdown_app;
 
 import android.content.Context;
 

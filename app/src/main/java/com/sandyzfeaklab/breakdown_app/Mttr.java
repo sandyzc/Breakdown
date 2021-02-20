@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.Breakdown_app;
+package com.sandyzfeaklab.breakdown_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,6 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
-import com.anychart.charts.Cartesian3d;
-import com.anychart.charts.Pie;
-import com.anychart.core.gauge.pointers.Bar;
-import com.anychart.core.ui.table.Column;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="setAdapter"
+            type="com.sandyzfeaklab.breakdown_app.Add_Sap_codes" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/nemak"
     tools:context=".Add_Sap_codes">
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_Sap"
@@ -23,7 +34,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sap_code_rcv"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="219dp"
@@ -31,3 +41,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
