@@ -1,16 +1,26 @@
 package com.sandyzfeaklab.breakdown_app.dataModel;
 
-public class Sap_code_Model {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String sap_code;
+import java.io.Serializable;
+
+public class Sap_code_Model implements Serializable {
+
+    private long sap_code;
     private String sap_description;
     private int sap_qty;
 
-    public String getSap_code() {
+    public Sap_code_Model() {
+    }
+
+
+
+    public long getSap_code() {
         return sap_code;
     }
 
-    public Sap_code_Model setSap_code(String sap_code) {
+    public Sap_code_Model setSap_code(long sap_code) {
         this.sap_code = sap_code;
         return this;
     }
@@ -32,4 +42,6 @@ public class Sap_code_Model {
         this.sap_qty = sap_qty;
         return this;
     }
+
+
 }

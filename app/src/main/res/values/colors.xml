@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="nemak">#0174c0</color>
     <color name="bluee">#012ac0</color>
+    <color name="Green">#228B22</color>
+    <color name="Red">	#FF0000</color>
+    <color name="grey">#7a7a7a</color>
+    <color name="lightGrey">#aaaaaa</color>
+    <color name="veryLightGrey">#f0f0f0</color>
+    <color name="purple">#7d64e6</color>
+    <color name="yellow">#ffee00</color>
 </resources>

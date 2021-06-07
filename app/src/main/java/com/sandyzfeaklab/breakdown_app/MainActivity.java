@@ -8,13 +8,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton mttr_butt,mtbf_butt,uptime_time,pending_butt;
+    ImageView mtbf_butt,mttr_butt,uptime_time,pending_butt;
 
 
     @Override
@@ -53,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         pending_butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this,Pending_activity.class);
+                startActivity(intent);
             }
         });
 
@@ -65,14 +69,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        ImageView fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Data_input.class);
+                Intent intent = new Intent(MainActivity.this,Add_Log.class);
                 startActivity(intent);
             }
         });
     }
+
 
 }

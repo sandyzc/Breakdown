@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,29 +13,76 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sandyzfeaklab.breakdown_app.dataModel.Model;
+import com.sandyzfeaklab.breakdown_app.dataModel.Model1;
+import com.sandyzfeaklab.breakdown_app.dataModel.Sap_code_Model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Data_input extends AppCompatActivity {
 
-    String Part = "Part Name", problem_desc = "Problem", action_taken = "Action Taken", spares_used = "Spares Used", sap_no = "Sap No", operation = "Operation", end_time = "End Time", Action_taken_by = "Action taken by ", start_time = "Start Time";
+    String Equipment_name = "Equipment Name",
+            Work_Type = "Work Type",
+            operation = "Operation",
+            Part = "Part Name",
+            Date="",
+            problem_desc = "Problem", action_taken = "Action Taken", spares_used = "Spares Used", sap_no = "", Start_Time = " Start Time", end_time = "End Time", Action_taken_by = "Action taken by ";
 
     TextView starttime, endtime, time_taken;
+    EditText part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by;
+    Date start,end;
+
+    ArrayList<Sap_code_Model> models = new ArrayList<>();
+
+    private static final int SECOND_ACTIVITY_REQUEST_CODE = 1;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference reference = FirebaseFirestore.getInstance().collection("log");
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.getExtras() != null) {
+                    models = (ArrayList<Sap_code_Model>) data.getExtras().getSerializable("Codes");
+                    String sapcode = "";
+
+                    for (int i = 0; i < models.size(); i++) {
+
+                        sapcode += models.get(i).getSap_description() + " Qty - " + models.get(i).getSap_qty() + "\n";
+
+                    }
+                    Toast.makeText(this, sapcode, Toast.LENGTH_SHORT).show();
+                    spares_used_et.setText(sapcode);
+                }
+
+            }
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,20 +92,18 @@ public class Data_input extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        EditText part_name, problem_desc_et, action_taken_et, spares_used_et, sap_no_et;
-
-
+        spares_used_et = findViewById(R.id.spares_used_et);
+        work_done_by = findViewById(R.id.work_done_by_et);
         part_name = findViewById(R.id.partname);
         problem_desc_et = findViewById(R.id.problem_desc_et);
         action_taken_et = findViewById(R.id.action_taken_et);
-        spares_used_et = findViewById(R.id.spares_used_et);
+
+
         //  sap_no_et=findViewById(R.id.sap_no_et);
 
 
         Button save_butt = findViewById(R.id.save_data);
-        Button add_sap_code=findViewById(R.id.add_sap_code);
+        Button add_sap_code = findViewById(R.id.add_sap_code);
 
         TextView date = findViewById(R.id.date_main);
 
@@ -74,8 +120,8 @@ public class Data_input extends AppCompatActivity {
         Spinner equpi_list_spinne = (Spinner) findViewById(R.id.equip_list_spin);
         Spinner work_type_spinner = (Spinner) findViewById(R.id.work_type_spin);
         Spinner operation_spinner = (Spinner) findViewById(R.id.operation_spin);
-        Spinner problem_category = (Spinner) findViewById(R.id.prob_cat);
-        Spinner stoppage_category = (Spinner) findViewById(R.id.stoppage_cat);
+        Spinner problem_category = findViewById(R.id.prob_cat);
+        Spinner stoppage_category = findViewById(R.id.stoppage_cat);
 
         ArrayAdapter<CharSequence> equip_lis_adapter = ArrayAdapter.createFromResource(this, R.array.Equipment_list, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> work_type_adapter = ArrayAdapter.createFromResource(this, R.array.Work_Type, android.R.layout.simple_spinner_item);
@@ -94,6 +140,7 @@ public class Data_input extends AppCompatActivity {
         operation_spinner.setAdapter(operation_type_adapter);
         problem_category.setAdapter(problem_category_adapter);
         stoppage_category.setAdapter(stoppage_category_adapter);
+
 
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,10 +172,12 @@ public class Data_input extends AppCompatActivity {
                         .listener(new SingleDateAndTimePickerDialog.Listener() {
                             @Override
                             public void onDateSelected(Date date) {
+                                    start=date;
 
-
-                                SimpleDateFormat localDateFormat = new SimpleDateFormat("hh:mm a");
-                                String starttim = localDateFormat.format(date);
+                                SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/M/yyyy");
+                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("hh:mm a");
+                                String starttim = localDateFormat1.format(date);
+                                Date=localDateFormat.format(date);
                                 starttime.setText(starttim);
                             }
                         }).display();
@@ -170,12 +219,18 @@ public class Data_input extends AppCompatActivity {
                         .listener(new SingleDateAndTimePickerDialog.Listener() {
                             @Override
                             public void onDateSelected(Date date) {
+                                end=date;
 
-                                SimpleDateFormat localDateFormat = new SimpleDateFormat("hh:mm a");
-                                String starttim = localDateFormat.format(date);
+                                SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("hh:mm a");
+                                String starttim = localDateFormat1.format(date);
                                 endtime.setText(starttim);
 
-                                timeDiff();
+
+
+                                printDifference(start,end);
+
+
                             }
                         }).display();
 
@@ -187,28 +242,64 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String work_type_selected = work_type_spinner.getSelectedItem().toString();
-                String oper_type_selected = operation_spinner.getSelectedItem().toString();
-                String equip_type_selected = equpi_list_spinne.getSelectedItem().toString();
+                String work_Type = work_type_spinner.getSelectedItem().toString();
+                String operation = operation_spinner.getSelectedItem().toString();
+                String equipment_name = equpi_list_spinne.getSelectedItem().toString();
 
-                //String Part= "Part Name",problem_desc="Problem",action_taken="Action Taken",spares_used="Spares Used",sap_no="Sap No";
 
-                Map<String, Object> data_log = new HashMap<>();
-                data_log.put(Part, part_name.getText().toString());
-                data_log.put(problem_desc, problem_desc_et.getText().toString());
-                data_log.put(action_taken, action_taken_et.getText().toString());
-                data_log.put(spares_used, spares_used_et.getText().toString());
-                //data_log.put(sap_no,sap_no_et.getText().toString());
-                data_log.put(operation, oper_type_selected);
-                data_log.put(end_time, endtime.getText().toString());
-                data_log.put(start_time, starttime.getText().toString());
+                if (endtime.getText().toString().equals(" End TIME : ")) {
+                    FlatDialog flatDialog = new FlatDialog(Data_input.this);
 
-                db.collection(equip_type_selected).document(date.getText().toString()).set(data_log).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(Data_input.this, "Sucessfully added", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    flatDialog.setTitle("Want to mark as pending ??")
+
+                            .setFirstButtonText("Yes").setSecondButtonText("NO").isCancelable(true).withFirstButtonListner(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            reference.add(new Model(equipment_name, work_Type,
+                                    operation, part_name.getText().toString(),
+                                    problem_desc_et.getText().toString(),
+                                    action_taken_et.getText().toString(),
+                                    spares_used_et.getText().toString(),
+                                    models, starttime.getText().toString(),
+                                    endtime.getText().toString(),
+                                    work_done_by.getText().toString(),"Pending",Date)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            finish();
+                        }
+                    }).withSecondButtonListner(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            flatDialog.cancel();
+                        }
+                    }).show();
+
+                } else {
+                    //adding data to firestore
+                    reference.add(new Model(equipment_name,
+                            work_Type,
+                            operation,
+                            part_name.getText().toString(),
+                            problem_desc_et.getText().toString(),
+                            action_taken_et.getText().toString(),
+                            spares_used_et.getText().toString(),
+                            models,
+                            starttime.getText().toString(),
+                            endtime.getText().toString(),
+                            work_done_by.getText().toString(),
+                            "Compleated",
+                            Date)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    finish();
+                }
 
 
             }
@@ -218,34 +309,95 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent= new Intent(Data_input.this,Add_Sap_codes.class);
-                startActivity(intent);
+//                uploaddate uploaddate= new uploaddate();
+//                uploaddate.setPriority(10);
+//
+//                uploaddate.run();
+
+                Intent intent = new Intent(Data_input.this, updata.class);
+                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
             }
         });
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void timeDiff() {
-        String inputStart = starttime.getText().toString().toUpperCase();
-        String inputStop = endtime.getText().toString().toUpperCase();
 
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm a");
-        LocalTime start = LocalTime.parse(inputStart, f);
-        LocalTime stop = LocalTime.parse(inputStop, f);
-        Duration d = Duration.between(start, stop);
 
-        if (d.toHours() > 24.0) {
-            Toast.makeText(Data_input.this, " More than 24 Hrs", Toast.LENGTH_LONG).show();
-        } else {
-            String diff_hr = String.valueOf(d);
-            String diff_mm = String.valueOf(d.toMinutes());
 
-            time_taken.setText(diff_mm + " Min ");
-        }
+    public void printDifference(Date startDate, Date endDate) {
+        //milliseconds
+        long different = endDate.getTime() - startDate.getTime();
+
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+
+        long elapsedDays = different / daysInMilli;
+        different = different % daysInMilli;
+
+        long elapsedHours = different / hoursInMilli;
+        different = different % hoursInMilli;
+
+        long elapsedMinutes = different / minutesInMilli + elapsedHours*60 + elapsedDays*24*60;
+        different = different % minutesInMilli;
+
+        time_taken.setText( elapsedMinutes +" Min");
 
 
     }
 
+        class uploaddate extends Thread{
 
+
+
+            CollectionReference reference = FirebaseFirestore.getInstance().collection("log");
+            ArrayList<Sap_code_Model> models = new ArrayList<>();
+
+            @Override
+            public void run() {
+
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                String json;
+                try {
+                    InputStream is = getAssets().open("data.json");
+                    int size = is.available();
+                    byte[] buffer = new byte[size];
+                    is.read(buffer);
+                    is.close();
+
+                    json= new String(buffer, StandardCharsets.UTF_8);
+                    JSONArray jsonArray = new JSONArray(json);
+
+                    for (int i=0; i<jsonArray.length();i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+
+                        reference.add(new Model(
+                                jsonObject.getString("equipment_name"),
+                                jsonObject.getString("work_Type"),
+                                jsonObject.getString("operation"),
+                                jsonObject.getString("part"),
+                                jsonObject.getString("problem_desc"),
+                                jsonObject.getString("action_taken"),
+                                jsonObject.getString("spares_used"),
+                                models,
+                                jsonObject.getString("start_Time"),
+                                jsonObject.getString("end_time"),
+                                jsonObject.getString("action_taken_by"),
+                                jsonObject.getString("status"),
+                                jsonObject.getString("Date")))
+                        ;
+                    }
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+
+                super.run();
+            }
+        }
 }
+
+
