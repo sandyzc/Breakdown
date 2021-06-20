@@ -6,7 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -49,10 +51,13 @@ public class Data_input extends AppCompatActivity {
             Part = "Part Name",
             Date="",
             problem_desc = "Problem", action_taken = "Action Taken", spares_used = "Spares Used", sap_no = "", Start_Time = " Start Time", end_time = "End Time", Action_taken_by = "Action taken by ";
+    int time;
 
-    TextView starttime, endtime, time_taken;
-    EditText part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by;
+    TextView starttime, endtime ;
+    EditText part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by,time_taken;
     Date start,end;
+    ArrayAdapter<CharSequence> equip_lis_adapter;
+    ArrayAdapter<CharSequence> operation_type_adapter;
 
     ArrayList<Sap_code_Model> models = new ArrayList<>();
 
@@ -119,27 +124,113 @@ public class Data_input extends AppCompatActivity {
 
         Spinner equpi_list_spinne = (Spinner) findViewById(R.id.equip_list_spin);
         Spinner work_type_spinner = (Spinner) findViewById(R.id.work_type_spin);
-        Spinner operation_spinner = (Spinner) findViewById(R.id.operation_spin);
+        AutoCompleteTextView operation_spinner = (AutoCompleteTextView) findViewById(R.id.operation_spin);
         Spinner problem_category = findViewById(R.id.prob_cat);
         Spinner stoppage_category = findViewById(R.id.stoppage_cat);
+        Spinner area = findViewById(R.id.spinner_area);
 
-        ArrayAdapter<CharSequence> equip_lis_adapter = ArrayAdapter.createFromResource(this, R.array.Equipment_list, android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<CharSequence> area_adapter = ArrayAdapter.createFromResource(this, R.array.Area, android.R.layout.simple_spinner_item);
+
         ArrayAdapter<CharSequence> work_type_adapter = ArrayAdapter.createFromResource(this, R.array.Work_Type, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> operation_type_adapter = ArrayAdapter.createFromResource(this, R.array.Operation, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> problem_category_adapter = ArrayAdapter.createFromResource(this, R.array.Problem_Category, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> stoppage_category_adapter = ArrayAdapter.createFromResource(this, R.array.Stoppage_Category, android.R.layout.simple_spinner_item);
 
-        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         work_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         problem_category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stoppage_category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        equpi_list_spinne.setAdapter(equip_lis_adapter);
+        area.setAdapter(area_adapter);
+
         work_type_spinner.setAdapter(work_type_adapter);
-        operation_spinner.setAdapter(operation_type_adapter);
+
         problem_category.setAdapter(problem_category_adapter);
         stoppage_category.setAdapter(stoppage_category_adapter);
+
+        area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+
+                    case 0:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 1:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC_ope, android.R.layout.simple_spinner_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 2:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 3:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 4:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 5:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 6:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingHPDC, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingHPDC_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 7:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+                    case 8:
+                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment, android.R.layout.simple_spinner_item);
+                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment_ope, android.R.layout.simple_spinner_item);
+                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        break;
+
+                }
+
+                equpi_list_spinne.setAdapter(equip_lis_adapter);
+                operation_spinner.setAdapter(operation_type_adapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+                equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting, android.R.layout.simple_spinner_item);
+                operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting_ope, android.R.layout.simple_spinner_item);
+            }
+        });
+
+
+
+
+
+
+
 
 
         starttime.setOnClickListener(new View.OnClickListener() {
@@ -190,20 +281,12 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Calendar c = Calendar.getInstance();
-                int hour = c.get(Calendar.HOUR_OF_DAY);
-                int minute = c.get(Calendar.MINUTE);
-                int second = c.get(Calendar.SECOND);
+
 
 
                 new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(true)
-                        //.bottomSheet()
-                        .curved()
+                                               .curved()
                         .minutesStep(1)
-                        //.stepSizeMinutes(15)
-                        //.displayHours(false)
-                        //.displayMinutes(false)
-                        //.todayText("aujourd'hui")
                         .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                             @Override
                             public void onDisplayed(SingleDateAndTimePicker picker) {
@@ -243,11 +326,11 @@ public class Data_input extends AppCompatActivity {
             public void onClick(View v) {
 
                 String work_Type = work_type_spinner.getSelectedItem().toString();
-                String operation = operation_spinner.getSelectedItem().toString();
+                String operation = operation_spinner.getText().toString();
                 String equipment_name = equpi_list_spinne.getSelectedItem().toString();
 
 
-                if (endtime.getText().toString().equals(" End TIME : ")) {
+                if (endtime.getText().toString().equals("END TIME")) {
                     FlatDialog flatDialog = new FlatDialog(Data_input.this);
 
                     flatDialog.setTitle("Want to mark as pending ??")
@@ -262,8 +345,8 @@ public class Data_input extends AppCompatActivity {
                                     action_taken_et.getText().toString(),
                                     spares_used_et.getText().toString(),
                                     models, starttime.getText().toString(),
-                                    endtime.getText().toString(),
-                                    work_done_by.getText().toString(),"Pending",Date)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    " ",
+                                    work_done_by.getText().toString(),"Pending",Date,time)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();
@@ -292,7 +375,7 @@ public class Data_input extends AppCompatActivity {
                             endtime.getText().toString(),
                             work_done_by.getText().toString(),
                             "Compleated",
-                            Date)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            Date,time)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();
@@ -309,12 +392,7 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                uploaddate uploaddate= new uploaddate();
-//                uploaddate.setPriority(10);
-//
-//                uploaddate.run();
-
-                Intent intent = new Intent(Data_input.this, updata.class);
+                Intent intent = new Intent(Data_input.this, Add_Sap_codes.class);
                 startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -341,63 +419,13 @@ public class Data_input extends AppCompatActivity {
 
         long elapsedMinutes = different / minutesInMilli + elapsedHours*60 + elapsedDays*24*60;
         different = different % minutesInMilli;
+        time= (int) elapsedMinutes;
 
         time_taken.setText( elapsedMinutes +" Min");
 
 
     }
 
-        class uploaddate extends Thread{
-
-
-
-            CollectionReference reference = FirebaseFirestore.getInstance().collection("log");
-            ArrayList<Sap_code_Model> models = new ArrayList<>();
-
-            @Override
-            public void run() {
-
-                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-                String json;
-                try {
-                    InputStream is = getAssets().open("data.json");
-                    int size = is.available();
-                    byte[] buffer = new byte[size];
-                    is.read(buffer);
-                    is.close();
-
-                    json= new String(buffer, StandardCharsets.UTF_8);
-                    JSONArray jsonArray = new JSONArray(json);
-
-                    for (int i=0; i<jsonArray.length();i++){
-
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-
-                        reference.add(new Model(
-                                jsonObject.getString("equipment_name"),
-                                jsonObject.getString("work_Type"),
-                                jsonObject.getString("operation"),
-                                jsonObject.getString("part"),
-                                jsonObject.getString("problem_desc"),
-                                jsonObject.getString("action_taken"),
-                                jsonObject.getString("spares_used"),
-                                models,
-                                jsonObject.getString("start_Time"),
-                                jsonObject.getString("end_time"),
-                                jsonObject.getString("action_taken_by"),
-                                jsonObject.getString("status"),
-                                jsonObject.getString("Date")))
-                        ;
-                    }
-
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-
-                super.run();
-            }
-        }
 }
 
 

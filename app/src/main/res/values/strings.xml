@@ -39,7 +39,208 @@
 
 	</string-array>
 
-	<string-array name="Equipment_list">
+	<string-array name="Melting_ope">
+		<item>Loader unit</item>
+		<item>Main LPG circuit</item>
+		<item>Melting chamber</item>
+		<item>Holding chamber</item>
+		<item>Melt cum Holding chamber</item>
+		<item>Tilting system</item>
+
+	</string-array>
+
+	<string-array name="Melting">
+		<item>ZPF</item>
+		<item>Striko1</item>
+		<item>Striko2</item>
+		<item>Crucible1</item>
+		<item>Crucible2</item>
+		<item>Ladlepreheater1</item>
+		<item>Ladlepreheater2</item>
+		<item>Degassing 1</item>
+		<item>Degassing 2</item>
+	</string-array>
+
+	<string-array name="HPDC">
+		<item>HPDC1</item>
+		<item>HPDC2</item>
+		<item>HPDC3</item>
+	</string-array>
+
+	<string-array name="HPDC_ope">
+		<item>Jib crane</item>
+		<item>Die casting machine</item>
+		<item>Robot - Liner</item>
+		<item>Robot - Sprayer</item>
+		<item>Robot - Extractor</item>
+		<item>Liner measuring system</item>
+		<item>Liner rack</item>
+		<item>Vacuum unit</item>
+		<item>Marking machine</item>
+		<item>Dosing Furnace</item>
+		<item>Holding Furnace</item>
+		<item>Auto ladle</item>
+		<item>Jet cooling machine - Inhouse</item>
+		<item>Jet cooling machine - Arhesty</item>
+		<item>Die Thermo Unit</item>
+		<item>Sleeve Thermo unit</item>
+		<item>Dycote mixing system</item>
+		<item>Cooling Tunnel </item>
+		<item>Part check station</item>
+		<item>Runner breaking station</item>
+		<item>Plunger lub unit</item>
+		<item>Granule lub unit</item>
+		<item>Saw machine</item>
+		<item>Safety fence</item>
+		<item>Return water line system</item>
+		<item>Fume Extraction</item>
+		<item>Leak test machine -TATA</item>
+		<item>Leak test machine -Dragon</item>
+	</string-array>
+
+	<string-array name="GSPM">
+
+		<item>GSPM2B</item>
+		<item>GSPM3B1</item>
+		<item>GSPM3B2</item>
+
+
+	</string-array>
+
+	<string-array name="GSPM_ope">
+		<item>Robot - Core Manipulator</item>
+		<item>Robot - Ladle</item>
+		<item>Robot - Extractor</item>
+		<item>Unloading conveyor</item>
+		<item>Bench 1</item>
+		<item>Bench 2</item>
+		<item>Bench 3</item>
+		<item>Mobile Degassing Unit</item>
+		<item>Cup cleaning station</item>
+		<item>Temporary station</item>
+		<item>Degating station</item>
+		<item>Holding Furnace</item>
+		<item>Hydraulic System</item>
+		<item>Cell</item>
+		<item>Core indexing table</item>
+		<item>Jib crane</item>
+		<item>Die loading crane</item>
+		<item>Die preheating unit</item>
+		<item>Return water line system</item>
+		<item>Fume extraction </item>
+		<item>CO2 Cleaning - 1</item>
+		<item>CO2 Cleaning - 2</item>
+		<item>CO2 Cleaning - 3</item>
+
+	</string-array>
+
+	<string-array name="ColdBox">
+		<item>Coldbox1</item>
+		<item>Coldbox2</item>
+		<item>Coldbox3</item>
+		<item>Coldbox4</item>
+	</string-array>
+
+	<string-array name="ColdBox_ope">
+		<item>Core shooting machine</item>
+		<item>Mixer unit</item>
+		<item>Amine unit</item>
+		<item>Sand conveyor unit</item>
+		<item>Amine Scrubber - 1</item>
+		<item>Amine Scrubber - 2</item>
+	</string-array>
+
+	<string-array name="HotBox"
+>
+		<item>Hotbox1</item>
+		<item>Hotbox2</item>
+		<item>Hotbox3</item>
+		<item>Hotbox4</item>
+	</string-array>
+
+	<string-array name="HotBox_ope">
+		<item>Core shooting machine</item>
+		<item>Mixer unit</item>
+		<item>Sand trolley</item>
+		<item>Sand conveyor unit</item>
+	</string-array>
+
+	<string-array name="FinishingHPDC">
+		<item>Trimming1</item>
+		<item>Trimming2</item>
+		<item>Shotblasting1</item>
+		<item>Shotblasting2</item>
+		<item>BandSaw1</item>
+		<item>BandSaw2</item>
+
+	</string-array>
+
+	<string-array name="FinishingHPDC_ope">
+		<item>Infeed conveyor</item>
+		<item>Robot - Loading </item>
+		<item>Robot - Un Loading </item>
+		<item>Trimming Press</item>
+		<item>Loading Poke yoke</item>
+		<item>Unloading Poke Yoke</item>
+		<item>Dust Collector System</item>
+		<item>Shot blasting machine</item>
+
+	</string-array>
+	<string-array name="FinishingGSPM">
+		<item>Fillcell1</item>
+		<item>Fillcell2</item>
+		<item>BandSaw1</item>
+		<item>BandSaw2</item>
+		<item>BandSaw3</item>
+		<item>BandSaw4</item>
+		<item>HemtechRotarycut</item>
+		<item>Bandsaw6</item>
+	</string-array>
+
+	<string-array name="FinishingGSPM_ope">
+		<item>Jib crane</item>
+		<item>Cell</item>
+		<item>Infeed conveyor</item>
+		<item>Hammering station </item>
+		<item>Swing master</item>
+		<item>Bandsaw</item>
+		<item>Burr conveyor</item>
+		<item>Sand conveyor</item>
+		<item>Outfeed conveyor</item>
+		<item>Robot</item>
+		<item>Table1</item>
+		<item>Table2</item>
+		<item>Rotary cut</item>
+	</string-array>
+
+	<string-array name="Heat_Treatment">
+		<item>HT1Block</item>
+		<item>HT2Block</item>
+		<item>Nianda1</item>
+		<item>Nianda2</item>
+
+	</string-array>
+
+	<string-array name="Heat_Treatment_ope">
+				<item>Furnace 1</item>
+		<item>Furnace 2</item>
+		<item>Furnace</item>
+		<item>Water Quenching</item>
+		<item>Air Quenching</item>
+
+	</string-array>
+
+	<string-array name="SandReclamation">
+		<item>Lumps breaker</item>
+		<item>Sand conveyor unit</item>
+		<item>Sand separator unit</item>
+		<item>Thermal Unit</item>
+		<item>Hot scrubber</item>
+		<item>Cold scrubber</item>
+
+	</string-array>
+
+	<string-array name="Area">
 		<item>Melting</item>
 		<item>HPDC</item>
 		<item>GSPM</item>
@@ -48,8 +249,8 @@
 		<item>SandReclamation</item>
 		<item>FinishingHPDC</item>
 		<item>FinishingGSPM</item>
-		<item>HTBlock</item>
-		<item>HTHead</item>
+		<item>Heat_Treatment</item>
+
 
 	</string-array>
 
@@ -62,24 +263,12 @@
 		<item>Predective Maintenance</item>
 	</string-array>
 
-	<string-array name="Operation">
-		<item>Table UP / Down</item>
-		<item>Ejector Up / Down</item>
-		<item>Core Picker</item>
-		<item>Burner Top</item>
-		<item>Burner Bottom</item>
-		<item>Mone rail</item>
-		<item>Blowing</item>
-		<item>Exhaust</item>
-		<item>Sand Call</item>
-	</string-array>
-	<string name="title_activity_scrolling">ScrollingActivity</string>
 
+	<string name="title_activity_scrolling">ScrollingActivity</string>
 	<string name="problem_description">Problem Description :</string>
 	<string name="title_activity_add__log"></string>
 	<string name="title_activity_p_en_act">PEn_act</string>
     <string name="title_activity_updata">updata</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

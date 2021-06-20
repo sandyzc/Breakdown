@@ -68,7 +68,7 @@ public class Add_Log extends AppCompatActivity {
         });
 
 
-        datePickerTimeline = findViewById(R.id.datePickerTimeline);
+      //  datePickerTimeline = findViewById(R.id.datePickerTimeline);
 
 // Set a Start date (Default, 1 Jan 1970)
 
@@ -79,29 +79,29 @@ public class Add_Log extends AppCompatActivity {
 
         Calendar date = Calendar.getInstance();
         date.add(Calendar.DAY_OF_YEAR, 5);
-        datePickerTimeline.setActiveDate(date);
+//        datePickerTimeline.setActiveDate(date);
 
 
-        datePickerTimeline.setInitialDate(2021, 1,1);
+     //   datePickerTimeline.setInitialDate(2021, 1,1);
 
 // Set a date Selected Listener
 
-        datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
-            @Override
+//        datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
+//            @Override
+//
+//            public void onDateSelected(int year, int month, int day, int dayOfWeek) {
+//
+//            }
+//
+//            @Override
+//            public void onDisabledDateSelected(int year, int month, int day, int dayOfWeek, boolean isDisabled) {
+//                // Do Something
+//            }
+//        });
 
-            public void onDateSelected(int year, int month, int day, int dayOfWeek) {
-
-            }
-
-            @Override
-            public void onDisabledDateSelected(int year, int month, int day, int dayOfWeek, boolean isDisabled) {
-                // Do Something
-            }
-        });
-
-// Disable date
-        Date[] dates = {Calendar.getInstance().getTime()};
-        datePickerTimeline.deactivateDates(dates);
+//// Disable date
+//        Date[] dates = {Calendar.getInstance().getTime()};
+//        datePickerTimeline.deactivateDates(dates);
 
     }
 
@@ -112,29 +112,6 @@ public class Add_Log extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int i =0;
-        switch (item.getItemId()){
-
-            case R.id.calen_menu:
-                i++;
-               if (i==1){
-                   datePickerTimeline.setVisibility(View.VISIBLE);
-               }else if (i==2){
-                   datePickerTimeline.setVisibility(View.GONE);
-                   i=0;
-               }
-
-
-
-
-        }
-
-
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onStart() {

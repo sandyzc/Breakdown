@@ -1,231 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="100dp"
-	android:layout_gravity="center"
-	android:background="@drawable/line_background"
-	app:layout_constraintCircleRadius="@dimen/WheelMargins">
+	android:layout_height="match_parent"
+	android:gravity="center">
 
 
-	<TextView
-		android:id="@+id/text1"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:text="@string/equipment_name"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="@+id/imageView"
-		app:layout_constraintStart_toEndOf="@+id/imageView"
-		app:layout_constraintTop_toTopOf="@+id/imageView" />
+	<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="100dp"
 
-	<ImageView
-		android:id="@+id/imageView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="8dp"
-		android:adjustViewBounds="false"
-		android:cropToPadding="true"
-		android:scaleType="fitStart"
-		app:layout_constraintEnd_toStartOf="@+id/text1"
-		app:layout_constraintHorizontal_bias="0.551"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/machine_logo" />
-
-	<TextView
-		android:id="@+id/txt2"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="8dp"
-		android:text="Operation :"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintStart_toStartOf="@+id/text1"
-		app:layout_constraintTop_toBottomOf="@+id/text1" />
-
-	<TextView
-		android:id="@+id/txt3"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="8dp"
-		android:text="Part name :"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintStart_toStartOf="@+id/txt2"
-		app:layout_constraintTop_toBottomOf="@+id/txt2"
-		app:layout_constraintVertical_bias="0.333" />
-
-	<TextView
-		android:id="@+id/log_card_equip_name"
-		android:layout_width="wrap_content"
-
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:layout_marginEnd="183dp"
-		android:textSize="12dp"
-		app:layout_constraintBottom_toBottomOf="@+id/text1"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toEndOf="@+id/text1"
-		app:layout_constraintTop_toTopOf="@+id/text1"
-		app:layout_constraintVertical_bias="1.0" />
-
-	<TextView
-		android:id="@+id/log_card_operation"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:textSize="12dp"
-
-		app:layout_constraintBottom_toBottomOf="@+id/txt2"
-		app:layout_constraintStart_toEndOf="@+id/txt2"
-		app:layout_constraintTop_toTopOf="@+id/txt2"
-		app:layout_constraintVertical_bias="0.0" />
-
-	<TextView
-		android:id="@+id/log_card_partname"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:layout_marginEnd="226dp"
-		android:textSize="12dp"
-		app:layout_constraintBottom_toBottomOf="@+id/txt3"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toEndOf="@+id/txt3"
-		app:layout_constraintTop_toTopOf="@+id/txt3"
-		app:layout_constraintVertical_bias="0.0" />
-
-	<TextView
-		android:id="@+id/textView17"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:text="Start time :"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintStart_toEndOf="@+id/imageView2"
-		app:layout_constraintTop_toTopOf="@+id/log_card_equip_name" />
-
-	<TextView
-		android:id="@+id/textView18"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="44dp"
-		android:text="End Time :"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintStart_toStartOf="@+id/textView17"
-		app:layout_constraintTop_toTopOf="@+id/log_card_operation" />
-
-	<TextView
-		android:id="@+id/log_card_start_time"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:layout_marginEnd="8dp"
-		android:textSize="12dp"
-		app:layout_constraintBottom_toBottomOf="@+id/textView17"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toEndOf="@+id/textView17"
-		app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-	<TextView
-		android:id="@+id/log_card_end_time"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:layout_marginEnd="8dp"
-		android:textSize="12dp"
-		app:layout_constraintBottom_toBottomOf="@+id/textView18"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toEndOf="@+id/textView18"
-		app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-	<ImageView
-		android:id="@+id/image"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:hapticFeedbackEnabled="true"
-		android:scaleType="fitCenter"
-		app:layout_constraintBottom_toBottomOf="@+id/txt2"
-		app:layout_constraintEnd_toEndOf="@+id/imageView"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toStartOf="@+id/imageView"
-		app:layout_constraintTop_toTopOf="@+id/txt2"
-		app:layout_constraintVertical_bias="0.0"
-		app:srcCompat="@drawable/input" />
-
-	<ImageView
-		android:id="@+id/imageView4"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		app:layout_constraintBottom_toBottomOf="@+id/txt3"
-		app:layout_constraintEnd_toEndOf="@+id/image"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toStartOf="@+id/image"
-		app:layout_constraintTop_toTopOf="@+id/txt3"
-		app:layout_constraintVertical_bias="0.0"
-		app:srcCompat="@drawable/partname" />
-
-	<ImageView
-		android:id="@+id/imageView2"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		app:layout_constraintBottom_toBottomOf="@+id/log_card_equip_name"
-		app:layout_constraintStart_toEndOf="@+id/log_card_equip_name"
-		app:layout_constraintTop_toTopOf="@+id/log_card_equip_name"
-		app:srcCompat="@drawable/time" />
-
-	<ImageView
-		android:id="@+id/imageView3"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="8dp"
-		android:layout_marginEnd="8dp"
-		app:layout_constraintBottom_toBottomOf="@+id/textView18"
-		app:layout_constraintEnd_toStartOf="@+id/textView18"
-		app:layout_constraintHorizontal_bias="1.0"
-		app:layout_constraintStart_toEndOf="@+id/log_card_operation"
-		app:layout_constraintTop_toTopOf="@+id/textView18"
-		app:layout_constraintVertical_bias="0.0"
-		app:srcCompat="@drawable/time2" />
-
-	<TextView
-		android:id="@+id/textView22"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Status :"
-		android:textColor="@color/nemak"
-		android:textSize="12dp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="@+id/txt3"
-		app:layout_constraintStart_toStartOf="@+id/textView18"
-		app:layout_constraintTop_toTopOf="@+id/txt3" />
-
-	<TextView
-		android:id="@+id/status"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		app:layout_constraintBottom_toBottomOf="@+id/textView22"
-		app:layout_constraintStart_toEndOf="@+id/textView22"
-		app:layout_constraintTop_toTopOf="@+id/textView22" />
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:layout_marginBottom="10dp"
+		app:cardCornerRadius="5dp"
+		app:cardElevation="8dp">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:weightSum="10"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_vertical"
+				android:orientation="horizontal">
+
+
+				<TextView
+					android:id="@+id/log_card_equip_name"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="0"
+					android:fontFamily="arial"
+					android:padding="5dp"
+					android:text="TextView"
+					android:textColor="@color/nemak"
+					android:textStyle="bold" />
+
+				<TextView
+					android:id="@+id/log_card_duruation"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="arial"
+					android:padding="5dp"
+					android:text="minutes"
+					android:textColor="@color/nemak"
+					android:textStyle="bold" />
+
+				<TextView
+					android:id="@+id/date_log_card"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:padding="5dp"
+					android:text="TextView"
+					android:textColor="@color/nemak" />
+
+				<ImageView
+					android:id="@+id/imageView"
+					android:layout_width="wrap_content"
+					android:padding="2dp"
+					android:layout_height="match_parent"
+					android:scaleType="centerInside"
+					app:srcCompat="@drawable/pending" />
+
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:padding="5dp"
+				android:background="@android:color/background_dark" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:orientation="horizontal"
+				android:paddingTop="5dp">
+
+
+				<TextView
+					android:id="@+id/log_card_prob_desc2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:paddingLeft="5dp"
+					android:text="TextView"
+					android:textColor="@color/bluee" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:padding="5dp"
+				android:background="@android:color/background_dark" />
+
+			<LinearLayout
+				android:id="@+id/lay1"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+
+				<TextView
+					android:id="@+id/log_card_action_taken"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingLeft="5dp"
+					android:text="TextView"
+					android:textColor="@color/black" />
+
+			</LinearLayout>
+
+
+
+
+		</LinearLayout>
+	</androidx.cardview.widget.CardView>
+</RelativeLayout>

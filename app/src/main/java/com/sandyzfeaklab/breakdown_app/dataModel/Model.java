@@ -17,6 +17,8 @@ public class Model {
             ,status=""
             ,Date=""
            ;
+    int time_taken;
+
     ArrayList<Sap_code_Model> sap_no;
 
     public Model() {
@@ -31,7 +33,7 @@ public class Model {
     }
 
     public Model(String equipment_name, String work_Type, String operation, String part, String problem_desc, String action_taken, String spares_used, ArrayList<Sap_code_Model> sap_no, String start_Time, String end_time,
-                 String action_taken_by, String status1, String Date) {
+                 String action_taken_by, String status1, String Date,int time) {
         this.equipment_name = equipment_name;
         this.work_Type = work_Type;
         this.operation = operation;
@@ -45,6 +47,7 @@ public class Model {
         this.start_Time = start_Time;
         this.end_time = end_time;
         this.action_taken_by = action_taken_by;
+        this.time_taken=time;
     }
 
     public String getEquipment_name() {

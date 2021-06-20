@@ -79,24 +79,32 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model,Recycler_Ad
         }
 
         viewHolder.sap_no.setText(sap_no_saved);
-        viewHolder.equipment_name.setText(model.getEquipment_name());
+       viewHolder.equipment_name.setText(model.getEquipment_name());
         viewHolder.work_Type.setText(model.getWork_Type());
-        viewHolder.operation.setText(model.getOperation());
-        viewHolder.part.setText(model.getPart());
+       // viewHolder.operation.setText(model.getOperation());
+       //viewHolder.part.setText(model.getPart());
         viewHolder.problem_desc.setText(model.getProblem_desc());
         viewHolder.action_taken.setText(model.getAction_taken());
         viewHolder.spares_used.setText(model.getSpares_used());
 
         viewHolder.start_Time.setText(model.getStart_Time());
-        viewHolder.end_time.setText(model.getEnd_time());
+       viewHolder.end_time.setText(model.getEnd_time());
         viewHolder.action_taken_by.setText(model.getAction_taken_by());
+        viewHolder.date.setText(model.getDate());
         viewHolder.status.setText(model.getStatus());
+
 
         if (model.getStatus().equals("Compleated")){
             viewHolder.status.setTextColor(Color.rgb(0,102,52));
+            viewHolder.line1.setBackgroundColor(Color.rgb(0,102,52));
+            viewHolder.line2.setBackgroundColor(Color.rgb(0,102,52));
+            viewHolder.problem_desc.setTextColor(Color.rgb(0,102,52));
         }
         else if (model.getStatus().equals("Pending")){
             viewHolder.status.setTextColor(Color.RED);
+            viewHolder.line1.setBackgroundColor(Color.RED);
+            viewHolder.line2.setBackgroundColor(Color.RED);
+            viewHolder.problem_desc.setTextColor(Color.RED);
         }
     }
 
@@ -107,24 +115,26 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model,Recycler_Ad
 //    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView equipment_name, work_Type,  operation,  part,  problem_desc,  action_taken,  spares_used,  sap_no,  start_Time,  end_time,  action_taken_by,status;
-
+        TextView date, equipment_name, work_Type,  operation,  part,  problem_desc,  action_taken,  spares_used,  sap_no,  start_Time,  end_time,  action_taken_by,status;
+        View line1,line2;
         FoldingCell fc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            equipment_name=itemView.findViewById(R.id.log_card_equip_name);
+           equipment_name=itemView.findViewById(R.id.log_card_equip_name);
             work_Type=itemView.findViewById(R.id.log_card_work_type);
-            operation=itemView.findViewById(R.id.log_card_operation);
-            part=itemView.findViewById(R.id.log_card_partname);
-            problem_desc=itemView.findViewById(R.id.log_card_prob_desc);
+          //  operation=itemView.findViewById(R.id.log_card_operation);
+            //part=itemView.findViewById(R.id.log_card_partname);
+            problem_desc=itemView.findViewById(R.id.log_card_prob_desc2);
             action_taken=itemView.findViewById(R.id.log_card_action_taken);
             spares_used=itemView.findViewById(R.id.log_card_spares_used);
             sap_no=itemView.findViewById(R.id.log_card_sap_no);
             start_Time=itemView.findViewById(R.id.log_card_start_time);
-            end_time=itemView.findViewById(R.id.log_card_end_time);
+           end_time=itemView.findViewById(R.id.log_card_end_time);
             action_taken_by=itemView.findViewById(R.id.log_card_attended_by);
-            status=itemView.findViewById(R.id.status);
-
+          status=itemView.findViewById(R.id.status);
+            date=itemView.findViewById(R.id.date_log_card);
+            line1=itemView.findViewById(R.id.line1);
+            line2=itemView.findViewById(R.id.line2);
 
 
             fc=itemView.findViewById(R.id.folding_cell);
