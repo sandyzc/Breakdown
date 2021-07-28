@@ -184,7 +184,8 @@ public class Add_Log extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 Model model = documentSnapshot.toObject(Model.class);
 
-                                aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || " + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken() + " " + model.getArea() + "\n\n";
+                                aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || "
+                                        + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken()+ "\n\n";
 
                             }
                         }
@@ -227,7 +228,8 @@ public class Add_Log extends AppCompatActivity {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Model model = documentSnapshot.toObject(Model.class);
 
-                            aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || " + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken() + " " + model.getArea() + "\n\n";
+                            aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || "
+                                    + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken() + "\n\n";
 
                         }
 
@@ -241,6 +243,31 @@ public class Add_Log extends AppCompatActivity {
 
                     }
                 });
+
+                notebookRef.whereGreaterThanOrEqualTo("shift", "C").whereEqualTo("date", yourDate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    String aaa = "";
+
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            Model model = documentSnapshot.toObject(Model.class);
+
+                            aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || "
+                                    + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken() + "\n\n";
+
+                        }
+
+                        logmsg = logmsg + aaa;
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("OnFilure", e.getMessage());
+
+                    }
+                });
+
 
 
                 Intent intent = new Intent();

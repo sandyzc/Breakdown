@@ -264,7 +264,6 @@
             android:background="@drawable/line_background"
             android:fontFamily="sans-serif-condensed-medium"
             android:padding="2dp"
-            android:text=" START TIME : "
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView9"

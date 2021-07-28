@@ -315,14 +315,14 @@ public class Data_input extends AppCompatActivity {
         save_butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date astart = null,aend = null,bend = null,cshift = null,currentime = null;
+                Date astart,aend = null,bend,cshift ,currentime;
 
                 isAllFieldsChecked = CheckAllFields();
 
                 try {
                     astart=new SimpleDateFormat("HH:mm a").parse("05:59 AM");
-                    aend=new SimpleDateFormat("HH:mm a").parse("14:00 PM");
-                    bend=new SimpleDateFormat("HH:mm a").parse("22:00 PM");
+                    aend=new SimpleDateFormat("HH:mm a").parse("13:59 PM");
+                    bend=new SimpleDateFormat("HH:mm a").parse("21:59 PM");
                     cshift=new SimpleDateFormat("HH:mm a").parse("00:00 AM");
                     currentime=new SimpleDateFormat("HH:mm a").parse(starttime.getText().toString());
 
@@ -369,14 +369,16 @@ public class Data_input extends AppCompatActivity {
 
 
 
-                                reference.add(new Model(area.getSelectedItem().toString(),stoppage_category.getSelectedItem().toString(),problem_category.getSelectedItem().toString(),equipment_name, work_Type,
+                                reference.add(new Model(area.getSelectedItem().toString(),stoppage_category.getSelectedItem().toString()
+                                        ,problem_category.getSelectedItem().toString(),equipment_name, work_Type,
                                         operation, part_name.getText().toString(),
                                         problem_desc_et.getText().toString(),
                                         action_taken_et.getText().toString(),
                                         spares_used_et.getText().toString(),
                                         models, starttime.getText().toString(),
                                         " ",
-                                        work_done_by.getText().toString(), "Pending", Date, time, "", flatDialog.getLargeTextField(),shift,timestampstart)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        work_done_by.getText().toString(), "Pending", Date, time, "",
+                                        flatDialog.getLargeTextField(),shift,timestampstart)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();

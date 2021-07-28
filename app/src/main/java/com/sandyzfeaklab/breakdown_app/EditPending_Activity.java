@@ -1,7 +1,5 @@
 package com.sandyzfeaklab.breakdown_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,16 +9,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sandyzfeaklab.breakdown_app.dataModel.Model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +30,9 @@ public class EditPending_Activity extends AppCompatActivity {
     EditText problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken;
     Spinner pend_work_type_spin;
     Date start, end;
+    Model model;
     Button save;
+    String shift="";
     int time;
     boolean isAllFieldsChecked = false;
 
@@ -90,12 +91,12 @@ public class EditPending_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                Model model = documentSnapshot.toObject(Model.class);
+                model = documentSnapshot.toObject(Model.class);
 
                 pend_partname.setText(model.getPart());
                 pend_equip_list_spin.setText(model.getEquipment_name());
                 pend_operation_spin.setText(model.getOperation());
-                starttime.setText(model.getStart_Time());
+               // starttime.setText(model.getStart_Time());
                 endtime.setText(model.getEnd_time());
                 pend_area.setText(model.getArea());
 
@@ -114,22 +115,35 @@ public class EditPending_Activity extends AppCompatActivity {
 
                 isAllFieldsChecked = CheckAllFields();
 
+                Date astart,aend = null,bend,cshift ,currentime;
+
+
+                try {
+                    astart=new SimpleDateFormat("HH:mm a").parse("05:59 AM");
+                    aend=new SimpleDateFormat("HH:mm a").parse("13:59 PM");
+                    bend=new SimpleDateFormat("HH:mm a").parse("21:59 PM");
+                    cshift=new SimpleDateFormat("HH:mm a").parse("00:00 AM");
+                    currentime=new SimpleDateFormat("HH:mm a").parse(starttime.getText().toString());
+
+                    assert currentime != null;
+                    if (currentime.after(astart)&&currentime.before(aend)){
+                        shift="A";
+                    }
+                    else if (currentime.after(aend)&&currentime
+                            .before(bend)){
+                        shift="B";
+
+                    }else if (currentime.after(bend)&&currentime
+                            .before(astart)|| currentime.after(cshift)&&currentime.before(astart)){
+                        shift="C";
+
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
                 CheckAllFields();
-// operation,
-//                        part,
-//                        problem_desc
-//                        ,action_taken
-//                        ,spares_used
-//                        , start_Time
-//                        ,end_time
-//                        , action_taken_by
-//                        ,status
-//                        ,stoppage_category
-//                        ,problem_category
-//                        ,Date
-//                        ,area
-//                        ,id
-//                        ,"pending_remarks"
 
                 documentReference.update(
                         "work_Type",pend_work_type_spin.getSelectedItem().toString(),"problem_desc",problem_desc_et.getText().toString()
@@ -140,6 +154,7 @@ public class EditPending_Activity extends AppCompatActivity {
                         ,"time_taken",time
                         ,"action_taken_by",work_done_by.getText().toString()
                         ,"status","Compleated"
+                        ,"shift",shift
                         ).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -147,6 +162,8 @@ public class EditPending_Activity extends AppCompatActivity {
                         Toast.makeText(EditPending_Activity.this, "Work Updated", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                finish();
 
 
 
@@ -185,12 +202,13 @@ public class EditPending_Activity extends AppCompatActivity {
                             public void onDateSelected(Date date) {
                                 start = date;
 
-                                String Date;
+
 
                                 SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/M/yyyy");
-                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                 String starttim = localDateFormat1.format(date);
-                                Date = localDateFormat.format(date);
+
+
                                 starttime.setText(starttim);
 
                             }
@@ -225,12 +243,17 @@ public class EditPending_Activity extends AppCompatActivity {
                             public void onDateSelected(Date date) {
                                 end = date;
 
-                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                 String starttim = localDateFormat1.format(date);
                                 endtime.setText(starttim);
 
 
-                                printDifference(start, end);
+                                if (!starttime.getText().toString().equals("")) {
+                                    printDifference(start, end);
+                                }else
+                                {
+                                    Toast.makeText(EditPending_Activity.this, "Select Start time", Toast.LENGTH_SHORT).show();
+                                }
 
 
                             }
