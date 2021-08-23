@@ -1,24 +1,34 @@
 package com.sandyzfeaklab.breakdown_app;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.sandyzfeaklab.breakdown_app.dataModel.Model;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +45,10 @@ public class EditPending_Activity extends AppCompatActivity {
     String shift="";
     int time;
     boolean isAllFieldsChecked = false;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    StorageReference riversRef, riversRef1;
+    ImageView beforepic,afterpic;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
@@ -51,6 +65,8 @@ public class EditPending_Activity extends AppCompatActivity {
         starttime = findViewById(R.id.pend_start_time);
         endtime = findViewById(R.id.pend_end_time);
         date_txt = findViewById(R.id.edit_pend_date_main);
+        beforepic=findViewById(R.id.before_pic_editdata);
+        afterpic=findViewById(R.id.after_pic_editdata);
 
         problem_desc_et = findViewById(R.id.pend_problem_desc_et);
         action_taken_et = findViewById(R.id.pend_action_taken_et);
@@ -104,8 +120,8 @@ public class EditPending_Activity extends AppCompatActivity {
                 action_taken_et.setText(model.getAction_taken());
                 spares_used_et.setText(model.getSpares_used());
                 work_done_by.setText(model.getaction_taken_by());
-                ;
-
+                Picasso.get().load(model.getBeforeimageurl()).placeholder(R.drawable.time).into(beforepic);
+                Picasso.get().load(model.getAfterimageurl()).placeholder(R.drawable.time).into(afterpic);
             }
         });
 
@@ -218,46 +234,50 @@ public class EditPending_Activity extends AppCompatActivity {
             }
         });
 
+
         endtime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (!starttime.getText().toString().equals("")) {
 
-                new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
-                        .curved()
-                        .minutesStep(1)
-                        .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
-                            @Override
-                            public void onDisplayed(SingleDateAndTimePicker picker) {
-                                // Retrieve the SingleDateAndTimePicker
-                            }
-
-                            @Override
-                            public void onClosed(SingleDateAndTimePicker picker) {
-                                // On dialog closed
-                            }
-                        })
-                        .title("End Time")
-                        .listener(new SingleDateAndTimePickerDialog.Listener() {
-                            @Override
-                            public void onDateSelected(Date date) {
-                                end = date;
-
-                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
-                                String starttim = localDateFormat1.format(date);
-                                endtime.setText(starttim);
-
-
-                                if (!starttime.getText().toString().equals("")) {
-                                    printDifference(start, end);
-                                }else
-                                {
-                                    Toast.makeText(EditPending_Activity.this, "Select Start time", Toast.LENGTH_SHORT).show();
+                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
+                            .curved()
+                            .minutesStep(1)
+                            .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
+                                @Override
+                                public void onDisplayed(SingleDateAndTimePicker picker) {
+                                    // Retrieve the SingleDateAndTimePicker
                                 }
 
+                                @Override
+                                public void onClosed(SingleDateAndTimePicker picker) {
+                                    // On dialog closed
+                                }
+                            })
+                            .title("End Time")
+                            .listener(new SingleDateAndTimePickerDialog.Listener() {
+                                @Override
+                                public void onDateSelected(Date date) {
+                                    end = date;
 
-                            }
-                        }).display();
+                                    SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
+                                    String starttim = localDateFormat1.format(date);
+                                    endtime.setText(starttim);
+
+                                    printDifference(start, end);
+
+
+
+
+                                }
+                            }).display();
+
+                }else
+                {
+                    Toast.makeText(EditPending_Activity.this, "Select Start time", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -311,6 +331,52 @@ public class EditPending_Activity extends AppCompatActivity {
             return false;
         }
         return true;
+
+    }
+
+    private void uploadtocloud(String beforuri, String afteruri, String databaseID) {
+
+
+        Uri beforefile = Uri.fromFile(new File(beforuri));
+        Uri afterfile = Uri.fromFile(new File(afteruri));
+        riversRef = storageRef.child(databaseID + " " + "BEFORE");
+        riversRef1 = storageRef.child(databaseID + " " + "AFTER");
+
+        riversRef.putFile(beforefile).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if (task.isSuccessful()) {
+                    task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            DocumentReference documentReference = db.collection("log").document(databaseID);
+                            documentReference.update("beforeimageurl", uri.toString());
+                        }
+                    });
+
+
+                }
+            }
+        });
+
+        riversRef1.putFile(afterfile).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if (task.isSuccessful()) {
+                    task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            DocumentReference documentReference = db.collection("log").document(databaseID);
+                            documentReference.update("afterimageurl", uri.toString());
+                        }
+                    });
+
+                }
+
+
+            }
+        });
+
 
     }
 }

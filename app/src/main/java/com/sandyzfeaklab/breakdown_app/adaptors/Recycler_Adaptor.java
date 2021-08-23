@@ -26,6 +26,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.ramotion.foldingcell.FoldingCell;
 import com.sandyzfeaklab.breakdown_app.Add_Sap_codes;
 import com.sandyzfeaklab.breakdown_app.Data_input;
@@ -33,6 +35,7 @@ import com.sandyzfeaklab.breakdown_app.EditPending_Activity;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.Model;
 import com.sandyzfeaklab.breakdown_app.dataModel.Sap_code_Model;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,6 +45,9 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
     Context context;
     private ArrayList<Model> data;
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference documentReference;
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -97,7 +103,27 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
         viewHolder.time_taken.setText(String.valueOf(model.getTime_taken())+" Min");
         viewHolder.action_taken_by.setText(model.getaction_taken_by());
 
-        String date= model.getDate()+ " || "+model.getStart_Time();
+
+
+        if (model.getBeforeimageurl()!=null&& !model.getBeforeimageurl().isEmpty() ){
+            viewHolder.picholder.setVisibility(View.VISIBLE);
+            viewHolder.piclable.setVisibility(View.VISIBLE);
+            Picasso.get().load(model.getBeforeimageurl()).placeholder(R.drawable.compleated).resize(100,100).centerInside().into(viewHolder.beforepic);
+
+        }
+        if (model.getAfterimageurl()!=null&& !model.getAfterimageurl().isEmpty() ){
+            viewHolder.picholder.setVisibility(View.VISIBLE);
+            viewHolder.piclable.setVisibility(View.VISIBLE);
+            viewHolder.afterpic.setVisibility(View.VISIBLE);
+            Picasso.get().load(model.getAfterimageurl()).placeholder(R.drawable.compleated).resize(100,100).centerInside().into(viewHolder.afterpic);
+
+        }
+
+
+
+
+
+        String date= model.getDate()+ " || "+model. getStart_Time();
 
         viewHolder.date.setText(date);
 
@@ -135,6 +161,15 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
             }
 
         });
+        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentReference = db.collection("log").document(model.getId());
+
+                documentReference.delete();
+            }
+        });
+
         viewHolder.editdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,11 +191,11 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView date, equipment_name, work_Type, operation, part, problem_desc, action_taken, spares_used, sap_no, start_Time, pending_remark, action_taken_by, time_taken;
         ImageView status;
-        ImageView showdetails, editdetails;
+        ImageView showdetails, editdetails,beforepic,afterpic,delete;
         CardView cardView;
         View line1, line2;
         FoldingCell fc;
-        LinearLayout expandedview;
+        LinearLayout expandedview,piclable,picholder;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -169,10 +204,13 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
             cardView = itemView.findViewById(R.id.card1);
             showdetails = itemView.findViewById(R.id.showdetails);
             expandedview = itemView.findViewById(R.id.expanded);
+            piclable=itemView.findViewById(R.id.before_after_lable);
+            picholder=itemView.findViewById(R.id.before_after_image);
             equipment_name = itemView.findViewById(R.id.log_card_equip_name);
             work_Type = itemView.findViewById(R.id.log_card_work_type);
             operation = itemView.findViewById(R.id.log_card_operation);
             part = itemView.findViewById(R.id.log_card_partname);
+            delete=itemView.findViewById(R.id.delete);
             problem_desc = itemView.findViewById(R.id.log_card_prob_desc2);
             action_taken = itemView.findViewById(R.id.log_card_action_taken1);
             spares_used = itemView.findViewById(R.id.log_card_spares_used);
@@ -185,7 +223,8 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
             date = itemView.findViewById(R.id.date_log_card);
             line1 = itemView.findViewById(R.id.line1);
             line2 = itemView.findViewById(R.id.line2);
-
+            beforepic=itemView.findViewById(R.id.before_pic_rcv);
+            afterpic=itemView.findViewById(R.id.after_pic_RCV);
 
 
 
@@ -193,18 +232,5 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<Model, Recycler_A
         }
     }
 
-    public void registerToggle(int position) {
-        if (unfoldedIndexes.contains(position))
-            registerFold(position);
-        else
-            registerUnfold(position);
-    }
 
-    public void registerFold(int position) {
-        unfoldedIndexes.remove(position);
-    }
-
-    public void registerUnfold(int position) {
-        unfoldedIndexes.add(position);
-    }
 }

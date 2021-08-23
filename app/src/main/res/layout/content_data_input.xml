@@ -400,7 +400,6 @@
 			android:id="@+id/pend_save_data"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="24dp"
 			android:fontFamily="sans-serif-condensed-medium"
 			android:text="SAVE"
 			app:icon="@android:drawable/ic_menu_save"
@@ -408,7 +407,7 @@
 			app:iconTintMode="src_atop"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/textView19" />
+			app:layout_constraintTop_toBottomOf="@+id/after_pic" />
 
 		<Button
 			android:id="@+id/add_sap_code"
@@ -442,6 +441,29 @@
 			app:layout_constraintStart_toStartOf="@+id/textView13"
 			app:layout_constraintTop_toBottomOf="@+id/pend_time_taken" />
 
+		<ImageView
+			android:id="@+id/before_pic"
+			android:layout_width="54dp"
+
+			android:onClick="befor_photo_click"
+
+			android:layout_height="49dp"
+			android:layout_marginTop="16dp"
+			app:layout_constraintStart_toStartOf="@+id/textView19"
+			app:layout_constraintTop_toBottomOf="@+id/textView19"
+			app:srcCompat="@drawable/before_pic" />
+
+		<ImageView
+			android:id="@+id/after_pic"
+			android:layout_width="54dp"
+			android:onClick="after_photo_click"
+			android:layout_height="49dp"
+			android:layout_marginStart="16dp"
+			app:layout_constraintBottom_toBottomOf="@+id/before_pic"
+			app:layout_constraintStart_toEndOf="@+id/before_pic"
+			app:layout_constraintTop_toTopOf="@+id/before_pic"
+			app:srcCompat="@drawable/before_pic" />
+
 		<EditText
 			android:id="@+id/pend_work_done_by_et"
 			android:layout_width="wrap_content"
@@ -472,15 +494,13 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="16dp"
-			android:layout_marginTop="39dp"
 			android:layout_marginEnd="120dp"
-			android:layout_marginBottom="16dp"
 			android:text="Mark as Pending"
 			app:layout_constraintBottom_toBottomOf="@+id/pend_save_data"
 			app:layout_constraintEnd_toStartOf="@+id/pend_save_data"
-			app:layout_constraintHorizontal_bias="0.147"
+			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/textView19" />
+			app:layout_constraintTop_toTopOf="@+id/pend_save_data" />
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

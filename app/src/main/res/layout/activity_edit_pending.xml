@@ -204,9 +204,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:background="@drawable/line_background"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="start"
@@ -403,14 +401,14 @@
             android:layout_marginTop="24dp"
             android:backgroundTint="#592946"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="SAVE"
+            android:text="Update"
             android:textColor="@color/white"
             app:icon="@android:drawable/ic_menu_save"
             app:iconTint="@color/white"
             app:iconTintMode="src_atop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/after_pic" />
 
         <Button
             android:id="@+id/add_sap_code"
@@ -468,6 +466,29 @@
             app:layout_constraintStart_toEndOf="@+id/textView0"
             app:layout_constraintTop_toTopOf="@+id/textView0"
             app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/before_pic_editdata"
+            android:layout_width="54dp"
+
+            android:layout_height="49dp"
+
+            android:layout_marginTop="24dp"
+            android:onClick="befor_photo_click"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19"
+            app:srcCompat="@drawable/before_pic" />
+
+        <ImageView
+            android:id="@+id/after_pic_editdata"
+            android:layout_width="54dp"
+            android:onClick="after_photo_click"
+            android:layout_height="49dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/before_pic_editdata"
+            app:layout_constraintStart_toEndOf="@+id/before_pic_editdata"
+            app:layout_constraintTop_toTopOf="@+id/before_pic_editdata"
+            app:srcCompat="@drawable/before_pic" />
 
 
 
