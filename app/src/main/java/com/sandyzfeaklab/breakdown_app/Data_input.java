@@ -310,7 +310,7 @@ public class Data_input extends AppCompatActivity {
 
         save_butt.setOnClickListener(new View.OnClickListener() {
 
-            String documentid;
+
 
             @Override
             public void onClick(View v) {
@@ -406,13 +406,15 @@ public class Data_input extends AppCompatActivity {
                                 endtime.getText().toString(),
                                 work_done_by.getText().toString(),
                                 "Compleated",
-                                Date, time, reference.document().getId(), "", shift, timestampend, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                Date, time, reference.document().getId(), "", shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
 //                                uploadaftertoCloud(AFTER_URI, documentReference.getId());
 //                                uploadbeforetocloud(BEFORE_URI, documentReference.getId());
 
-                                uploadtocloud(BEFORE_URI, AFTER_URI, documentReference.getId());
+                                if (BEFORE_URI!=null&&AFTER_URI!=null){
+                                    uploadtocloud(BEFORE_URI, AFTER_URI, documentReference.getId());
+                                }
 
                                 documentReference.update("id", documentReference.getId());
 

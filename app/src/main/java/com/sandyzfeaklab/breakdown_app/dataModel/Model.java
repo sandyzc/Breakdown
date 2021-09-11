@@ -21,8 +21,30 @@ public class Model {
         this.id = id;
     }
 
-    public Model(String area, String stoppage_category, String problem_category, String equipment_name, String work_Type, String operation, String part, String problem_desc, String action_taken, String spares_used, ArrayList<Sap_code_Model> sap_no, String start_Time, String end_time,
-                 String action_taken_by, String status1, String Date, int time, String id, String pending_remarks, String shift, java.util.Date ts, String beforeimageurl, String afterimageurl) {
+    public Model(String area,
+                 String stoppage_category,
+                 String problem_category,
+                 String equipment_name,
+                 String work_Type,
+                 String operation,
+                 String part,
+                 String problem_desc,
+                 String action_taken,
+                 String spares_used,
+                 ArrayList<Sap_code_Model> sap_no,
+                 String start_Time,
+                 String end_time,
+                 String action_taken_by,
+                 String status1,
+                 String Date,
+                 int time,
+                 String id,
+                 String pending_remarks,
+                 String shift,
+                 java.util.Date ts,
+                 String beforeimageurl,
+                 String afterimageurl) {
+
         this.equipment_name = equipment_name;
         this.shift = shift;
         this.timestamp = ts;

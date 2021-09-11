@@ -1,12 +1,16 @@
 package com.sandyzfeaklab.breakdown_app;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}
+            ,PackageManager.PERMISSION_GRANTED);
 
         mttr_butt=findViewById(R.id.mttr_butt);
         mtbf_butt=findViewById(R.id.mtbf_butt);
@@ -48,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         mtbf_butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Excel2Firestore.class);
+                startActivity(intent);
 
             }
         });
@@ -65,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         uptime_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Report.class);
+                startActivity(intent);
 
             }
         });
