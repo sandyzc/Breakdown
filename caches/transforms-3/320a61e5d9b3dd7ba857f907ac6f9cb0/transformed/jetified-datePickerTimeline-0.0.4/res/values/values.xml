@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#000000</color>
+    <color name="grey">#4D000000</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="dateTextSize">25sp</dimen>
+    <dimen name="dayTextSize">13sp</dimen>
+    <dimen name="monthTextSize">13sp</dimen>
+    <string name="app_name">DatePicker</string>
+    <declare-styleable name="DatePickerTimeline" ns1:ignore="ResourceName">
+        <attr format="color" name="monthTextColor"/>
+        <attr format="color" name="dateTextColor"/>
+        <attr format="color" name="dayTextColor"/>
+        <attr format="color" name="disabledColor"/>
+        <!--<attr name="selectionBackgroundColor" format="color"/>-->
+        <!--<attr name="monthTextSize" format="dimension"/>-->
+        <!--<attr name="dateTextSize" format="dimension"/>-->
+        <!--<attr name="dayTextSize" format="dimension"/>-->
+    </declare-styleable>
+</resources>

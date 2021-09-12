@@ -1,0 +1,7 @@
+ss.anoop.awesometextinputlayout
+attr animatedTextSize
+attr animationDuration
+attr borderColor
+attr borderWidth
+attr cornerRadius
+styleable AwesomeTextInputLayout animatedTextSize animationDuration borderColor borderWidth cornerRadius

@@ -253,6 +253,14 @@
 
     </string-array>
 
+    <string-array name="Shift">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>G</item>
+
+
+    </string-array>
     <string-array name="Work_Type">
         <item>Breakdown</item>
         <item>Corrective Measure</item>

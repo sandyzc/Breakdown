@@ -474,15 +474,16 @@
             android:layout_height="49dp"
 
             android:layout_marginTop="24dp"
-            android:onClick="befor_photo_click"
+            android:onClick="before_pic_editdata"
             app:layout_constraintStart_toStartOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/textView19"
             app:srcCompat="@drawable/before_pic" />
 
         <ImageView
             android:id="@+id/after_pic_editdata"
+
             android:layout_width="54dp"
-            android:onClick="after_photo_click"
+            android:onClick="after_pic_editdata"
             android:layout_height="49dp"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/before_pic_editdata"

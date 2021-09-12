@@ -1,0 +1,11 @@
+com.ramotion.foldingcell.BuildConfig
+com.ramotion.foldingcell.FoldingCell
+com.ramotion.foldingcell.FoldingCell$1
+com.ramotion.foldingcell.FoldingCell$2
+com.ramotion.foldingcell.FoldingCell$3
+com.ramotion.foldingcell.animations.AnimationEndListener
+com.ramotion.foldingcell.animations.FoldAnimation
+com.ramotion.foldingcell.animations.FoldAnimation$1
+com.ramotion.foldingcell.animations.FoldAnimation$FoldAnimationMode
+com.ramotion.foldingcell.animations.HeightAnimation
+com.ramotion.foldingcell.views.FoldingCellView

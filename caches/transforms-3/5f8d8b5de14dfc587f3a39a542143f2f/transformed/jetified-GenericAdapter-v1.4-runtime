@@ -1,0 +1,14 @@
+com.manojbhadane.genericadapter.BuildConfig
+com.manojbhadane.genericadapter.DataBinderMapperImpl
+com.manojbhadane.genericadapter.DataBinderMapperImpl$InnerBrLookup
+com.manojbhadane.genericadapter.DataBinderMapperImpl$InnerLayoutIdLookup
+com.manojbhadane.genericadapter.GenericAdapter
+com.manojbhadane.genericadapter.GenericAdapter$1
+com.manojbhadane.genericadapter.GenericAdapter$ItemViewHolder
+com.manojbhadane.genericadapter.GenericFilterAdapter
+com.manojbhadane.genericadapter.GenericFilterAdapter$1
+com.manojbhadane.genericadapter.GenericFilterAdapter$2
+com.manojbhadane.genericadapter.GenericFilterAdapter$3
+com.manojbhadane.genericadapter.GenericFilterAdapter$4
+com.manojbhadane.genericadapter.GenericFilterAdapter$5
+com.manojbhadane.genericadapter.GenericFilterAdapter$ItemViewHolder

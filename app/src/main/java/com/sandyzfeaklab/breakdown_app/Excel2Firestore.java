@@ -43,63 +43,62 @@ public class Excel2Firestore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_excel2_firestore);
 
-        progressBar=findViewById(R.id.progressBar);
-        textView=findViewById(R.id.progresspercent);
 
 
-    }
-
-    public void Upload(View view) {
-
-        mGetContent.launch("application/vnd.ms-excel");
 
     }
 
-    public String getPathFromURI(Uri contentUri) {
-        String res = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        return res;
-    }
-
-    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri uri) {
-
-                  
-                    Workbook wb = null;
-
-                    try {
-                        FileInputStream inputStream = new FileInputStream(getPathFromURI(uri));
-                         wb = new HSSFWorkbook(inputStream);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Sheet sheet1 = null;
-                    if (wb != null) {
-                        sheet1 = wb.getSheetAt(0);
-                    }
-
-                    Sheet sheet2 = null;
-                    if (wb != null) {
-                        sheet2 = wb.getSheetAt(0);
-                    }
-                    if (sheet1 == null) {
-                        return;
-                    }
-                    if (sheet2 == null) {
-                        return;
-                    }
-                    Excel2SQLiteHelper.insertExcelToSqlite( sheet1);
-                    Excel2SQLiteHelper.insertExcelToSqlite( sheet2);
-
-
-                }
-            });
+//    public void Upload(View view) {
+//
+//        mGetContent.launch("application/vnd.ms-excel");
+//
+//    }
+//
+//    public String getPathFromURI(Uri contentUri) {
+//        String res = null;
+//        String[] proj = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+//        if (cursor.moveToFirst()) {
+//            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//            res = cursor.getString(column_index);
+//        }
+//        cursor.close();
+//        return res;
+//    }
+//
+//    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+//            new ActivityResultCallback<Uri>() {
+//                @Override
+//                public void onActivityResult(Uri uri) {
+//
+//
+//                    Workbook wb = null;
+//
+//                    try {
+//                        FileInputStream inputStream = new FileInputStream(getPathFromURI(uri));
+//                         wb = new HSSFWorkbook(inputStream);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    Sheet sheet1 = null;
+//                    if (wb != null) {
+//                        sheet1 = wb.getSheetAt(0);
+//                    }
+//
+//                    Sheet sheet2 = null;
+//                    if (wb != null) {
+//                        sheet2 = wb.getSheetAt(0);
+//                    }
+//                    if (sheet1 == null) {
+//                        return;
+//                    }
+//                    if (sheet2 == null) {
+//                        return;
+//                    }
+//                    Excel2SQLiteHelper.insertExcelToSqlite( sheet1);
+//                    Excel2SQLiteHelper.insertExcelToSqlite( sheet2);
+//
+//
+//                }
+//            });
 }

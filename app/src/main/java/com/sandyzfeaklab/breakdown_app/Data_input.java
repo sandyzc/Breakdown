@@ -105,6 +105,7 @@ public class Data_input extends AppCompatActivity {
 
         starttime = findViewById(R.id.pend_start_time);
         endtime = findViewById(R.id.pend_end_time);
+        TextView to =findViewById(R.id.textView10);
         time_taken = findViewById(R.id.pend_time_taken);
 
 
@@ -243,6 +244,8 @@ public class Data_input extends AppCompatActivity {
                             @Override
                             public void onDateSelected(Date date) {
                                 start = date;
+                                endtime.setVisibility(View.VISIBLE);
+                                to.setVisibility(View.VISIBLE);
 
                                 SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
@@ -251,6 +254,7 @@ public class Data_input extends AppCompatActivity {
                                 starttime.setText(starttim);
 
                                 timestampstart = new Timestamp(date.getTime());
+
 
 
                             }
@@ -264,7 +268,7 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!starttime.getText().toString().equals("")) {
+                if (!starttime.getText().toString().equals(null)) {
 
                     new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(true)
                             .curved()

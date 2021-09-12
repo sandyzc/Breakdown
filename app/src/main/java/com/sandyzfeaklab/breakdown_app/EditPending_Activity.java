@@ -1,7 +1,11 @@
 package com.sandyzfeaklab.breakdown_app;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
@@ -36,19 +41,23 @@ import java.util.Date;
 
 public class EditPending_Activity extends AppCompatActivity {
 
-    TextView starttime, endtime, pend_partname, pend_equip_list_spin,  pend_operation_spin, date_txt, pend_area;
+    TextView starttime, endtime, pend_partname, pend_equip_list_spin, pend_operation_spin, date_txt, pend_area;
     EditText problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken;
     Spinner pend_work_type_spin;
     Date start, end;
     Model model;
     Button save;
-    String shift="";
+    private static final int REQUEST_GET_AFTER_FILE = 3;
+    private static final int REQUEST_GET_BEFORE_FILE = 2;
+    String shift = "";
     int time;
     boolean isAllFieldsChecked = false;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     StorageReference riversRef, riversRef1;
-    ImageView beforepic,afterpic;
+    ImageView beforepic, afterpic;
+    String BEFORE_URI;
+    String AFTER_URI;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
@@ -65,8 +74,8 @@ public class EditPending_Activity extends AppCompatActivity {
         starttime = findViewById(R.id.pend_start_time);
         endtime = findViewById(R.id.pend_end_time);
         date_txt = findViewById(R.id.edit_pend_date_main);
-        beforepic=findViewById(R.id.before_pic_editdata);
-        afterpic=findViewById(R.id.after_pic_editdata);
+        beforepic = findViewById(R.id.before_pic_editdata);
+        afterpic = findViewById(R.id.after_pic_editdata);
 
         problem_desc_et = findViewById(R.id.pend_problem_desc_et);
         action_taken_et = findViewById(R.id.pend_action_taken_et);
@@ -74,7 +83,7 @@ public class EditPending_Activity extends AppCompatActivity {
         work_done_by = findViewById(R.id.pend_work_done_by_et);
         time_taken = findViewById(R.id.pend_time_taken);
         pend_area = findViewById(R.id.pend_spinner_area);
-        save=findViewById(R.id.edit_pend_save_data);
+        save = findViewById(R.id.edit_pend_save_data);
 
 
         Spinner problem_category = findViewById(R.id.edit_prob_cat);
@@ -112,7 +121,7 @@ public class EditPending_Activity extends AppCompatActivity {
                 pend_partname.setText(model.getPart());
                 pend_equip_list_spin.setText(model.getEquipment_name());
                 pend_operation_spin.setText(model.getOperation());
-               // starttime.setText(model.getStart_Time());
+                // starttime.setText(model.getStart_Time());
                 endtime.setText(model.getEnd_time());
                 pend_area.setText(model.getArea());
 
@@ -120,8 +129,14 @@ public class EditPending_Activity extends AppCompatActivity {
                 action_taken_et.setText(model.getAction_taken());
                 spares_used_et.setText(model.getSpares_used());
                 work_done_by.setText(model.getaction_taken_by());
-                Picasso.get().load(model.getBeforeimageurl()).placeholder(R.drawable.time).into(beforepic);
-                Picasso.get().load(model.getAfterimageurl()).placeholder(R.drawable.time).into(afterpic);
+                if (!model.getBeforeimageurl().equals("")) {
+                    Picasso.get().load(model.getBeforeimageurl()).placeholder(R.drawable.time).into(beforepic);
+                }
+                if (!model.getAfterimageurl().equals("")) {
+                    Picasso.get().load(model.getAfterimageurl()).placeholder(R.drawable.time).into(afterpic);
+                }
+
+
             }
         });
 
@@ -131,27 +146,26 @@ public class EditPending_Activity extends AppCompatActivity {
 
                 isAllFieldsChecked = CheckAllFields();
 
-                Date astart,aend = null,bend,cshift ,currentime;
+                Date astart, aend = null, bend, cshift, currentime;
 
 
                 try {
-                    astart=new SimpleDateFormat("HH:mm a").parse("05:59 AM");
-                    aend=new SimpleDateFormat("HH:mm a").parse("13:59 PM");
-                    bend=new SimpleDateFormat("HH:mm a").parse("21:59 PM");
-                    cshift=new SimpleDateFormat("HH:mm a").parse("00:00 AM");
-                    currentime=new SimpleDateFormat("HH:mm a").parse(starttime.getText().toString());
+                    astart = new SimpleDateFormat("HH:mm a").parse("05:59 AM");
+                    aend = new SimpleDateFormat("HH:mm a").parse("13:59 PM");
+                    bend = new SimpleDateFormat("HH:mm a").parse("21:59 PM");
+                    cshift = new SimpleDateFormat("HH:mm a").parse("00:00 AM");
+                    currentime = new SimpleDateFormat("HH:mm a").parse(starttime.getText().toString());
 
                     assert currentime != null;
-                    if (currentime.after(astart)&&currentime.before(aend)){
-                        shift="A";
-                    }
-                    else if (currentime.after(aend)&&currentime
-                            .before(bend)){
-                        shift="B";
+                    if (currentime.after(astart) && currentime.before(aend)) {
+                        shift = "A";
+                    } else if (currentime.after(aend) && currentime
+                            .before(bend)) {
+                        shift = "B";
 
-                    }else if (currentime.after(bend)&&currentime
-                            .before(astart)|| currentime.after(cshift)&&currentime.before(astart)){
-                        shift="C";
+                    } else if (currentime.after(bend) && currentime
+                            .before(astart) || currentime.after(cshift) && currentime.before(astart)) {
+                        shift = "C";
 
                     }
                 } catch (ParseException e) {
@@ -162,25 +176,27 @@ public class EditPending_Activity extends AppCompatActivity {
                 CheckAllFields();
 
                 documentReference.update(
-                        "work_Type",pend_work_type_spin.getSelectedItem().toString(),"problem_desc",problem_desc_et.getText().toString()
-                        ,"action_taken",action_taken_et.getText().toString(),"spares_used",spares_used_et.getText().toString(),"stoppage_category",stoppage_category.getSelectedItem().toString()
-                        ,"problem_category",problem_category.getSelectedItem().toString()
-                        ,"start_Time",starttime.getText().toString()
-                        ,"end_time",endtime.getText().toString()
-                        ,"time_taken",time
-                        ,"action_taken_by",work_done_by.getText().toString()
-                        ,"status","Compleated"
-                        ,"shift",shift
-                        ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        "work_Type", pend_work_type_spin.getSelectedItem().toString(), "problem_desc", problem_desc_et.getText().toString()
+                        , "action_taken", action_taken_et.getText().toString(), "spares_used", spares_used_et.getText().toString(), "stoppage_category", stoppage_category.getSelectedItem().toString()
+                        , "problem_category", problem_category.getSelectedItem().toString()
+                        , "start_Time", starttime.getText().toString()
+                        , "end_time", endtime.getText().toString()
+                        , "time_taken", time
+                        , "action_taken_by", work_done_by.getText().toString()
+                        , "status", "Compleated"
+                        , "shift", shift
+                ).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 
+                        if (BEFORE_URI!=null&&AFTER_URI!=null){
+                            uploadtocloud(BEFORE_URI, AFTER_URI,model.getId());
+                        }
                         Toast.makeText(EditPending_Activity.this, "Work Updated", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 finish();
-
 
 
             }
@@ -217,7 +233,6 @@ public class EditPending_Activity extends AppCompatActivity {
                             @Override
                             public void onDateSelected(Date date) {
                                 start = date;
-
 
 
                                 SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/M/yyyy");
@@ -268,20 +283,16 @@ public class EditPending_Activity extends AppCompatActivity {
                                     printDifference(start, end);
 
 
-
-
                                 }
                             }).display();
 
-                }else
-                {
+                } else {
                     Toast.makeText(EditPending_Activity.this, "Select Start time", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
-
 
 
     }
@@ -310,23 +321,23 @@ public class EditPending_Activity extends AppCompatActivity {
 
     }
 
-    private Boolean CheckAllFields(){
+    private Boolean CheckAllFields() {
         //part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken
-        if (pend_partname.length()==0){
+        if (pend_partname.length() == 0) {
             pend_partname.setError("Field Cannot be empty");
             pend_partname.setHint("Field Cannot be empty");
             return false;
         }
-        if (problem_desc_et.length()<3){
+        if (problem_desc_et.length() < 3) {
             problem_desc_et.setError("Please enter proper details");
 
             return false;
         }
-        if (action_taken_et.length()<3){
+        if (action_taken_et.length() < 3) {
             action_taken_et.setError("Please enter proper details");
             return false;
         }
-        if (work_done_by.length()<2){
+        if (work_done_by.length() < 2) {
             work_done_by.setError("Please enter proper details");
             return false;
         }
@@ -379,4 +390,86 @@ public class EditPending_Activity extends AppCompatActivity {
 
 
     }
+
+    public void after_pic_editdata(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_AFTER_FILE);
+    }
+
+    public void before_pic_editdata(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_BEFORE_FILE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_GET_BEFORE_FILE) {
+                assert data != null;
+                Uri selectedImageUri = data.getData();
+                // Get the path from the Uri
+                final String path = getPathFromURI(selectedImageUri);
+                BEFORE_URI = getRealPathFromURI(getApplicationContext(), selectedImageUri);
+                if (path != null) {
+                    File f = new File(path);
+
+                    selectedImageUri = Uri.fromFile(f);
+                }
+                // Set the image in ImageView
+                beforepic.setImageURI(selectedImageUri);
+            }
+        }
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_GET_AFTER_FILE) {
+                assert data != null;
+                Uri selectedImageUri = data.getData();
+                AFTER_URI = getRealPathFromURI(getApplicationContext(), selectedImageUri);
+                // Get the path from the Uri
+                final String path = getPathFromURI(selectedImageUri);
+                if (path != null) {
+                    File f = new File(path);
+
+                    selectedImageUri = Uri.fromFile(f);
+                }
+                // Set the image in ImageView
+                afterpic.setImageURI(selectedImageUri);
+            }
+        }
+    }
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null
+                , MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
+    public String getPathFromURI(Uri contentUri) {
+        String res = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
+    }
+
+
 }

@@ -99,8 +99,9 @@ public class Add_Log extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.share:
-                shareDialog();
-
+                //shareDialog();
+                Intent intent = new Intent(this, reportGen.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -123,7 +124,7 @@ public class Add_Log extends AppCompatActivity {
         CheckBox bshift = dialogView.findViewById(R.id.bshift);
         CheckBox cshift = dialogView.findViewById(R.id.cshift);
 
-      //  dateEntered.setText(date1);
+        //  dateEntered.setText(date1);
 
         new DateInputMask(dateEntered);
 
@@ -185,7 +186,7 @@ public class Add_Log extends AppCompatActivity {
                                 Model model = documentSnapshot.toObject(Model.class);
 
                                 aaa = aaa + "#" + model.getEquipment_name() + " " + model.getStart_Time() + " || "
-                                        + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken()+ "\n\n";
+                                        + model.getDate() + "\nProb: " + model.getProblem_desc() + "\naction: " + model.getAction_taken() + "\n\n";
 
                             }
                         }
@@ -267,7 +268,6 @@ public class Add_Log extends AppCompatActivity {
 
                     }
                 });
-
 
 
                 Intent intent = new Intent();
