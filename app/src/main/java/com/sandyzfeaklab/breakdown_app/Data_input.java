@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -45,9 +44,10 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Data_input extends AppCompatActivity {
 
@@ -61,7 +61,7 @@ public class Data_input extends AppCompatActivity {
     StorageReference riversRef, riversRef1;
     int time;
     boolean isAllFieldsChecked = false;
-    CheckBox checkBox,gshift;
+    CheckBox checkBox, gshift;
     ImageView beforepic, afterpic;
     Timestamp timestampstart, timestampend;
     String shift = "";
@@ -92,6 +92,7 @@ public class Data_input extends AppCompatActivity {
         problem_desc_et = findViewById(R.id.pend_problem_desc_et);
         action_taken_et = findViewById(R.id.pend_action_taken_et);
         checkBox = findViewById(R.id.checkBox);
+        gshift=findViewById(R.id.G_SHiftcheckBox);
         beforepic = findViewById(R.id.before_pic);
         afterpic = findViewById(R.id.after_pic);
 
@@ -106,7 +107,7 @@ public class Data_input extends AppCompatActivity {
 
         starttime = findViewById(R.id.pend_start_time);
         endtime = findViewById(R.id.pend_end_time);
-        TextView to =findViewById(R.id.textView10);
+        TextView to = findViewById(R.id.textView10);
         time_taken = findViewById(R.id.pend_time_taken);
 
 
@@ -257,7 +258,6 @@ public class Data_input extends AppCompatActivity {
                                 timestampstart = new Timestamp(date.getTime());
 
 
-
                             }
                         }).display();
 
@@ -298,13 +298,10 @@ public class Data_input extends AppCompatActivity {
                                     printDifference(start, end);
 
 
-
-
                                 }
                             }).display();
 
-                }else
-                {
+                } else {
                     Toast.makeText(Data_input.this, "Select Start time", Toast.LENGTH_SHORT).show();
                 }
 
@@ -314,7 +311,6 @@ public class Data_input extends AppCompatActivity {
 
 
         save_butt.setOnClickListener(new View.OnClickListener() {
-
 
 
             @Override
@@ -338,12 +334,19 @@ public class Data_input extends AppCompatActivity {
                     } else if (currentime.after(aend) && currentime
                             .before(bend)) {
                         shift = "B";
-
                     } else if (currentime.after(bend) && currentime
                             .before(astart) || currentime.after(cshift) && currentime.before(astart)) {
                         shift = "C";
+                        //Person in night shit need not select previous date in picker
 
+                        if(currentime.after(cshift)){
+                            Calendar calendar= GregorianCalendar.getInstance();
+                            calendar.add(Calendar.DAY_OF_YEAR,-1);
+                            Date previousDay=calendar.getTime();
 
+                            SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            Date = localDateFormat.format(previousDay);
+                        }
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -352,9 +355,11 @@ public class Data_input extends AppCompatActivity {
 
                 if (isAllFieldsChecked) {
 
+
                     String work_Type = work_type_spinner.getSelectedItem().toString();
                     String operation = operation_spinner.getSelectedItem().toString();
                     String equipment_name = equpi_list_spinne.getSelectedItem().toString();
+
 
 
                     if (endtime.getText().toString().equals("END TIME") || checkBox.isChecked()) {
@@ -370,9 +375,11 @@ public class Data_input extends AppCompatActivity {
                                     Date = date1;
                                 }
 
-                                if (gshift.isChecked()){
-                                    shift="G";
+                                if (gshift.isChecked()) {
+                                    shift = "G";
                                 }
+
+
 
 
                                 reference.add(new Model(area.getSelectedItem().toString(), stoppage_category.getSelectedItem().toString()
@@ -402,8 +409,8 @@ public class Data_input extends AppCompatActivity {
 
                     } else {
                         //adding data to firestore
-                        if (gshift.isChecked()){
-                            shift="G";
+                        if (gshift.isChecked()) {
+                            shift = "G";
                         }
 
 
@@ -423,7 +430,7 @@ public class Data_input extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
 
-                                if (BEFORE_URI!=null&&AFTER_URI!=null){
+                                if (BEFORE_URI != null && AFTER_URI != null) {
                                     uploadtocloud(BEFORE_URI, AFTER_URI, documentReference.getId());
                                 }
 
@@ -567,7 +574,7 @@ public class Data_input extends AppCompatActivity {
         different = different % minutesInMilli;
         time = (int) elapsedMinutes;
 
-        time_taken.setText((int) elapsedMinutes);
+        time_taken.setText(String.valueOf( elapsedMinutes));
 
 
     }

@@ -92,4 +92,12 @@ public class reportGen extends AppCompatActivity {
 
 
     }
+
+    public void send_report(View view) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, generatedReport.getText().toString());
+        startActivity(intent);
+    }
 }
