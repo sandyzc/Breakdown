@@ -45,6 +45,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -342,6 +343,7 @@ public class Data_input extends AppCompatActivity {
                             .before(astart) || currentime.after(cshift) && currentime.before(astart)) {
                         shift = "C";
 
+
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -410,7 +412,7 @@ public class Data_input extends AppCompatActivity {
                                 endtime.getText().toString(),
                                 work_done_by.getText().toString(),
                                 "Compleated",
-                                Date, time, reference.document().getId(), "", shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                Date, Integer.parseInt(time_taken.getText().toString()), reference.document().getId(), "", shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
 //                                uploadaftertoCloud(AFTER_URI, documentReference.getId());
@@ -560,7 +562,7 @@ public class Data_input extends AppCompatActivity {
         different = different % minutesInMilli;
         time = (int) elapsedMinutes;
 
-        time_taken.setText(elapsedMinutes + " Min");
+        time_taken.setText((int) elapsedMinutes);
 
 
     }
