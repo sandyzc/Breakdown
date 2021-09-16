@@ -107,7 +107,7 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-		<AutoCompleteTextView
+		<Spinner
 			android:id="@+id/pend_operation_spin"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="1.0"
 			app:layout_constraintStart_toEndOf="@+id/textView3"
-			app:layout_constraintTop_toBottomOf="@+id/pend_work_type_spin" />
+			app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 		<TextView
 			android:id="@+id/textView4"
@@ -409,7 +409,7 @@ android:visibility="gone"
 			app:iconTintMode="src_atop"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/after_pic" />
+			app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
 		<Button
 			android:id="@+id/add_sap_code"
@@ -498,11 +498,22 @@ android:visibility="gone"
 			android:layout_marginStart="16dp"
 			android:layout_marginEnd="120dp"
 			android:text="Mark as Pending"
-			app:layout_constraintBottom_toBottomOf="@+id/pend_save_data"
 			app:layout_constraintEnd_toStartOf="@+id/pend_save_data"
 			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="@+id/pend_save_data" />
+			app:layout_constraintTop_toBottomOf="@+id/after_pic" />
+
+		<CheckBox
+			android:id="@+id/G_SHiftcheckBox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="G Shift"
+			app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.116"
+			app:layout_constraintStart_toEndOf="@+id/checkBox"
+			app:layout_constraintTop_toTopOf="@+id/checkBox"
+			app:layout_constraintVertical_bias="0.0" />
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

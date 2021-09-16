@@ -61,7 +61,7 @@ public class Data_input extends AppCompatActivity {
     StorageReference riversRef, riversRef1;
     int time;
     boolean isAllFieldsChecked = false;
-    CheckBox checkBox;
+    CheckBox checkBox,gshift;
     ImageView beforepic, afterpic;
     Timestamp timestampstart, timestampend;
     String shift = "";
@@ -114,9 +114,9 @@ public class Data_input extends AppCompatActivity {
 
         date.setText("Date : " + date1);
 
-        Spinner equpi_list_spinne = (Spinner) findViewById(R.id.pend_equip_list_spin);
-        Spinner work_type_spinner = (Spinner) findViewById(R.id.pend_work_type_spin);
-        AutoCompleteTextView operation_spinner = (AutoCompleteTextView) findViewById(R.id.pend_operation_spin);
+        Spinner equpi_list_spinne = findViewById(R.id.pend_equip_list_spin);
+        Spinner work_type_spinner = findViewById(R.id.pend_work_type_spin);
+        Spinner operation_spinner = findViewById(R.id.pend_operation_spin);
         Spinner problem_category = findViewById(R.id.pend_edit_prob_cat);
         Spinner stoppage_category = findViewById(R.id.pend_edit_stoppage_cat);
         Spinner area = findViewById(R.id.pend_spinner_area);
@@ -353,7 +353,7 @@ public class Data_input extends AppCompatActivity {
                 if (isAllFieldsChecked) {
 
                     String work_Type = work_type_spinner.getSelectedItem().toString();
-                    String operation = operation_spinner.getText().toString();
+                    String operation = operation_spinner.getSelectedItem().toString();
                     String equipment_name = equpi_list_spinne.getSelectedItem().toString();
 
 
@@ -368,6 +368,10 @@ public class Data_input extends AppCompatActivity {
 
                                 if (Date.equals("")) {
                                     Date = date1;
+                                }
+
+                                if (gshift.isChecked()){
+                                    shift="G";
                                 }
 
 
@@ -398,6 +402,9 @@ public class Data_input extends AppCompatActivity {
 
                     } else {
                         //adding data to firestore
+                        if (gshift.isChecked()){
+                            shift="G";
+                        }
 
 
                         reference.add(new Model(area.getSelectedItem().toString(), stoppage_category.getSelectedItem().toString(), problem_category.getSelectedItem().toString(), equipment_name,
@@ -415,8 +422,6 @@ public class Data_input extends AppCompatActivity {
                                 Date, Integer.parseInt(time_taken.getText().toString()), reference.document().getId(), "", shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-//                                uploadaftertoCloud(AFTER_URI, documentReference.getId());
-//                                uploadbeforetocloud(BEFORE_URI, documentReference.getId());
 
                                 if (BEFORE_URI!=null&&AFTER_URI!=null){
                                     uploadtocloud(BEFORE_URI, AFTER_URI, documentReference.getId());
