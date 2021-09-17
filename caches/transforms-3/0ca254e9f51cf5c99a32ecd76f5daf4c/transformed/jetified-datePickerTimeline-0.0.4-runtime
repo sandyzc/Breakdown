@@ -1,7 +1,0 @@
-com.vivekkaushik.datepicker.BuildConfig
-com.vivekkaushik.datepicker.DatePickerTimeline
-com.vivekkaushik.datepicker.OnDateSelectedListener
-com.vivekkaushik.datepicker.TimelineView
-com.vivekkaushik.datepicker.adapter.TimelineAdapter
-com.vivekkaushik.datepicker.adapter.TimelineAdapter$1
-com.vivekkaushik.datepicker.adapter.TimelineAdapter$ViewHolder

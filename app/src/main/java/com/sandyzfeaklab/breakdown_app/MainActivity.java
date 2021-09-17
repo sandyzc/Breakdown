@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mtbf_butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Excel2Firestore.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -76,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
         uptime_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Report.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
 
             }
         });

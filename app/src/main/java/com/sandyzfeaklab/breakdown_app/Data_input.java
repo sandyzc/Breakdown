@@ -334,9 +334,8 @@ public class Data_input extends AppCompatActivity {
                     } else if (currentime.after(aend) && currentime
                             .before(bend)) {
                         shift = "B";
-                    } else if (currentime.after(bend) && currentime
-                            .before(astart) || currentime.after(cshift) && currentime.before(astart)) {
-                        shift = "C";
+                    } else if (currentime.after(bend) || currentime.after(cshift)&&currentime.before(astart)) {
+
                         //Person in night shit need not select previous date in picker
 
                         if(currentime.after(cshift)){
@@ -346,7 +345,10 @@ public class Data_input extends AppCompatActivity {
 
                             SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date = localDateFormat.format(previousDay);
+
+
                         }
+                        shift = "C";
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

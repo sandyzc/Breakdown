@@ -38,17 +38,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class EditPending_Activity extends AppCompatActivity {
 
+    private static final int REQUEST_GET_AFTER_FILE = 3;
+    private static final int REQUEST_GET_BEFORE_FILE = 2;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView starttime, endtime, pend_partname, pend_equip_list_spin, pend_operation_spin, date_txt, pend_area;
     EditText problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken;
     Spinner pend_work_type_spin;
     Date start, end;
     Model model;
     Button save;
-    private static final int REQUEST_GET_AFTER_FILE = 3;
-    private static final int REQUEST_GET_BEFORE_FILE = 2;
     String shift = "";
     int time;
     boolean isAllFieldsChecked = false;
@@ -56,10 +58,8 @@ public class EditPending_Activity extends AppCompatActivity {
     StorageReference storageRef = storage.getReference();
     StorageReference riversRef, riversRef1;
     ImageView beforepic, afterpic;
-    String BEFORE_URI;
+    String BEFORE_URI, Date;
     String AFTER_URI;
-
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
 
     @Override
@@ -121,7 +121,9 @@ public class EditPending_Activity extends AppCompatActivity {
                 pend_partname.setText(model.getPart());
                 pend_equip_list_spin.setText(model.getEquipment_name());
                 pend_operation_spin.setText(model.getOperation());
-                // starttime.setText(model.getStart_Time());
+                if (!model.getStart_Time().equals("")) {
+                    starttime.setText(model.getStart_Time());
+                }
                 endtime.setText(model.getEnd_time());
                 pend_area.setText(model.getArea());
 
@@ -163,9 +165,19 @@ public class EditPending_Activity extends AppCompatActivity {
                             .before(bend)) {
                         shift = "B";
 
-                    } else if (currentime.after(bend) && currentime
-                            .before(astart) || currentime.after(cshift) && currentime.before(astart)) {
+                    } else if (currentime.after(bend) || currentime.after(cshift) && currentime.before(astart)) {
                         shift = "C";
+
+                        if (currentime.after(cshift)) {
+                            Calendar calendar = GregorianCalendar.getInstance();
+                            calendar.add(Calendar.DAY_OF_YEAR, -1);
+                            Date previousDay = calendar.getTime();
+
+                            SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            Date = localDateFormat.format(previousDay);
+
+
+                        }
 
                     }
                 } catch (ParseException e) {
@@ -181,7 +193,7 @@ public class EditPending_Activity extends AppCompatActivity {
                         , "problem_category", problem_category.getSelectedItem().toString()
                         , "start_Time", starttime.getText().toString()
                         , "end_time", endtime.getText().toString()
-                        , "time_taken", time
+                        , "time_taken", Integer.parseInt(time_taken.getText().toString())
                         , "action_taken_by", work_done_by.getText().toString()
                         , "status", "Compleated"
                         , "shift", shift
@@ -189,8 +201,8 @@ public class EditPending_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
 
-                        if (BEFORE_URI!=null&&AFTER_URI!=null){
-                            uploadtocloud(BEFORE_URI, AFTER_URI,model.getId());
+                        if (BEFORE_URI != null && AFTER_URI != null) {
+                            uploadtocloud(BEFORE_URI, AFTER_URI, model.getId());
                         }
                         Toast.makeText(EditPending_Activity.this, "Work Updated", Toast.LENGTH_SHORT).show();
                     }
@@ -205,18 +217,11 @@ public class EditPending_Activity extends AppCompatActivity {
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int hour = c.get(Calendar.HOUR_OF_DAY);
-                int minute = c.get(Calendar.MINUTE);
-                int second = c.get(Calendar.SECOND);
 
                 new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
-                        //.bottomSheet()
+
                         .curved()
                         .minutesStep(1)
-                        //.displayHours(false)
-                        //.displayMinutes(false)
-                        //.todayText("aujourd'hui")
                         .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                             @Override
                             public void onDisplayed(SingleDateAndTimePicker picker) {
@@ -234,8 +239,6 @@ public class EditPending_Activity extends AppCompatActivity {
                             public void onDateSelected(Date date) {
                                 start = date;
 
-
-                                SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/M/yyyy");
                                 SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                 String starttim = localDateFormat1.format(date);
 
@@ -316,7 +319,7 @@ public class EditPending_Activity extends AppCompatActivity {
         different = different % minutesInMilli;
         time = (int) elapsedMinutes;
 
-        time_taken.setText(elapsedMinutes + " Min");
+        time_taken.setText(String.valueOf(elapsedMinutes));
 
 
     }
