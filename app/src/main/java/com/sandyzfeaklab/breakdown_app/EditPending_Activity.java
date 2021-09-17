@@ -59,7 +59,7 @@ public class EditPending_Activity extends AppCompatActivity {
     StorageReference riversRef, riversRef1;
     ImageView beforepic, afterpic;
     String BEFORE_URI, Date;
-    String AFTER_URI;
+    String AFTER_URI,starttimerce;
     private DocumentReference documentReference;
 
     @Override
@@ -117,13 +117,16 @@ public class EditPending_Activity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                 model = documentSnapshot.toObject(Model.class);
-
+                assert model != null;
+                starttimerce=model.getStart_Time();
+                start= model.getTimestamp();
                 pend_partname.setText(model.getPart());
                 pend_equip_list_spin.setText(model.getEquipment_name());
                 pend_operation_spin.setText(model.getOperation());
                 if (!model.getStart_Time().equals("")) {
                     starttime.setText(model.getStart_Time());
                 }
+
                 endtime.setText(model.getEnd_time());
                 pend_area.setText(model.getArea());
 
@@ -141,6 +144,8 @@ public class EditPending_Activity extends AppCompatActivity {
 
             }
         });
+
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,43 +219,51 @@ public class EditPending_Activity extends AppCompatActivity {
             }
         });
 
-        starttime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
-
-                        .curved()
-                        .minutesStep(1)
-                        .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
-                            @Override
-                            public void onDisplayed(SingleDateAndTimePicker picker) {
-                                // Retrieve the SingleDateAndTimePicker
-                            }
-
-                            @Override
-                            public void onClosed(SingleDateAndTimePicker picker) {
-                                // On dialog closed
-                            }
-                        })
-                        .title("Start Time")
-                        .listener(new SingleDateAndTimePickerDialog.Listener() {
-                            @Override
-                            public void onDateSelected(Date date) {
-                                start = date;
-
-                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
-                                String starttim = localDateFormat1.format(date);
 
 
-                                starttime.setText(starttim);
+            starttime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                            }
-                        }).display();
+                    if (starttimerce.equals("")){
 
 
-            }
-        });
+                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
+
+                            .curved()
+                            .minutesStep(1)
+                            .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
+                                @Override
+                                public void onDisplayed(SingleDateAndTimePicker picker) {
+                                    // Retrieve the SingleDateAndTimePicker
+                                }
+
+                                @Override
+                                public void onClosed(SingleDateAndTimePicker picker) {
+                                    // On dialog closed
+                                }
+                            })
+                            .title("Start Time")
+                            .listener(new SingleDateAndTimePickerDialog.Listener() {
+                                @Override
+                                public void onDateSelected(Date date) {
+                                    start = date;
+
+                                    SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
+                                    String starttim = localDateFormat1.format(date);
+
+
+                                    starttime.setText(starttim);
+
+                                }
+                            }).display();
+
+
+                }
+                }
+            });
+
+
 
 
         endtime.setOnClickListener(new View.OnClickListener() {

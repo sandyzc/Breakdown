@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class Data_input extends AppCompatActivity {
 
@@ -223,7 +224,7 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(true)
+                SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog=   new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
                         //.bottomSheet()
                         .curved()
                         .minutesStep(1)
@@ -234,6 +235,8 @@ public class Data_input extends AppCompatActivity {
                             @Override
                             public void onDisplayed(SingleDateAndTimePicker picker) {
                                 // Retrieve the SingleDateAndTimePicker
+                                picker.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
+
                             }
 
                             @Override
@@ -259,7 +262,8 @@ public class Data_input extends AppCompatActivity {
 
 
                             }
-                        }).display();
+                        });
+                singleDateAndTimePickerDialog.display();
 
 
             }
@@ -269,15 +273,16 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!starttime.getText().toString().equals(null)) {
+                if (!starttime.getText().toString().equals("")) {
 
-                    new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(true)
+                    SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog=    new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
                             .curved()
                             .minutesStep(1)
                             .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                                 @Override
                                 public void onDisplayed(SingleDateAndTimePicker picker) {
                                     // Retrieve the SingleDateAndTimePicker
+                                    picker.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
                                 }
 
                                 @Override
@@ -299,7 +304,9 @@ public class Data_input extends AppCompatActivity {
 
 
                                 }
-                            }).display();
+                            });
+
+                    singleDateAndTimePickerDialog.display();
 
                 } else {
                     Toast.makeText(Data_input.this, "Select Start time", Toast.LENGTH_SHORT).show();

@@ -17,12 +17,6 @@
         <activity
             android:name=".reportGen"
             android:exported="true" />
-        <activity
-            android:name=".Excel2Firestore"
-            android:exported="true" />
-        <activity
-            android:name=".Report"
-            android:exported="true" />
         <activity android:name=".EditPending_Activity" />
         <activity android:name=".Pending_activity" />
         <activity
