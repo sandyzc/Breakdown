@@ -107,11 +107,11 @@
 					android:orientation="vertical">
 
 					<ImageView
-						android:id="@+id/up_time_butt"
+						android:id="@+id/oil_cons_activity"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_horizontal"
-						android:src="@mipmap/uptime_logo_foreground" />
+						android:src="@drawable/oil_cons_logo" />
 
 
 				</LinearLayout>

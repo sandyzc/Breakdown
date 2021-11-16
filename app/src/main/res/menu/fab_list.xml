@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/HPDC"
+        android:title="HPDC" />
+    <item
+        android:id="@+id/Melting"
+        android:title="Melting" />
+    <item
+        android:id="@+id/GSPM"
+        android:title="GSPM" />
+    <item
+        android:id="@+id/HotBox"
+        android:title="HotBox" />
+    <item
+        android:id="@+id/ColdBox"
+        android:title="ColdBox" />
+
+    <item
+        android:id="@+id/Sand_Reclamation"
+        android:title="Sand Reclamation" />
+
+    <item
+        android:id="@+id/Heat_Treatment"
+        android:title="Heat Treatment" />
+    <item
+        android:id="@+id/Finishing"
+        android:title="Finising" />
+    <item
+        android:id="@+id/General"
+        android:title="General" />
+
+</menu>

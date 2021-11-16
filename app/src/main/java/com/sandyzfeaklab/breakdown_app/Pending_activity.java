@@ -12,9 +12,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.sandyzfeaklab.breakdown_app.adaptors.Recycler_Adaptor;
-import com.sandyzfeaklab.breakdown_app.dataModel.Model;
-
-import java.util.ArrayList;
+import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 
 public class Pending_activity extends AppCompatActivity {
 
@@ -31,9 +29,9 @@ public class Pending_activity extends AppCompatActivity {
         Query query = notebookRef.whereEqualTo("status","Pending");
 
 
-        FirestoreRecyclerOptions<Model>options=new FirestoreRecyclerOptions.Builder<Model>().setQuery(query,Model.class).build();
+        FirestoreRecyclerOptions<DataInput_Model>options=new FirestoreRecyclerOptions.Builder<DataInput_Model>().setQuery(query, DataInput_Model.class).build();
 
-        adaptor= new Recycler_Adaptor(options);
+        adaptor= new Recycler_Adaptor(options,this);
         rcv.setHasFixedSize(true);
         rcv.setLayoutManager(new LinearLayoutManager(this));
         rcv.addItemDecoration(new DividerItemDecoration(this,

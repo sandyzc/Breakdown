@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/HPDC_oil"
+        android:title="HPDC" />
+    <item
+        android:id="@+id/GSPM_Oil_cons"
+        android:title="GSPM" />
+    <item
+        android:id="@+id/CoreShop"
+        android:title="Core Shop" />
+    <item
+        android:id="@+id/Finishing_Oil_cons_"
+        android:title="Finising" />
+
+</menu>

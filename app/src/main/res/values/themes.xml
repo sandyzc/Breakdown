@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 	<!-- Base application theme. -->
 	<style name="Theme.Breakdown"
-		parent="Theme.AppCompat.DayNight.DarkActionBar">
+		parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
 		<!-- Primary brand color. -->
 		<item name="colorPrimary">#2e001f</item>
 		<item name="colorPrimaryDark">#0f0000</item>
@@ -17,6 +17,20 @@
 		<!-- Customize your theme here. -->
 	</style>
 
+	<style name="RoundShapeTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+		<item name="shapeAppearanceMediumComponent">@style/RoundShapeAppearance</item>
+		<item name="colorSurface">@android:color/transparent</item>
+		<item name="elevation">8dp</item>
+
+	</style>
+
+	<style name="RoundShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">16dp</item>
+	</style>
+
+
 	<style name="spinnerTheme">
 		<item name="android:textColor">#592946</item>
 	</style>
@@ -24,6 +38,11 @@
 	<style name="Theme.Breakdown.NoActionBar">
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="CircularDeterminateProgressBar">
+		<item name="android:indeterminateOnly">false</item>
+		<item name="android:progressDrawable">@drawable/circle</item>
 	</style>
 
 	<style name="Theme.Breakdown.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

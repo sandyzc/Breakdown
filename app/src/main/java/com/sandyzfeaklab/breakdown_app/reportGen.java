@@ -18,15 +18,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 import com.sandyzfeaklab.breakdown_app.dataModel.DateInputMask;
-import com.sandyzfeaklab.breakdown_app.dataModel.Model;
 
 public class reportGen extends AppCompatActivity {
 
     EditText enteredDate;
     Spinner shift;
     TextView generatedReport;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference reference = FirebaseFirestore.getInstance().collection("log");
 
     @Override
@@ -62,13 +61,12 @@ public class reportGen extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                    Model model = documentSnapshot.toObject(Model.class);
+                    DataInput_Model dataInputModel = documentSnapshot.toObject(DataInput_Model.class);
 
-                    aaa = aaa +num+ "#" + model.getEquipment_name()
-                            + " " + model.getStart_Time()
-                            + "\nProb: " + model.getProblem_desc()
-                            + "\nAction: " + model.getAction_taken()
-                            + "\nShift: " + model.getShift()
+                    aaa = aaa +num+ "#" + dataInputModel.getEquipment_name()
+                            + " " + dataInputModel.getStart_Time()
+                            + "\nProb: " + dataInputModel.getProblem_desc()
+                            + "\nAction: " + dataInputModel.getAction_taken()
                             + "\n\n";
                     num++;
 

@@ -1,0 +1,128 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/themeColor"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="Enter The Oil Consmption Details"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <Spinner
+            android:id="@+id/add_oil_cons_dialog_select_dept"
+            android:layout_width="match_parent"
+            android:background="@drawable/line_background"
+            android:layout_height="50dp"
+            android:hint="Select Machine"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@color/black"
+            android:layout_weight="1.8" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_phone_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:hint="Enter Quantity"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconTint="@color/black">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_oil_cons_dialog_select_qnty"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/add_oil_cons_dialog_select_oil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1.8"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:hint="Oil Type"
+            android:textColor="@color/black" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_phoner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:hint="Remarks on Why OIl TopUp done"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconTint="@color/black">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_oil_cons_dialog_select_reason"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:inputType="textMultiLine"
+                app:errorEnabled="true"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/button_back"
+    android:text="Save"
+    android:onClick="SAve_oil"
+    android:textColor="@color/white"
+    android:drawableRight="@drawable/save"
+    android:id="@+id/add_oil_cons_dialog_save"
+    />
+
+</LinearLayout>
+
+
+

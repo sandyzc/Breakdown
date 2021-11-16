@@ -1,57 +1,33 @@
 package com.sandyzfeaklab.breakdown_app;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.sandyzfeaklab.breakdown_app.adaptors.Recycler_Adaptor;
-import com.sandyzfeaklab.breakdown_app.dataModel.DateInputMask;
-import com.sandyzfeaklab.breakdown_app.dataModel.Model;
+import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 public class Add_Log extends AppCompatActivity {
 
-    private FirebaseAnalytics mFirebaseAnalytics;
-
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference notebookRef = db.collection("log");
     Recycler_Adaptor adaptor;
     RecyclerView rcv;
-
-    private final CollectionReference notebookRef = db.collection("log");
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +40,87 @@ public class Add_Log extends AppCompatActivity {
         Query query = notebookRef.orderBy("timestamp", Query.Direction.DESCENDING);
 
 
-        FirestoreRecyclerOptions<Model> options = new FirestoreRecyclerOptions.Builder<Model>().setQuery(query, Model.class).build();
+        FirestoreRecyclerOptions<DataInput_Model> options = new FirestoreRecyclerOptions.Builder<DataInput_Model>().setQuery(query, DataInput_Model.class).build();
 
-        adaptor = new Recycler_Adaptor(options);
+        adaptor = new Recycler_Adaptor(options, this);
         rcv.setHasFixedSize(true);
         rcv.setLayoutManager(new LinearLayoutManager(Add_Log.this));
         rcv.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
         rcv.setAdapter(adaptor);
 
+        FabSpeedDial fabSpeedDial = findViewById(R.id.fab_speed_dial);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_Log.this, Data_input.class);
-            startActivity(intent);
+         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                //TODO: Start some activity
+                //TODO: add hpdc finishing option i.e trimming
+
+                Intent intent = new Intent(Add_Log.this, Data_input.class);
+                Bundle bundle= new Bundle();
+
+                switch (menuItem.getItemId()){
+
+
+                    case R.id.HPDC:
+                        bundle.putString("Area","HPDC");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+                    case R.id.GSPM:
+                        bundle.putString("Area","GSPM");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Melting:
+                        bundle.putString("Area","Melting");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Heat_Treatment:
+                        bundle.putString("Area","Heat_Treatment");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.HotBox:
+                        bundle.putString("Area","HotBox");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+
+                        return true;
+                    case R.id.ColdBox:
+                        bundle.putString("Area","ColdBox");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+
+                        return true;
+                    case R.id.Sand_Reclamation:
+
+                        bundle.putString("Area","Sand_Reclamation");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Finishing:
+
+                        bundle.putString("Area","Finishing");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+
+                }
+
+                return false;
+            }
         });
 
 
@@ -104,8 +147,6 @@ public class Add_Log extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
 
     @Override

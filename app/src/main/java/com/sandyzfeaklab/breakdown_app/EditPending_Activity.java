@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -30,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sandyzfeaklab.breakdown_app.dataModel.Model;
+import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -39,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class EditPending_Activity extends AppCompatActivity {
 
@@ -49,7 +51,7 @@ public class EditPending_Activity extends AppCompatActivity {
     EditText problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken;
     Spinner pend_work_type_spin;
     Date start, end;
-    Model model;
+    DataInput_Model dataInputModel;
     Button save;
     String shift = "";
     int time;
@@ -59,7 +61,8 @@ public class EditPending_Activity extends AppCompatActivity {
     StorageReference riversRef, riversRef1;
     ImageView beforepic, afterpic;
     String BEFORE_URI, Date;
-    String AFTER_URI,starttimerce;
+    String AFTER_URI,starttimerce,status;
+    CheckBox compleated;
     private DocumentReference documentReference;
 
     @Override
@@ -67,6 +70,10 @@ public class EditPending_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_pending);
 
+        //TODO: Remove unwanted viewholders
+        //TODO:Create correct holder for only required data
+
+        compleated=findViewById(R.id.checkBoxCompleated);
         pend_partname = findViewById(R.id.pend_partname);
         pend_equip_list_spin = findViewById(R.id.pend_equip_list_spin);
         pend_work_type_spin = findViewById(R.id.pend_work_type_spin);
@@ -81,10 +88,15 @@ public class EditPending_Activity extends AppCompatActivity {
         action_taken_et = findViewById(R.id.pend_action_taken_et);
         spares_used_et = findViewById(R.id.pend_spares_used_et);
         work_done_by = findViewById(R.id.pend_work_done_by_et);
-        time_taken = findViewById(R.id.pend_time_taken);
+        time_taken = findViewById(R.id.edit_pend_time_taken);
         pend_area = findViewById(R.id.pend_spinner_area);
         save = findViewById(R.id.edit_pend_save_data);
 
+        if (compleated.isChecked()){
+            status="Compleated";
+        }else{
+            status="Pending";
+        }
 
         Spinner problem_category = findViewById(R.id.edit_prob_cat);
         Spinner stoppage_category = findViewById(R.id.edit_stoppage_cat);
@@ -116,29 +128,29 @@ public class EditPending_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                model = documentSnapshot.toObject(Model.class);
-                assert model != null;
-                starttimerce=model.getStart_Time();
-                start= model.getTimestamp();
-                pend_partname.setText(model.getPart());
-                pend_equip_list_spin.setText(model.getEquipment_name());
-                pend_operation_spin.setText(model.getOperation());
-                if (!model.getStart_Time().equals("")) {
-                    starttime.setText(model.getStart_Time());
+                dataInputModel = documentSnapshot.toObject(DataInput_Model.class);
+                assert dataInputModel != null;
+                starttimerce= dataInputModel.getStart_Time();
+                start= dataInputModel.getTimestamp();
+                pend_partname.setText(dataInputModel.getPart());
+                pend_equip_list_spin.setText(dataInputModel.getEquipment_name());
+                pend_operation_spin.setText(dataInputModel.getOperation());
+                if (!dataInputModel.getStart_Time().equals("")) {
+                    starttime.setText(dataInputModel.getStart_Time());
                 }
 
-                endtime.setText(model.getEnd_time());
-                pend_area.setText(model.getArea());
-
-                problem_desc_et.setText(model.getProblem_desc());
-                action_taken_et.setText(model.getAction_taken());
-                spares_used_et.setText(model.getSpares_used());
-                work_done_by.setText(model.getaction_taken_by());
-                if (!model.getBeforeimageurl().equals("")) {
-                    Picasso.get().load(model.getBeforeimageurl()).placeholder(R.drawable.time).into(beforepic);
+                endtime.setText(dataInputModel.getEnd_time());
+                pend_area.setText(dataInputModel.getArea());
+                time_taken.setText(String.valueOf(dataInputModel.getTime_taken()));
+                problem_desc_et.setText(dataInputModel.getProblem_desc());
+                action_taken_et.setText(dataInputModel.getAction_taken());
+                spares_used_et.setText(dataInputModel.getSpares_used());
+                work_done_by.setText(dataInputModel.getaction_taken_by());
+                if (!dataInputModel.getBeforeimageurl().equals("")) {
+                    Picasso.get().load(dataInputModel.getBeforeimageurl()).placeholder(R.drawable.time).into(beforepic);
                 }
-                if (!model.getAfterimageurl().equals("")) {
-                    Picasso.get().load(model.getAfterimageurl()).placeholder(R.drawable.time).into(afterpic);
+                if (!dataInputModel.getAfterimageurl().equals("")) {
+                    Picasso.get().load(dataInputModel.getAfterimageurl()).placeholder(R.drawable.time).into(afterpic);
                 }
 
 
@@ -207,7 +219,7 @@ public class EditPending_Activity extends AppCompatActivity {
                     public void onSuccess(Void unused) {
 
                         if (BEFORE_URI != null && AFTER_URI != null) {
-                            uploadtocloud(BEFORE_URI, AFTER_URI, model.getId());
+                            uploadtocloud(BEFORE_URI, AFTER_URI, dataInputModel.getId());
                         }
                         Toast.makeText(EditPending_Activity.this, "Work Updated", Toast.LENGTH_SHORT).show();
                     }
@@ -228,14 +240,17 @@ public class EditPending_Activity extends AppCompatActivity {
                     if (starttimerce.equals("")){
 
 
-                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
+                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(false)
 
                             .curved()
                             .minutesStep(1)
+
                             .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                                 @Override
                                 public void onDisplayed(SingleDateAndTimePicker picker) {
                                     // Retrieve the SingleDateAndTimePicker
+
+                                    picker.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
                                 }
 
                                 @Override
@@ -256,7 +271,7 @@ public class EditPending_Activity extends AppCompatActivity {
                                     starttime.setText(starttim);
 
                                 }
-                            }).display();
+                            }).defaultDate(start).display();
 
 
                 }
@@ -272,13 +287,14 @@ public class EditPending_Activity extends AppCompatActivity {
 
                 if (!starttime.getText().toString().equals("")) {
 
-                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(true)
+                    new SingleDateAndTimePickerDialog.Builder(EditPending_Activity.this).displayAmPm(false)
                             .curved()
                             .minutesStep(1)
                             .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                                 @Override
                                 public void onDisplayed(SingleDateAndTimePicker picker) {
                                     // Retrieve the SingleDateAndTimePicker
+                                    picker.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
                                 }
 
                                 @Override
@@ -300,7 +316,7 @@ public class EditPending_Activity extends AppCompatActivity {
 
 
                                 }
-                            }).display();
+                            }).defaultDate(end).display();
 
                 } else {
                     Toast.makeText(EditPending_Activity.this, "Select Start time", Toast.LENGTH_SHORT).show();

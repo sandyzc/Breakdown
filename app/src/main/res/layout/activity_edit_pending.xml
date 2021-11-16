@@ -122,6 +122,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pend_work_type_spin" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/textView4"
             android:layout_width="97dp"
             android:layout_height="32dp"
@@ -137,6 +138,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/pend_partname"
             android:layout_width="240dp"
             android:layout_height="34dp"
@@ -380,7 +382,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <EditText
-            android:id="@+id/pend_time_taken"
+            android:id="@+id/edit_pend_time_taken"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
@@ -408,9 +410,10 @@
             app:iconTintMode="src_atop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/after_pic_editdata" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxCompleated" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/add_sap_code"
             style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
@@ -440,7 +443,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/pend_time_taken" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_pend_time_taken" />
 
         <EditText
             android:id="@+id/pend_work_done_by_et"
@@ -491,7 +494,16 @@
             app:layout_constraintTop_toTopOf="@+id/before_pic_editdata"
             app:srcCompat="@drawable/before_pic" />
 
-
+        <CheckBox
+            android:id="@+id/checkBoxCompleated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Compleated"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.025"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/after_pic_editdata" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

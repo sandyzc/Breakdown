@@ -1,15 +1,14 @@
 package com.sandyzfeaklab.breakdown_app;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,11 +18,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
@@ -37,10 +39,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sandyzfeaklab.breakdown_app.dataModel.Model;
+import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 import com.sandyzfeaklab.breakdown_app.dataModel.Sap_code_Model;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class Data_input extends AppCompatActivity {
@@ -56,13 +60,11 @@ public class Data_input extends AppCompatActivity {
     private static final int REQUEST_GET_BEFORE_FILE = 2;
     private static final int REQUEST_GET_AFTER_FILE = 3;
     String download;
-    String Date = "";
-    String BEFORE_URI;
-    String AFTER_URI;
+    String Date = "",BEFORE_URI,AFTER_URI;
     StorageReference riversRef, riversRef1;
     int time;
     boolean isAllFieldsChecked = false;
-    CheckBox checkBox, gshift;
+    CheckBox checkBox, gshift, cb_Breakdown,cb_ser_req,cb_planned;
     ImageView beforepic, afterpic;
     Timestamp timestampstart, timestampend;
     String shift = "";
@@ -74,6 +76,7 @@ public class Data_input extends AppCompatActivity {
     ArrayList<Sap_code_Model> models = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference reference = FirebaseFirestore.getInstance().collection("log");
+
     // Create a Cloud Storage reference from the app
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
@@ -84,32 +87,38 @@ public class Data_input extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_data_input);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+
+        //TODO : Workdone by using multi auto compleate view
+        //TODO: createlist of people
+
 
         spares_used_et = findViewById(R.id.pend_spares_used_et);
         work_done_by = findViewById(R.id.pend_work_done_by_et);
-        part_name = findViewById(R.id.pend_partname);
+        part_name = findViewById(R.id.partname);
         problem_desc_et = findViewById(R.id.pend_problem_desc_et);
         action_taken_et = findViewById(R.id.pend_action_taken_et);
         checkBox = findViewById(R.id.checkBox);
-        gshift=findViewById(R.id.G_SHiftcheckBox);
+        gshift = findViewById(R.id.G_SHiftcheckBox);
         beforepic = findViewById(R.id.before_pic);
         afterpic = findViewById(R.id.after_pic);
-
-        //  sap_no_et=findViewById(R.id.sap_no_et);
-
+        cb_Breakdown=findViewById(R.id.cb_DI_Breakdown);
+        cb_ser_req=findViewById(R.id.cb_DI_Service_REQ);
+        cb_planned=findViewById(R.id.cb_DI_Planned);
 
         Button save_butt = findViewById(R.id.pend_save_data);
         Button add_sap_code = findViewById(R.id.add_sap_code);
-
         TextView date = findViewById(R.id.pend_date_main);
-
-
         starttime = findViewById(R.id.pend_start_time);
         endtime = findViewById(R.id.pend_end_time);
-        TextView to = findViewById(R.id.textView10);
+
         time_taken = findViewById(R.id.pend_time_taken);
+
+        Bundle bundle = getIntent().getExtras();
+
+        String area_selected = bundle.getString("Area");
+
+
 
 
         @SuppressLint("SimpleDateFormat") String date1 = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
@@ -117,120 +126,142 @@ public class Data_input extends AppCompatActivity {
         date.setText("Date : " + date1);
 
         Spinner equpi_list_spinne = findViewById(R.id.pend_equip_list_spin);
-        Spinner work_type_spinner = findViewById(R.id.pend_work_type_spin);
+
         Spinner operation_spinner = findViewById(R.id.pend_operation_spin);
         Spinner problem_category = findViewById(R.id.pend_edit_prob_cat);
-        Spinner stoppage_category = findViewById(R.id.pend_edit_stoppage_cat);
-        Spinner area = findViewById(R.id.pend_spinner_area);
+        TextView area = findViewById(R.id.pend_spinner_area);
+        area.setText(area_selected);
 
 
-        ArrayAdapter<CharSequence> area_adapter = ArrayAdapter.createFromResource(this, R.array.Area, android.R.layout.simple_spinner_item);
 
         ArrayAdapter<CharSequence> work_type_adapter = ArrayAdapter.createFromResource(this, R.array.Work_Type, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> problem_category_adapter = ArrayAdapter.createFromResource(this, R.array.Problem_Category, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> stoppage_category_adapter = ArrayAdapter.createFromResource(this, R.array.Stoppage_Category, android.R.layout.simple_spinner_item);
 
 
-        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         work_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         problem_category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stoppage_category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        area.setAdapter(area_adapter);
 
-        work_type_spinner.setAdapter(work_type_adapter);
 
         problem_category.setAdapter(problem_category_adapter);
-        stoppage_category.setAdapter(stoppage_category_adapter);
 
-        area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        ActivityResultLauncher<Intent> beforePicIntentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
+            public void onActivityResult(ActivityResult result) {
 
-                    case 0:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 1:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC_ope, android.R.layout.simple_spinner_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 2:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 3:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 4:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 5:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 6:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingHPDC, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingHPDC_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 7:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
-                    case 8:
-                        equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment, android.R.layout.simple_spinner_item);
-                        operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment_ope, android.R.layout.simple_spinner_item);
-                        equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        break;
+                Intent intent = result.getData();
+                if (intent != null) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), intent.getData());
+                        beforepic.setImageBitmap(bitmap);
+
+                        BEFORE_URI = getPathFromURI(intent.getData());
+                        ;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
-
-                equpi_list_spinne.setAdapter(equip_lis_adapter);
-                operation_spinner.setAdapter(operation_type_adapter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting, android.R.layout.simple_spinner_item);
-                operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting_ope, android.R.layout.simple_spinner_item);
             }
         });
+        ActivityResultLauncher<Intent> afterPicIntentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+
+                Intent intent = result.getData();
+                if (intent != null) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), intent.getData());
+                        afterpic.setImageURI(intent.getData());
+
+                        AFTER_URI = getPathFromURI(intent.getData());
+
+                        //   AFTER_URI=intent.getData().normalizeScheme().toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+
+
+
+        if (area_selected.equals("HPDC")) {
+            equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC, android.R.layout.simple_spinner_item);
+            operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HPDC_ope, android.R.layout.simple_spinner_item);
+            operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        if (area_selected.equals("GSPM")) {
+            equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM, android.R.layout.simple_spinner_item);
+            operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.GSPM_ope, android.R.layout.simple_spinner_item);
+            equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+
+        if (area_selected.equals("Finishing")) {
+                equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM, android.R.layout.simple_spinner_item);
+                operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.FinishingGSPM_ope, android.R.layout.simple_spinner_item);
+                equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        if (area_selected.equals("HotBox"))
+           {
+                equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox, android.R.layout.simple_spinner_item);
+                operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.HotBox_ope, android.R.layout.simple_spinner_item);
+                equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            }
+            if(area_selected.equals("ColdBox"))
+            {
+                equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox, android.R.layout.simple_spinner_item);
+                operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.ColdBox_ope, android.R.layout.simple_spinner_item);
+                equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            }
+
+
+        if (area_selected.equals("Heat_Treatment")) {
+            equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment, android.R.layout.simple_spinner_item);
+            operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Heat_Treatment_ope, android.R.layout.simple_spinner_item);
+            equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        if (area_selected.equals("Sand_Reclamation")) {
+            equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
+            operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.SandReclamation, android.R.layout.simple_spinner_item);
+            equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        if (area_selected.equals("Melting")) {
+            equip_lis_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting, android.R.layout.simple_spinner_item);
+            operation_type_adapter = ArrayAdapter.createFromResource(Data_input.this, R.array.Melting_ope, android.R.layout.simple_spinner_item);
+            equip_lis_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        equpi_list_spinne.setAdapter(equip_lis_adapter);
+        operation_spinner.setAdapter(operation_type_adapter);
+
+
 
 
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog=   new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
-                        //.bottomSheet()
+                SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog = new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
                         .curved()
                         .minutesStep(1)
-                        //.displayHours(false)
-                        //.displayMinutes(false)
-                        //.todayText("aujourd'hui")
                         .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                             @Override
                             public void onDisplayed(SingleDateAndTimePicker picker) {
@@ -250,8 +281,6 @@ public class Data_input extends AppCompatActivity {
                             public void onDateSelected(Date date) {
                                 start = date;
                                 endtime.setVisibility(View.VISIBLE);
-                                to.setVisibility(View.VISIBLE);
-
                                 SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                 String starttim = localDateFormat1.format(date);
@@ -262,7 +291,7 @@ public class Data_input extends AppCompatActivity {
 
 
                             }
-                        });
+                        }).defaultDate(start);
                 singleDateAndTimePickerDialog.display();
 
 
@@ -275,7 +304,7 @@ public class Data_input extends AppCompatActivity {
 
                 if (!starttime.getText().toString().equals("")) {
 
-                    SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog=    new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
+                    SingleDateAndTimePickerDialog.Builder singleDateAndTimePickerDialog = new SingleDateAndTimePickerDialog.Builder(Data_input.this).displayAmPm(false)
                             .curved()
                             .minutesStep(1)
                             .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
@@ -304,7 +333,7 @@ public class Data_input extends AppCompatActivity {
 
 
                                 }
-                            });
+                            }).defaultDate(end);
 
                     singleDateAndTimePickerDialog.display();
 
@@ -341,14 +370,14 @@ public class Data_input extends AppCompatActivity {
                     } else if (currentime.after(aend) && currentime
                             .before(bend)) {
                         shift = "B";
-                    } else if (currentime.after(bend) || currentime.after(cshift)&&currentime.before(astart)) {
+                    } else if (currentime.after(bend) || currentime.after(cshift) && currentime.before(astart)) {
 
                         //Person in night shit need not select previous date in picker
 
-                        if(currentime.after(cshift)){
-                            Calendar calendar= GregorianCalendar.getInstance();
-                            calendar.add(Calendar.DAY_OF_YEAR,-1);
-                            Date previousDay=calendar.getTime();
+                        if (currentime.after(cshift)) {
+                            Calendar calendar = GregorianCalendar.getInstance();
+                            calendar.add(Calendar.DAY_OF_YEAR, -1);
+                            Date previousDay = calendar.getTime();
 
                             SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date = localDateFormat.format(previousDay);
@@ -365,10 +394,9 @@ public class Data_input extends AppCompatActivity {
                 if (isAllFieldsChecked) {
 
 
-                    String work_Type = work_type_spinner.getSelectedItem().toString();
+
                     String operation = operation_spinner.getSelectedItem().toString();
                     String equipment_name = equpi_list_spinne.getSelectedItem().toString();
-
 
 
                     if (endtime.getText().toString().equals("END TIME") || checkBox.isChecked()) {
@@ -389,10 +417,8 @@ public class Data_input extends AppCompatActivity {
                                 }
 
 
-
-
-                                reference.add(new Model(area.getSelectedItem().toString(), stoppage_category.getSelectedItem().toString()
-                                        , problem_category.getSelectedItem().toString(), equipment_name, work_Type,
+                                reference.add(new DataInput_Model(area_selected
+                                        , problem_category.getSelectedItem().toString(), equipment_name, worktype(),
                                         operation, part_name.getText().toString(),
                                         problem_desc_et.getText().toString(),
                                         action_taken_et.getText().toString(),
@@ -400,7 +426,10 @@ public class Data_input extends AppCompatActivity {
                                         models, starttime.getText().toString(),
                                         " ",
                                         work_done_by.getText().toString(), "Pending", Date, time, "",
-                                        flatDialog.getLargeTextField(), shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        flatDialog.getLargeTextField(), shift, timestampstart, "", ""))
+
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Toast.makeText(Data_input.this, "Added Sucussfully", Toast.LENGTH_SHORT).show();
@@ -423,8 +452,8 @@ public class Data_input extends AppCompatActivity {
                         }
 
 
-                        reference.add(new Model(area.getSelectedItem().toString(), stoppage_category.getSelectedItem().toString(), problem_category.getSelectedItem().toString(), equipment_name,
-                                work_Type,
+                        reference.add(new DataInput_Model(area_selected, problem_category.getSelectedItem().toString(), equipment_name,
+                                worktype(),
                                 operation,
                                 part_name.getText().toString(),
                                 problem_desc_et.getText().toString(),
@@ -467,6 +496,32 @@ public class Data_input extends AppCompatActivity {
             }
         });
 
+        afterpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                //set type
+                intent.setType("image/*");
+                //launch intent
+
+                afterPicIntentActivityResultLauncher.launch(intent);
+            }
+        });
+
+        beforepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //intialize intent
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                //set type
+                intent.setType("image/*");
+                //launch intent
+
+                beforePicIntentActivityResultLauncher.launch(intent);
+            }
+        });
+
+
     }
 
     public String getPathFromURI(Uri contentUri) {
@@ -503,47 +558,14 @@ public class Data_input extends AppCompatActivity {
             }
 
         }
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_GET_BEFORE_FILE) {
-                assert data != null;
-                Uri selectedImageUri = data.getData();
-                // Get the path from the Uri
-                final String path = getPathFromURI(selectedImageUri);
-                BEFORE_URI = getRealPathFromURI(getApplicationContext(), selectedImageUri);
-                if (path != null) {
-                    File f = new File(path);
-
-                    selectedImageUri = Uri.fromFile(f);
-                }
-                // Set the image in ImageView
-                beforepic.setImageURI(selectedImageUri);
-            }
-        }
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_GET_AFTER_FILE) {
-                assert data != null;
-                Uri selectedImageUri = data.getData();
-                AFTER_URI = getRealPathFromURI(getApplicationContext(), selectedImageUri);
-                // Get the path from the Uri
-                final String path = getPathFromURI(selectedImageUri);
-                if (path != null) {
-                    File f = new File(path);
-
-                    selectedImageUri = Uri.fromFile(f);
-                }
-                // Set the image in ImageView
-                afterpic.setImageURI(selectedImageUri);
-            }
-        }
 
 
     }
 
     private Boolean CheckAllFields() {
-        //part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken
-        if (part_name.length() == 0) {
-            part_name.setError("Field Cannot be empty");
-            part_name.setHint("Field Cannot be empty");
+
+        if (worktype().equals("")){
+            Toast.makeText(Data_input.this, "Select Work type", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (problem_desc_et.length() < 3) {
@@ -583,27 +605,7 @@ public class Data_input extends AppCompatActivity {
         different = different % minutesInMilli;
         time = (int) elapsedMinutes;
 
-        time_taken.setText(String.valueOf( elapsedMinutes));
-
-
-    }
-
-    public void befor_photo_click(View view) {
-
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_BEFORE_FILE);
-
-
-    }
-
-    public void after_photo_click(View view) {
-
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_AFTER_FILE);
+        time_taken.setText(String.valueOf(elapsedMinutes));
 
 
     }
@@ -621,7 +623,7 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if (task.isSuccessful()) {
-                    task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    Objects.requireNonNull(task.getResult()).getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             DocumentReference documentReference = db.collection("log").document(databaseID);
@@ -638,7 +640,7 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if (task.isSuccessful()) {
-                    task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    Objects.requireNonNull(task.getResult()).getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             DocumentReference documentReference = db.collection("log").document(databaseID);
@@ -654,21 +656,20 @@ public class Data_input extends AppCompatActivity {
 
 
     }
+    private String worktype(){
+        String worktype="";
 
-    public String getRealPathFromURI(Context context, Uri contentUri) {
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-        cursor.close();
+        if (cb_Breakdown.isChecked()){
+            worktype="Breakdown";
 
-        cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null
-                , MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
+        }if (cb_ser_req.isChecked()){
+            worktype="Service Request";
+        }
+        if (cb_planned.isChecked()){
+            worktype="Planned";
+        }
 
-        return path;
+        return worktype;
     }
 }
 

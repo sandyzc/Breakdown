@@ -31,30 +31,18 @@
 
 
 		<TextView
-			android:id="@+id/textView0"
+			android:id="@+id/textView"
 			android:layout_width="150dp"
 			android:layout_height="24dp"
 			android:layout_marginStart="16dp"
 			android:layout_marginTop="16dp"
 			android:fontFamily="sans-serif-condensed-medium"
-			android:text="Area :"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/pend_date_main" />
-
-		<TextView
-			android:id="@+id/textView"
-			android:layout_width="150dp"
-			android:layout_height="24dp"
-			android:layout_marginStart="16dp"
-			android:layout_marginTop="8dp"
-			android:fontFamily="sans-serif-condensed-medium"
 			android:text="@string/equipment_name"
 			android:textColor="@color/black"
+
 			android:textStyle="bold"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/textView0" />
+			app:layout_constraintTop_toBottomOf="@+id/pend_spinner_area" />
 
 		<Spinner
 			android:id="@+id/pend_equip_list_spin"
@@ -80,32 +68,55 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-		<Spinner
-			android:id="@+id/pend_work_type_spin"
-			android:layout_width="wrap_content"
-			android:layout_height="24dp"
-			android:layout_marginStart="8dp"
-			android:layout_marginTop="12dp"
-			android:fontFamily="sans-serif-condensed-medium"
-			android:gravity="left"
+		<LinearLayout
+			android:id="@+id/linearLayout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:layout_marginStart="12dp"
+			android:orientation="horizontal"
+			android:weightSum="3"
+			app:layout_constraintBottom_toTopOf="@+id/textView3"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.01"
-			app:layout_constraintStart_toEndOf="@+id/textView2"
-			app:layout_constraintTop_toBottomOf="@+id/pend_equip_list_spin" />
+			app:layout_constraintStart_toStartOf="@+id/textView2"
+			app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+
+			<CheckBox
+				android:id="@+id/cb_DI_Breakdown"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="Breakdown" />
+
+			<CheckBox
+				android:id="@+id/cb_DI_Service_REQ"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="Service req" />
+
+			<CheckBox
+				android:id="@+id/cb_DI_Planned"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="Planned" />
+
+		</LinearLayout>
 
 		<TextView
 			android:id="@+id/textView3"
 			android:layout_width="150dp"
 			android:layout_height="24dp"
 			android:layout_marginStart="16dp"
-			android:layout_marginLeft="16dp"
-			android:layout_marginTop="12dp"
+			android:layout_marginTop="16dp"
 			android:fontFamily="sans-serif-condensed-medium"
 			android:text="Operation"
 			android:textColor="@color/black"
 			android:textStyle="bold"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/textView2" />
+			app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 		<Spinner
 			android:id="@+id/pend_operation_spin"
@@ -132,17 +143,19 @@
 			android:text="Part"
 			android:textColor="@color/black"
 			android:textStyle="bold"
+			android:visibility="gone"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 		<EditText
-			android:id="@+id/pend_partname"
+			android:id="@+id/partname"
 			android:layout_width="240dp"
 			android:layout_height="34dp"
 			android:layout_marginStart="16dp"
 			android:layout_marginEnd="16dp"
 			android:background="@drawable/line_background"
 			android:fontFamily="sans-serif-condensed-medium"
+			android:visibility="gone"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -258,8 +271,8 @@
 			android:id="@+id/pend_start_time"
 			android:layout_width="wrap_content"
 			android:layout_height="24dp"
-			android:layout_marginStart="32dp"
-			android:layout_marginTop="20dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
 			android:background="@drawable/line_background"
 			android:fontFamily="sans-serif-condensed-medium"
 			android:padding="2dp"
@@ -267,59 +280,32 @@
 			android:textColor="@color/black"
 			android:textStyle="bold"
 			app:layout_constraintStart_toEndOf="@+id/textView9"
-			app:layout_constraintTop_toBottomOf="@+id/pend_edit_prob_cat" />
-
-		<Spinner
-			android:id="@+id/pend_edit_stoppage_cat"
-			android:layout_width="wrap_content"
-			android:layout_height="24dp"
-			android:layout_marginStart="170dp"
-			android:layout_marginTop="16dp"
-			android:fontFamily="sans-serif-condensed-medium"
-			android:gravity="left"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.056"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/pend_spares_used_et" />
-
-		<TextView
-			android:id="@+id/textView11"
-			android:layout_width="160dp"
-			android:layout_height="24dp"
-			android:layout_marginStart="16dp"
-			android:layout_marginTop="16dp"
-			android:fontFamily="sans-serif-condensed-medium"
-			android:text="STOPPAGE CATEGORY :"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/pend_spares_used_et" />
+			app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 		<Spinner
 			android:id="@+id/pend_edit_prob_cat"
 			android:layout_width="wrap_content"
 			android:layout_height="24dp"
-			android:layout_marginStart="170dp"
-			android:layout_marginTop="14dp"
+			android:layout_marginStart="16dp"
 			android:fontFamily="sans-serif-condensed-medium"
 			android:gravity="left"
+			app:layout_constraintBottom_toBottomOf="@+id/textView12"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/pend_edit_stoppage_cat" />
+			app:layout_constraintStart_toEndOf="@+id/textView12"
+			app:layout_constraintTop_toTopOf="@+id/textView12" />
 
 		<TextView
 			android:id="@+id/textView12"
 			android:layout_width="150dp"
 			android:layout_height="24dp"
-			android:layout_marginStart="16dp"
 			android:layout_marginTop="16dp"
 			android:fontFamily="sans-serif-condensed-medium"
 			android:text="PROBLEM CATEGORY :"
 			android:textColor="@color/black"
 			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/textView11" />
+			app:layout_constraintStart_toStartOf="@+id/pend_spares_used_et"
+			app:layout_constraintTop_toBottomOf="@+id/pend_spares_used_et" />
 
 		<TextView
 			android:id="@+id/textView9"
@@ -334,39 +320,26 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+
 		<TextView
 			android:id="@+id/pend_end_time"
 			android:layout_width="wrap_content"
-			android:layout_height="24dp"
-			android:visibility="gone"
-			android:layout_marginStart="24dp"
-			android:layout_marginTop="20dp"
+			android:layout_height="0dp"
+			android:layout_marginStart="32dp"
+			android:layout_marginEnd="172dp"
 			android:background="@drawable/line_background"
 			android:fontFamily="sans-serif-condensed-medium"
+
 			android:padding="2dp"
 			android:text="END TIME"
 			android:textColor="@color/black"
 			android:textStyle="bold"
-			app:layout_constraintStart_toEndOf="@+id/textView10"
-			app:layout_constraintTop_toBottomOf="@+id/pend_edit_prob_cat" />
-
-
-		<TextView
-			android:id="@+id/textView10"
-			android:layout_width="wrap_content"
-			android:layout_height="24dp"
-			android:layout_marginStart="24dp"
-			android:layout_marginTop="20dp"
-			android:fontFamily="sans-serif-condensed-medium"
-			android:padding="2dp"
-android:visibility="gone"
-			android:text="to:"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			app:layout_constraintEnd_toStartOf="@+id/pend_end_time"
-			app:layout_constraintHorizontal_bias="0.0"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="@+id/pend_start_time"
+			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toEndOf="@+id/pend_start_time"
-			app:layout_constraintTop_toBottomOf="@+id/pend_edit_prob_cat" />
+			app:layout_constraintTop_toTopOf="@+id/pend_start_time"
+			app:layout_constraintVertical_bias="0.0" />
 
 		<TextView
 			android:id="@+id/textView13"
@@ -389,10 +362,10 @@ android:visibility="gone"
 			android:layout_height="24dp"
 			android:layout_marginStart="16dp"
 			android:fontFamily="sans-serif-condensed-medium"
+			android:inputType="number"
 			android:padding="2dp"
 			android:textColor="@color/black"
 			android:textStyle="bold"
-			android:inputType="number"
 			app:layout_constraintBottom_toBottomOf="@+id/textView13"
 			app:layout_constraintEnd_toStartOf="@+id/pend_end_time"
 			app:layout_constraintHorizontal_bias="0.0"
@@ -448,10 +421,10 @@ android:visibility="gone"
 			android:id="@+id/before_pic"
 			android:layout_width="54dp"
 
-			android:onClick="befor_photo_click"
-
 			android:layout_height="49dp"
+
 			android:layout_marginTop="16dp"
+			android:onClick="befor_photo_click"
 			app:layout_constraintStart_toStartOf="@+id/textView19"
 			app:layout_constraintTop_toBottomOf="@+id/textView19"
 			app:srcCompat="@drawable/before_pic" />
@@ -459,9 +432,9 @@ android:visibility="gone"
 		<ImageView
 			android:id="@+id/after_pic"
 			android:layout_width="54dp"
-			android:onClick="after_photo_click"
 			android:layout_height="49dp"
 			android:layout_marginStart="16dp"
+			android:onClick="after_photo_click"
 			app:layout_constraintBottom_toBottomOf="@+id/before_pic"
 			app:layout_constraintStart_toEndOf="@+id/before_pic"
 			app:layout_constraintTop_toTopOf="@+id/before_pic"
@@ -482,15 +455,16 @@ android:visibility="gone"
 			app:layout_constraintStart_toEndOf="@+id/textView19"
 			app:layout_constraintTop_toTopOf="@+id/textView19" />
 
-		<Spinner
+		<TextView
 			android:id="@+id/pend_spinner_area"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			app:layout_constraintBottom_toBottomOf="@+id/textView0"
-			app:layout_constraintStart_toEndOf="@+id/textView0"
-			app:layout_constraintTop_toTopOf="@+id/textView0"
-			app:layout_constraintVertical_bias="0.0" />
+			android:layout_marginTop="16dp"
+			android:fontFamily="sans-serif-condensed-medium"
+			android:textColor="@color/black"
+			android:textSize="20dp"
+			app:layout_constraintStart_toStartOf="@+id/pend_date_main"
+			app:layout_constraintTop_toBottomOf="@+id/pend_date_main" />
 
 		<CheckBox
 			android:id="@+id/checkBox"
