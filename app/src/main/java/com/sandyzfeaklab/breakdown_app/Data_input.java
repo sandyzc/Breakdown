@@ -33,6 +33,8 @@ import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePick
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -59,7 +61,6 @@ public class Data_input extends AppCompatActivity {
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 1;
     private static final int REQUEST_GET_BEFORE_FILE = 2;
     private static final int REQUEST_GET_AFTER_FILE = 3;
-    String download;
     String Date = "",BEFORE_URI,AFTER_URI;
     StorageReference riversRef, riversRef1;
     int time;
@@ -80,6 +81,7 @@ public class Data_input extends AppCompatActivity {
     // Create a Cloud Storage reference from the app
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -417,6 +419,7 @@ public class Data_input extends AppCompatActivity {
                                 }
 
 
+
                                 reference.add(new DataInput_Model(area_selected
                                         , problem_category.getSelectedItem().toString(), equipment_name, worktype(),
                                         operation, part_name.getText().toString(),
@@ -426,7 +429,7 @@ public class Data_input extends AppCompatActivity {
                                         models, starttime.getText().toString(),
                                         " ",
                                         work_done_by.getText().toString(), "Pending", Date, time, "",
-                                        flatDialog.getLargeTextField(), shift, timestampstart, "", ""))
+                                        flatDialog.getLargeTextField(), shift, timestampstart, "", "",user.getDisplayName(),user.getUid()))
 
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
 
@@ -464,7 +467,7 @@ public class Data_input extends AppCompatActivity {
                                 endtime.getText().toString(),
                                 work_done_by.getText().toString(),
                                 "Compleated",
-                                Date, Integer.parseInt(time_taken.getText().toString()), reference.document().getId(), "", shift, timestampstart, "", "")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                Date, Integer.parseInt(time_taken.getText().toString()), reference.document().getId(), "", shift, timestampstart, "", "",user.getDisplayName(),user.getUid())).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
 

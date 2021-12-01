@@ -8,7 +8,7 @@ public class DataInput_Model {
             work_Type,
             operation,
             part,
-            problem_desc, action_taken, spares_used, start_Time, end_time, action_taken_by, status, stoppage_category, problem_category, Date, area, id, pending_remarks, shift, beforeimageurl, afterimageurl;
+            problem_desc,uid, action_taken, spares_used, start_Time, end_time, action_taken_by, status, stoppage_category, problem_category, Date, area, id, pending_remarks, shift, beforeimageurl, afterimageurl,username;
     int time_taken;
 
     java.util.Date timestamp;
@@ -42,7 +42,10 @@ public class DataInput_Model {
                            String shift,
                            java.util.Date ts,
                            String beforeimageurl,
-                           String afterimageurl) {
+                           String afterimageurl,
+                            String usrnme,
+                           String uid
+    ) {
 
         this.equipment_name = equipment_name;
         this.shift = shift;
@@ -66,10 +69,16 @@ public class DataInput_Model {
         this.id = id;
         this.beforeimageurl = beforeimageurl;
         this.afterimageurl = afterimageurl;
+        this.username=usrnme;
+        this.uid=uid;
     }
 
     public java.util.Date getTimestamp() {
         return timestamp;
+    }
+
+    public String getUid() {
+        return uid;
     }
 
     public String getId() {
@@ -78,6 +87,10 @@ public class DataInput_Model {
 
     public String getDate() {
         return Date;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setDate(String date) {

@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +48,7 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<DataInput_Model, 
     private ArrayList<DataInput_Model> data;
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private DocumentReference documentReference;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -90,6 +93,12 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<DataInput_Model, 
             for (int k = 0; k < sap_codesArrayList.size(); k++) {
                 sap_no_saved += sap_codesArrayList.get(k).getSap_code() + ",";
             }
+        }
+
+        if (dataInputModel.getUid() != null &&!dataInputModel.getUid().equals(user.getUid())){
+            viewHolder.editdetails.setVisibility(View.GONE);
+            viewHolder.delete.setVisibility(View.GONE);
+
         }
 
         viewHolder.sap_no.setText(sap_no_saved);
@@ -260,6 +269,8 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<DataInput_Model, 
             line2 = itemView.findViewById(R.id.line2);
             beforepic = itemView.findViewById(R.id.before_pic_rcv);
             afterpic = itemView.findViewById(R.id.after_pic_RCV);
+
+
 
 
         }

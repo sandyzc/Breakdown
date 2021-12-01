@@ -1,11 +1,13 @@
 package com.sandyzfeaklab.breakdown_app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,10 +32,12 @@ public class Oil_cons_list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.oil_cons_list);
 
+
         recyclerView=findViewById(R.id.oil_cons_list_rcv);
 
         Bundle bundle = getIntent().getExtras();
         area_selected  = bundle.getString("Area");
+        getSupportActionBar().setTitle(area_selected);
 
         Date date = new Date();
 
@@ -67,4 +71,6 @@ adaptor.startListening();
 
 
     }
+
+
 }

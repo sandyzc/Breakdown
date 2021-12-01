@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sandyzfeaklab.breakdown_app.AddOildetails;
 import com.sandyzfeaklab.breakdown_app.EditPending_Activity;
+import com.sandyzfeaklab.breakdown_app.Oil_consumption;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 
@@ -37,6 +41,7 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
     Context context;
     private DocumentReference documentReference;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public Oil_cons_list_adaptor(@NonNull FirestoreRecyclerOptions<OIl_Consump_model> options, Context context) {
         super(options);
@@ -51,6 +56,12 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
 
         @SuppressLint("SimpleDateFormat") String date1 = new SimpleDateFormat("dd-MM-yyyy").format(oIl_consump_model.getTimestamp());
 
+        if (oIl_consump_model.getUid() != null &&!oIl_consump_model.getUid().equals(user.getUid())){
+            viewHolder.modify.setVisibility(View.GONE);
+//            viewHolder.delete.setVisibility(View.GONE);
+
+        }
+
         viewHolder.date.setText(date1);
         viewHolder.equip.setText(oIl_consump_model.getEquip());
         viewHolder.remarks.setText(oIl_consump_model.getReason());
@@ -64,7 +75,9 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
                 String savedID = getSnapshots().getSnapshot(i).getId();
                 Bundle bundle = new Bundle();
                 bundle.putString("id", savedID);
+
                 Intent intent = new Intent(v.getContext(), AddOildetails.class);
+                intent.putExtra("type","update");
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
@@ -75,9 +88,11 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
             @Override
             public void onClick(View v) {
 
-                String savedID = getSnapshots().getSnapshot(i).getId();
+                String savedID = getSnapshots().getSnapshot(viewHolder.getAdapterPosition()).getId();
                 documentReference = db.collection("oil Consump").document(savedID);
                 documentReference.delete();
+
+
 
             }
         });
@@ -110,10 +125,12 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
 
         TextView qty,equip,remarks,date,oilType;
         ImageView edit,delete;
+        LinearLayout modify;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            modify=itemView.findViewById(R.id.modifiy);
             edit=itemView.findViewById(R.id.oil_cons_rcv_edit);
             delete=itemView.findViewById(R.id.oil_cons_rcv_del);
             qty=itemView.findViewById(R.id.oil_cons_rcv_qty);

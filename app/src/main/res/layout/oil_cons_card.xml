@@ -154,6 +154,7 @@
 
             <LinearLayout
 
+                android:id="@+id/modifiy"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"

@@ -4,11 +4,15 @@ import java.util.Date;
 
 public class OIl_Consump_model {
 
-    String oilType,reason,equip,id,area,mnth;
+    String oilType,reason,equip,id,area,mnth,username,uid;
     int qty;
     java.util.Date timestamp;
 
-    public OIl_Consump_model(String oilType, String reason, String equip, String id, String area, int qty, java.util.Date ts,String month) {
+    public String getUid() {
+        return uid;
+    }
+
+    public OIl_Consump_model(String oilType, String reason, String equip, String id, String area, int qty, java.util.Date ts, String month, String usr, String uid) {
         this.oilType = oilType;
         this.reason = reason;
         this.equip = equip;
@@ -17,9 +21,15 @@ public class OIl_Consump_model {
         this.mnth=month;
         this.qty = qty;
         this.timestamp = ts;
+        this.username=usr;
+        this.uid=uid;
     }
 
     public OIl_Consump_model() {
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getMnth() {

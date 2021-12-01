@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:padding="30dp"
+    android:transitionName="transition_login"
+    tools:context=".SaveUserInfo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/muli_black"
+            android:text="User"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Name"
+                android:textColorHint="@color/white"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:hintTextColor="@color/white"
+                app:startIconDrawable="@drawable/person"
+                app:startIconTint="@color/white">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_username1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/muli_semibold"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+
+
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/forget_password_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_marginTop="10dp">
+
+
+
+            </RelativeLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/forget_password_block"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp">
+
+                <Button
+                    android:id="@+id/save_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:transitionName="transition_login"
+                    android:background="@color/black"
+                    android:onClick="save_user_info"
+                    android:text="Save"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

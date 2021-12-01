@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sandyzfeaklab.breakdown_app">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -16,40 +17,84 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Breakdown">
         <activity
+            android:name=".SaveUserInfo"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="true"
+            android:theme="@style/Theme.Breakdown.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".dataModel.Oil_Data_Entry"
+            android:exported="false" />
+        <activity
+            android:name=".OIl_Cons_Graph"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_oil_cons_graph"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Breakdown.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".Oil_cons_list"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".AddOildetails"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".Oil_consumption"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".chips"
             android:exported="true" />
         <activity
             android:name=".reportGen"
             android:exported="true" />
-        <activity android:name=".EditPending_Activity" />
-        <activity android:name=".Pending_activity" />
+        <activity
+            android:name=".EditPending_Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Pending_activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".Add_Log"
             android:label="@string/title_activity_add__log"
             android:theme="@style/Theme.Breakdown" />
-        <activity android:name=".Add_Sap_codes" />
-        <activity android:name=".Mttr" />
+        <activity
+            android:name=".Add_Sap_codes"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Mttr"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".Data_input"
             android:label="@string/title_activity_data_input"
-            android:theme="@style/Theme.Breakdown.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Breakdown.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Breakdown.NoActionBar">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Breakdown.NoActionBar"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

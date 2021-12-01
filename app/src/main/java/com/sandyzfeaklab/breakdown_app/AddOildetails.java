@@ -1,20 +1,19 @@
 package com.sandyzfeaklab.breakdown_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 
 import java.text.SimpleDateFormat;
@@ -23,14 +22,15 @@ import java.util.Objects;
 
 public class AddOildetails extends AppCompatActivity {
 
-    TextInputEditText qty,reason;
-    Spinner dept,oiltype;
+    TextInputEditText qty, reason;
+    private FirebaseAuth mAuth;
+    Spinner dept, oiltype;
     ArrayAdapter<CharSequence> dept_adap;
-    String area_selected;
+    String area_selected, type,id;
     Button save;
     OIl_Consump_model model;
     boolean isAllFieldsChecked = false;
-    ArrayAdapter ad;
+    ArrayAdapter<String> ad;
     CollectionReference reference = FirebaseFirestore.getInstance().collection("oil Consump");
 
     @Override
@@ -39,26 +39,31 @@ public class AddOildetails extends AppCompatActivity {
         setContentView(R.layout.add_oil_log);
 
         intViews();
+        mAuth = FirebaseAuth.getInstance();
 
         Bundle bundle = getIntent().getExtras();
-        area_selected  = bundle.getString("Area");
+        type = bundle.getString("type");
+        area_selected = bundle.getString("Area");
 
-        String id = bundle.getString("id");
 
-        if (!id.equals("")){
-            updateData(id);
-        }
-        else {
+        if (type.equals("update")) {
+            Bundle bundle1 = getIntent().getExtras();
+            id = bundle1.getString("id");
+
+            if (!id.equals("")) {
+                updateData(id);
+            }
+        } else if (type.equals("save")) {
             setAdapt(area_selected);
         }
 
-        String[] oiltype_adap= {"ULTRASAFE 620","HLP68"};
 
-        ad= new ArrayAdapter(
+        String[] oiltype_adap = {"ULTRASAFE 620", "HLP68"};
+
+        ad = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 oiltype_adap);
-
 
 
         oiltype.setAdapter(ad);
@@ -66,7 +71,7 @@ public class AddOildetails extends AppCompatActivity {
 
     }
 
-    private void setAdapt(String area_selected){
+    private void setAdapt(String area_selected) {
 
         if (area_selected.equals("HPDC")) {
             dept_adap = ArrayAdapter.createFromResource(AddOildetails.this, R.array.HPDC, android.R.layout.simple_spinner_item);
@@ -80,8 +85,7 @@ public class AddOildetails extends AppCompatActivity {
             dept_adap = ArrayAdapter.createFromResource(AddOildetails.this, R.array.Finishing, android.R.layout.simple_spinner_item);
 
         }
-        if (area_selected.equals("CoreShop"))
-        {
+        if (area_selected.equals("CoreShop")) {
             dept_adap = ArrayAdapter.createFromResource(AddOildetails.this, R.array.Coreshop, android.R.layout.simple_spinner_item);
         }
 
@@ -93,12 +97,12 @@ public class AddOildetails extends AppCompatActivity {
     }
 
 
-    private void intViews(){
-        qty=findViewById(R.id.add_oil_cons_dialog_select_qnty);
-        reason=findViewById(R.id.add_oil_cons_dialog_select_reason);
-        dept=findViewById(R.id.add_oil_cons_dialog_select_dept);
-        oiltype=findViewById(R.id.add_oil_cons_dialog_select_oil);
-        save=findViewById(R.id.add_oil_cons_dialog_save);
+    private void intViews() {
+        qty = findViewById(R.id.add_oil_cons_dialog_select_qnty);
+        reason = findViewById(R.id.add_oil_cons_dialog_select_reason);
+        dept = findViewById(R.id.add_oil_cons_dialog_select_dept);
+        oiltype = findViewById(R.id.add_oil_cons_dialog_select_oil);
+        save = findViewById(R.id.add_oil_cons_dialog_save);
 
 
     }
@@ -106,79 +110,88 @@ public class AddOildetails extends AppCompatActivity {
     public void SAve_oil(View view) {
         //String oilType, String reason, String equip, String id, String area, int qty
 
-       isAllFieldsChecked= checkFeilds();
+        isAllFieldsChecked = checkFeilds();
 
-       if (isAllFieldsChecked){
+        if (isAllFieldsChecked) {
 
-           Date date=new Date();
-
-           SimpleDateFormat localDateFormat = new SimpleDateFormat("MMMM");
-
-           String mnth = localDateFormat.format(date);
-
-
-           reference.add(new OIl_Consump_model(oiltype.getSelectedItem().toString(),
-                   reason.getText().toString(),
-                   dept.getSelectedItem().toString(),
-                   "",
-                   area_selected,
-                   Integer.parseInt(Objects.requireNonNull(qty.getText()).toString()),date,mnth)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-               @Override
-               public void onSuccess(DocumentReference documentReference) {
-                   documentReference.update("id",documentReference.getId());
-               }
-           });
+            if (type.equals("update")){
+                updateSavedLog(id);
+            }else {
+                newLog();
+            }
 
 
-           finish();
-       }
+            finish();
+        }
 
     }
 
-    private Boolean checkFeilds(){
+    private void updateSavedLog(String id){
 
-        if(qty.length()<1)
-        {
+        reference.document(id).update("equip",dept.getSelectedItem().toString());
+        reference.document(id).update("oilType",oiltype.getSelectedItem().toString());
+        reference.document(id).update("qty",Integer.parseInt(Objects.requireNonNull(qty.getText()).toString()));
+        reference.document(id).update("reason", Objects.requireNonNull(reason.getText()).toString());
+    }
+
+    private void newLog(){
+
+        Date date = new Date();
+
+        SimpleDateFormat localDateFormat;
+        localDateFormat = new SimpleDateFormat("MMMM");
+
+        String mnth = localDateFormat.format(date);
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        reference.add(new OIl_Consump_model(oiltype.getSelectedItem().toString(),
+                Objects.requireNonNull(reason.getText()).toString(),
+                dept.getSelectedItem().toString(),
+                "",
+                area_selected,
+                Integer.parseInt(Objects.requireNonNull(qty.getText()).toString()), date, mnth,user.getDisplayName(),user.getUid())).
+                addOnSuccessListener(documentReference -> documentReference.update("id", documentReference.getId()));
+
+    }
+
+    private Boolean checkFeilds() {
+
+        if (qty.length() < 1) {
             qty.setError("Quantity cannot be empty");
             return false;
         }
 
-        if(Integer.parseInt(qty.getText().toString()) <= 0 ) {
+        if (Integer.parseInt(Objects.requireNonNull(qty.getText()).toString()) <= 0) {
             qty.setError("Quantity should be more than 0");
             return false;
         }
 
-        if(Objects.requireNonNull(reason.getText()).toString().length()<4)
-        {
+        if (Objects.requireNonNull(reason.getText()).toString().length() < 4) {
 
             reason.setError("Enter Proper reason for OIl top Up");
-                return false;
+            return false;
 
         }
 
         return true;
     }
 
-    private void updateData(String id){
+    @SuppressLint("SetTextI18n")
+    private void updateData(String id) {
 
-        reference.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                model=documentSnapshot.toObject(OIl_Consump_model.class);
+        reference.document(id).get().addOnSuccessListener(documentSnapshot -> {
+            model = documentSnapshot.toObject(OIl_Consump_model.class);
 
-                assert model!= null ;
-
-
-                qty.setText(String.valueOf(model.getQty()));
-                reason.setText(model.getReason());
-
-                setAdapt(model.getArea());
-                save.setText("Update");
+            assert model != null;
 
 
+            qty.setText(String.valueOf(model.getQty()));
+            reason.setText(model.getReason());
+
+            setAdapt(model.getArea());
+            save.setText("Update");
 
 
-            }
         });
 
     }
