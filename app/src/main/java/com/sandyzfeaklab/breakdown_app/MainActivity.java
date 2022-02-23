@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.sandyzfeaklab.breakdown_app.dataModel.Oil_Data_Entry;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
 
@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+
+        firebaseMessaging.subscribeToTopic("oil_entry_added");
+        firebaseMessaging.subscribeToTopic("Weekly_report");
+
+
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -35,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             ,PackageManager.PERMISSION_GRANTED);
 
         logout=findViewById(R.id.logout);
-        mttr_butt=findViewById(R.id.mttr_butt);
-        mtbf_butt=findViewById(R.id.mtbf_butt);
         pending_butt=findViewById(R.id.pending_button);
         oil_cons_activity =findViewById(R.id.oil_cons_activity);
          TextView id = findViewById(R.id.idd);
@@ -46,14 +50,8 @@ public class MainActivity extends AppCompatActivity {
 //        id.setText(mAuth.getCurrentUser().getUid());
 
 
-        mttr_butt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
-
-            }
-        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,15 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mtbf_butt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
         pending_butt.setOnClickListener(new View.OnClickListener() {
@@ -111,4 +100,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void energy_consp(View view) {
+
+        Intent intent = new Intent(MainActivity.this,Energy_Entry.class);
+        startActivity(intent);
+    }
 }

@@ -15,6 +15,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,7 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     TextInputEditText email,password;
+    RelativeLayout progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class Login extends AppCompatActivity {
 
         email=findViewById(R.id.login_username);
         password=findViewById(R.id.login_password_editText);
+        progressBar=findViewById(R.id.login_progress_bar);
 
     }
 
@@ -51,6 +55,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void letTheUserLoggedIn(View view) {
+
+        progressBar.setVisibility(View.VISIBLE);
 
             signIn(email.getText().toString(),password.getText().toString());
 

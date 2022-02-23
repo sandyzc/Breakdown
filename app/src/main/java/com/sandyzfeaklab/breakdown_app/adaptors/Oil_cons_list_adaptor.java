@@ -46,7 +46,7 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
     public Oil_cons_list_adaptor(@NonNull FirestoreRecyclerOptions<OIl_Consump_model> options, Context context) {
         super(options);
         this.context=context;
-        // TODO add edit and dele button
+
 
 
     }
@@ -58,10 +58,9 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
 
         if (oIl_consump_model.getUid() != null &&!oIl_consump_model.getUid().equals(user.getUid())){
             viewHolder.modify.setVisibility(View.GONE);
-//            viewHolder.delete.setVisibility(View.GONE);
-
         }
 
+        viewHolder.name.setText(oIl_consump_model.getUsername());
         viewHolder.date.setText(date1);
         viewHolder.equip.setText(oIl_consump_model.getEquip());
         viewHolder.remarks.setText(oIl_consump_model.getReason());
@@ -123,13 +122,14 @@ public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView qty,equip,remarks,date,oilType;
+        TextView qty,equip,remarks,date,oilType,name;
         ImageView edit,delete;
         LinearLayout modify;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            name=itemView.findViewById(R.id.oil_cons_rcv_name);
             modify=itemView.findViewById(R.id.modifiy);
             edit=itemView.findViewById(R.id.oil_cons_rcv_edit);
             delete=itemView.findViewById(R.id.oil_cons_rcv_del);

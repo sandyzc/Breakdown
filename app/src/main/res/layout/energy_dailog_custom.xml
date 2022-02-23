@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/energy_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_background"
+        android:popupElevation="5dp" />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/energy_tv"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Reading"
+        android:textColorHint="@color/white"
+        app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/white"
+        app:hintTextColor="@color/white"
+        app:startIconTint="@color/white">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/energy_reading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            app:errorEnabled="true" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/energy_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primary"
+            android:backgroundTintMode="multiply"
+            android:drawableStart="@drawable/save"
+            android:fontFamily="@font/mulish_extralight"
+            android:text="Save"
+            android:textColor="#EFEFEF"
+            android:typeface="sans" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@color/white" />
+
+        <Button
+            android:id="@+id/energy_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primary"
+            android:backgroundTintMode="multiply"
+            android:drawableStart="@android:drawable/ic_notification_clear_all"
+            android:fontFamily="@font/mulish_extralight"
+            android:text="Cancel"
+            android:textColor="#EFEFEF"
+            android:typeface="sans" />
+
+
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

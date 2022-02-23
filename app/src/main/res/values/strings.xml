@@ -62,9 +62,9 @@
     </string-array>
 
     <string-array name="HPDC">
-        <item>HPDC1</item>
-        <item>HPDC2</item>
-        <item>HPDC3</item>
+        <item>hpdc1</item>
+        <item>hpdc2</item>
+        <item>hpdc3</item>
     </string-array>
 
     <string-array name="HPDC_ope">
@@ -100,10 +100,11 @@
 
     <string-array name="GSPM">
 
-        <item>GSPM2B</item>
-        <item>GSPM3B1</item>
-        <item>GSPM3B2</item>
-        <item>Roto Cast</item>
+        <item>gspm2B</item>
+        <item>gspm3B1</item>
+        <item>gspm3B2</item>
+        <item>gspm3B3</item>
+        <item>rotoCast</item>
 
 
     </string-array>

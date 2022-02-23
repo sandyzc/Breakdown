@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Breakdown">
         <activity
+            android:name=".Energy_Entry"
+            android:theme="@style/Theme.Breakdown.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".SaveUserInfo"
             android:exported="false" />
         <activity
@@ -29,9 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".dataModel.Oil_Data_Entry"
-            android:exported="false" />
         <activity
             android:name=".OIl_Cons_Graph"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -55,9 +56,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".chips"
-            android:exported="true" />
         <activity
             android:name=".reportGen"
             android:exported="true" />
@@ -97,6 +95,17 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".FireBase_Notification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

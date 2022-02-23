@@ -60,14 +60,13 @@ public class Data_input extends AppCompatActivity {
 
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 1;
     private static final int REQUEST_GET_BEFORE_FILE = 2;
-    private static final int REQUEST_GET_AFTER_FILE = 3;
     String Date = "",BEFORE_URI,AFTER_URI;
     StorageReference riversRef, riversRef1;
     int time;
     boolean isAllFieldsChecked = false;
     CheckBox checkBox, gshift, cb_Breakdown,cb_ser_req,cb_planned;
     ImageView beforepic, afterpic;
-    Timestamp timestampstart, timestampend;
+    Timestamp timestampstart;
     String shift = "";
     TextView starttime, endtime;
     EditText part_name, problem_desc_et, action_taken_et, spares_used_et, work_done_by, time_taken;
@@ -84,6 +83,7 @@ public class Data_input extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,8 +283,8 @@ public class Data_input extends AppCompatActivity {
                             public void onDateSelected(Date date) {
                                 start = date;
                                 endtime.setVisibility(View.VISIBLE);
-                                SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat localDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                 String starttim = localDateFormat1.format(date);
                                 Date = localDateFormat.format(date);
                                 starttime.setText(starttim);
@@ -327,7 +327,7 @@ public class Data_input extends AppCompatActivity {
                                 public void onDateSelected(Date date) {
                                     end = date;
 
-                                    SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat localDateFormat1 = new SimpleDateFormat("HH:mm a");
                                     String starttim = localDateFormat1.format(date);
                                     endtime.setText(starttim);
 
@@ -351,6 +351,7 @@ public class Data_input extends AppCompatActivity {
         save_butt.setOnClickListener(new View.OnClickListener() {
 
 
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onClick(View v) {
 
@@ -545,7 +546,7 @@ public class Data_input extends AppCompatActivity {
 
         if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                if (data.getExtras() != null) {
+                if (Objects.requireNonNull(data).getExtras() != null) {
                     models = (ArrayList<Sap_code_Model>) data.getExtras().getSerializable("Codes");
                     String sapcode = "";
 

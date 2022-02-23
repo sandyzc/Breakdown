@@ -2,14 +2,14 @@ package com.sandyzfeaklab.breakdown_app;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class SaveUserInfo extends AppCompatActivity {
 
-    TextInputEditText name;
+    TextInputEditText name, newpass, confirmnewwpass;
     private FirebaseAuth mAuth;
 
     @Override
@@ -33,20 +33,24 @@ public class SaveUserInfo extends AppCompatActivity {
         setContentView(R.layout.activity_save_user_info);
         mAuth = FirebaseAuth.getInstance();
 
-        name=findViewById(R.id.login_username1);
+        name = findViewById(R.id.login_username1);
+        newpass = findViewById(R.id.new_pass_et);
+        confirmnewwpass=findViewById(R.id.new_pass_con_et);
 
     }
 
     public void save_user_info(View view) {
 
-        if (!(Objects.requireNonNull(name.getText()).toString().length() <2)){
-
+        if (!(Objects.requireNonNull(name.getText()).toString().length() < 2)&& Objects.requireNonNull(newpass.getText()).toString().equals(Objects.requireNonNull(confirmnewwpass.getText()).toString())) {
 
 
             FirebaseUser user = mAuth.getCurrentUser();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("users").document(user.getUid()).set(new User_Info(name.getText().toString()));
+            assert user != null;
+            db.collection("users").document(Objects.requireNonNull(user.getEmail())).set(new User_Info(name.getText().toString(),user.getUid()));
+
+            user.updatePassword(confirmnewwpass.getText().toString());
 
             UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name.getText().toString())
@@ -62,7 +66,6 @@ public class SaveUserInfo extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
 
-
                             startActivity(intent);
                         }
                     })
@@ -75,11 +78,9 @@ public class SaveUserInfo extends AppCompatActivity {
                         }
                     });
 
-        }else{
+        } else {
             name.setError("Enter Valid Name");
         }
-
-
 
 
     }
