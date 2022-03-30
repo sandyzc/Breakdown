@@ -104,7 +104,6 @@
 
 
                 <Button
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -112,7 +111,8 @@
                     android:background="#00000000"
                     android:onClick="callForgetPassword"
                     android:text="Forgot Password"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -129,11 +129,11 @@
                     android:id="@+id/letTheUserLogIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:transitionName="transition_login"
                     android:background="@color/black"
                     android:onClick="letTheUserLoggedIn"
                     android:text="login"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:transitionName="transition_login" />
             </androidx.cardview.widget.CardView>
 
 
@@ -142,16 +142,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/white_circle"
                 android:elevation="8dp"
-                android:padding="20dp"
-                android:visibility="gone">
+                android:padding="20dp">
 
-
-                <ProgressBar
-                    android:id="@+id/progress_bar"
+                <ImageView
+                    android:id="@+id/sucess"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:visibility="gone"
+                    android:background="@drawable/white_circle" />
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_bar_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
                     android:layout_centerInParent="true" />
 
 
@@ -159,8 +165,6 @@
 
 
         </RelativeLayout>
-
-
 
 
     </LinearLayout>

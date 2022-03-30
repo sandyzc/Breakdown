@@ -5,11 +5,15 @@ import java.util.Date;
 public class Energy_cons_model {
 
     String uid,name;
-    Long hpdc1, hpdc2, hpdc3, gspm2B, gspm3B1, gspm3B2, rotoCast, gspm3B3,hpdc1Units, hpdc2Units, hpdc3Units, gspm2BUnits, gspm3B1Units, gspm3B2Units, rotoCastUnits, gspm3B3Units;
+    Long hpdc1, hpdc2, hpdc3, gspm2B, gspm3B1, gspm3B2, rotoCast, gspm3B3,hpdc1Units, hpdc2Units, hpdc3Units, gspm2BUnits, gspm3B1Units, gspm3B2Units, rotoCastUnits, gspm3B3Units,
+             gspm2B_Immer, gspm3B1_Immer, gspm3B2_Immer, rotoCast_Immer, gspm3B3_Immer, gspm2B_ImmerUnits, gspm3B1_ImmerUnits, gspm3B2_ImmerUnits, rotoCast_ImmerUnits, gspm3B3_ImmerUnits;
     Date ts;
 
     public Energy_cons_model(String uid, String name, Long hpdc1, Long hpdc2, Long hpdc3, Long gspm2B, Long gspm3B1, Long gspm3B2, Long rotoCast, Long gspm3B3, Long hpdc1Units,
-                             Long hpdc2Units, Long hpdc3Units, Long gspm2BUnits, Long gspm3B1Units, Long gspm3B2Units, Long rotoCastUnits, Long gspm3B3Units, Date ts) {
+                             Long hpdc2Units, Long hpdc3Units, Long gspm2BUnits, Long gspm3B1Units, Long gspm3B2Units, Long rotoCastUnits, Long gspm3B3Units,
+                             Long gspm2B_Immer, Long gspm3B1_Immer,Long  gspm3B2_Immer,Long  rotoCast_Immer,Long  gspm3B3_Immer,
+                             Long  gspm2B_ImmerUnits,Long  gspm3B1_ImmerUnits,Long  gspm3B2_ImmerUnits,Long  rotoCast_ImmerUnits,Long  gspm3B3_ImmerUnits,
+                             Date ts) {
         this.uid = uid;
         this.name = name;
         this.hpdc1 = hpdc1;
@@ -28,7 +32,57 @@ public class Energy_cons_model {
         this.gspm3B2Units = gspm3B2Units;
         this.rotoCastUnits = rotoCastUnits;
         this.gspm3B3Units = gspm3B3Units;
+        this.gspm2B_Immer=gspm2B_Immer;
+        this.gspm3B1_Immer=gspm3B1_Immer;
+        this.gspm3B2_Immer=gspm3B2_Immer;
+        this.rotoCast_Immer=rotoCast_Immer;
+        this.gspm3B3_Immer=gspm3B3_Immer;
+        this.gspm2B_ImmerUnits=gspm2B_ImmerUnits;
+        this.gspm3B1_ImmerUnits=gspm3B1_ImmerUnits;
+        this.gspm3B2_ImmerUnits=gspm3B2_ImmerUnits;
+        this.rotoCast_ImmerUnits=rotoCast_ImmerUnits;
+        this.gspm3B3_ImmerUnits=gspm3B3_ImmerUnits;
         this.ts = ts;
+    }
+
+    public Long getGspm2B_Immer() {
+        return gspm2B_Immer;
+    }
+
+    public Long getGspm3B1_Immer() {
+        return gspm3B1_Immer;
+    }
+
+    public Long getGspm3B2_Immer() {
+        return gspm3B2_Immer;
+    }
+
+    public Long getRotoCast_Immer() {
+        return rotoCast_Immer;
+    }
+
+    public Long getGspm3B3_Immer() {
+        return gspm3B3_Immer;
+    }
+
+    public Long getGspm2B_ImmerUnits() {
+        return gspm2B_ImmerUnits;
+    }
+
+    public Long getGspm3B1_ImmerUnits() {
+        return gspm3B1_ImmerUnits;
+    }
+
+    public Long getGspm3B2_ImmerUnits() {
+        return gspm3B2_ImmerUnits;
+    }
+
+    public Long getRotoCast_ImmerUnits() {
+        return rotoCast_ImmerUnits;
+    }
+
+    public Long getGspm3B3_ImmerUnits() {
+        return gspm3B3_ImmerUnits;
     }
 
     public Long getHpdc1Units() {

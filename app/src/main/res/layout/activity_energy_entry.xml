@@ -8,45 +8,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Energy_Entry">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_margin="10dp"
-            android:elevation="10dp"
+    <!--
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            android:layout_height="200dp">
 
-            <com.anychart.AnyChartView
-                android:id="@+id/energy_daily_graph"
+            <androidx.cardview.widget.CardView
+                android:layout_margin="10dp"
+                android:elevation="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.anychart.AnyChartView
+                    android:id="@+id/energy_daily_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </com.anychart.AnyChartView>
+                    app:layout_constraintTop_toTopOf="parent" >
 
-        </androidx.cardview.widget.CardView>
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.anychart.AnyChartView>
+
+            </androidx.cardview.widget.CardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
+    <Button
+        android:onClick="fullGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="end"
+        android:text="graph"
+        android:textSize="10dp"
+        android:textColor="@color/white"
+        android:background="@color/primary"
+        android:layout_marginRight="10dp"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

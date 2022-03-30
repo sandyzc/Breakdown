@@ -61,6 +61,11 @@
         <item>Degassing 2</item>
     </string-array>
 
+    <string-array name="Melting_oil">
+        <item>ZPF</item>
+
+    </string-array>
+
     <string-array name="HPDC">
         <item>hpdc1</item>
         <item>hpdc2</item>
@@ -105,6 +110,17 @@
         <item>gspm3B2</item>
         <item>gspm3B3</item>
         <item>rotoCast</item>
+
+
+    </string-array>
+
+    <string-array name="GSPM_Immer">
+
+        <item>gspm2B_Immer</item>
+        <item>gspm3B1_Immer</item>
+        <item>gspm3B2_Immer</item>
+        <item>gspm3B3_Immer</item>
+        <item>rotoCast_Immer</item>
 
 
     </string-array>
@@ -157,6 +173,8 @@
         <item>Hotbox2</item>
         <item>Hotbox3</item>
         <item>Hotbox4</item>
+        <item>Hotbox5</item>
+        <item>Hotbox6</item>
     </string-array>
 
     <string-array name="Finishing">
@@ -178,6 +196,8 @@
         <item>Hotbox2</item>
         <item>Hotbox3</item>
         <item>Hotbox4</item>
+        <item>Hotbox5</item>
+        <item>Hotbox6</item>
         <item>Coldbox1</item>
         <item>Coldbox2</item>
         <item>Coldbox3</item>
@@ -328,4 +348,5 @@
     <string name="title_activity_oil_cons_graph">OIl_Cons_Graph</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_energy_grapgh">EnergyGrapgh</string>
 </resources>

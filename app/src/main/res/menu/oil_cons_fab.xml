@@ -15,4 +15,8 @@
         android:id="@+id/Finishing_Oil_cons_"
         android:title="Finising" />
 
+    <item
+        android:id="@+id/Melt_Oil_cons_"
+        android:title="Melting" />
+
 </menu>

@@ -10,7 +10,8 @@
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_add__log.xml" value="0.22" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_chips.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_edit_pending.xml" value="0.33" />
-        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_energy_entry.xml" value="0.25" />
+        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_energy_entry.xml" value="0.5" />
+        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_energy_grapgh.xml" value="0.54375" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_excel2_firestore.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_login.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/activity_main.xml" value="0.5" />
@@ -29,8 +30,9 @@
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/add_oil_log_dialog.xml" value="0.22" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/cell_title_layout.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/content_data_input.xml" value="0.25" />
-        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/energy_dailog_custom.xml" value="0.3069053708439898" />
-        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/energy_rcv_item.xml" value="0.9" />
+        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/energy_dailog_custom.xml" value="0.49122807017543857" />
+        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/energy_rcv_item.xml" value="0.6005361930294906" />
+        <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/energy_reading_entry.xml" value="0.42531120331950206" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/oil_cons_card.xml" value="0.3625" />
         <entry key="..\:/Users/Uma_Santosh.DESKTOP-LPPEQ8I.000/AndroidStudioProjects/Breakdown/app/src/main/res/layout/oil_cons_list.xml" value="0.25" />

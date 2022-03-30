@@ -9,6 +9,9 @@
     <item
         android:id="@+id/GSPM_ENERGY"
         android:title="GSPM" />
+    <item
+        android:id="@+id/GSPM_IMER"
+        android:title="GSPM IMMERSION" />
 
 
 </menu>

@@ -6,6 +6,80 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/energy_dt"
+            android:layout_weight="2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Date"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="2dp"
+
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/white"
+            app:hintTextColor="@color/white"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/energy_reading_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"
+                app:errorEnabled="true" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+
+            android:id="@+id/change_energy_date"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/calender_icon"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <com.vivekkaushik.datepicker.DatePickerTimeline
+        android:visibility="gone"
+        android:id="@+id/datePickerTimeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:dateTextColor="@color/white"
+        app:monthTextColor="@color/white"
+        app:dayTextColor="@color/white"
+
+        />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
     <Spinner
         android:layout_marginTop="10dp"
         android:id="@+id/energy_spinner"
@@ -20,6 +94,8 @@
         android:layout_height="2dp"
         android:background="@color/white" />
 
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="10dp"
         android:id="@+id/energy_tv"
@@ -29,7 +105,7 @@
         android:hint="Enter Reading"
         android:textColorHint="@color/white"
         app:boxStrokeColor="@color/white"
-                app:boxStrokeWidthFocused="2dp"
+        app:boxStrokeWidthFocused="2dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
         app:hintTextColor="@color/white"
@@ -49,11 +125,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white" />
 
     <LinearLayout
         android:layout_marginTop="10dp"

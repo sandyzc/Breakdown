@@ -25,16 +25,16 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logout"
-                app:tint="@color/Red" />
+                app:tint="@color/primary" />
 
             <TextView
                 android:id="@+id/idd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/muli_black"
+                android:fontFamily="@font/muli"
                 android:text="LogOut"
-                android:textColor="@color/Red" />
+                android:textColor="@color/primary" />
 
         </LinearLayout>
 
@@ -64,7 +64,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_columnWeight="2"
 
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -139,9 +139,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="100dp"
                 android:layout_height="0dp"
-
                 android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_columnWeight="2"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
@@ -170,7 +169,6 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

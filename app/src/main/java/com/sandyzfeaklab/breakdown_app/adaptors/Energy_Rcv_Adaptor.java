@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,14 +53,24 @@ public class Energy_Rcv_Adaptor extends FirestoreRecyclerAdapter<Energy_cons_mod
         viewholder.gspm3b2.setText(String.valueOf(model.getGspm3B2()));
         viewholder.gspm3b3.setText(String.valueOf(model.getGspm3B3()));
         viewholder.rotocast.setText(String.valueOf(model.getRotoCast()));
-        viewholder.hpdc1units.setText(String.valueOf(model.getHpdc1Units())+" Units");
-        viewholder.hpdc2units.setText(String.valueOf(model.getHpdc2Units())+" Units");
-        viewholder.hpdc3units.setText(String.valueOf(model.getHpdc3Units())+" Units");
-        viewholder.gspm2bunits.setText(String.valueOf(model.getGspm2BUnits())+" Units");
-        viewholder.gspm3b1units.setText(String.valueOf(model.getGspm3B1Units())+" Units");
-        viewholder.gspm3b2units.setText(String.valueOf(model.getGspm3B2Units())+" Units");
-        viewholder.gspm3b3units.setText(String.valueOf(model.getGspm3B3Units())+" Units");
-        viewholder.rotocastunits.setText(String.valueOf(model.getRotoCastUnits())+" Units");
+        viewholder.hpdc1units.setText(model.getHpdc1Units() + " Units");
+        viewholder.hpdc2units.setText(model.getHpdc2Units() + " Units");
+        viewholder.hpdc3units.setText(model.getHpdc3Units() + " Units");
+        viewholder.gspm2bunits.setText(model.getGspm2BUnits() + " Units");
+        viewholder.gspm3b1units.setText(model.getGspm3B1Units() + " Units");
+        viewholder.gspm3b2units.setText(model.getGspm3B2Units() + " Units");
+        viewholder.gspm3b3units.setText(model.getGspm3B3Units() + " Units");
+        viewholder.rotocastunits.setText(model.getRotoCastUnits() + " Units");
+        viewholder.gspm2b_IMMER.setText(String.valueOf(model.getGspm2B_Immer()));
+        viewholder.gspm3b1_IMMER.setText(String.valueOf(model.getGspm3B1_Immer()));
+        viewholder.gspm3b2_IMMER.setText(String.valueOf(model.getGspm3B2_Immer()));
+        viewholder.gspm3b3_IMMER.setText(String.valueOf(model.getGspm3B3_Immer()));
+        viewholder.rotocast_IMMER.setText(String.valueOf(model.getRotoCast_Immer()));
+        viewholder.gspm2b_UNITS_IMMER.setText(String.valueOf(model.getGspm2B_ImmerUnits()));
+        viewholder.gspm3b1_UNITS_IMMER.setText(String.valueOf(model.getGspm3B1_ImmerUnits()));
+        viewholder.gspm3b2_UNITS_IMMER.setText(String.valueOf(model.getGspm3B2_ImmerUnits()));
+        viewholder.gspm3b3_UNITS_IMMER.setText(String.valueOf(model.getGspm3B3_ImmerUnits()));
+        viewholder.rotocast_UNITS_IMMER.setText(String.valueOf(model.getRotoCast_ImmerUnits()));
 
     }
 
@@ -79,7 +90,11 @@ public class Energy_Rcv_Adaptor extends FirestoreRecyclerAdapter<Energy_cons_mod
 
     static class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView date, name, hpdc1, hpdc2, hpdc3, gspm2b, gspm3b1, gspm3b2, gspm3b3, rotocast, hpdc1units, hpdc2units, hpdc3units, gspm2bunits, gspm3b1units, gspm3b2units, gspm3b3units, rotocastunits;
+        TextView date, name, hpdc1, hpdc2, hpdc3, gspm2b, gspm3b1, gspm3b2, gspm3b3, rotocast,
+                hpdc1units, hpdc2units, hpdc3units, gspm2bunits, gspm3b1units, gspm3b2units, gspm3b3units, rotocastunits,
+                gspm2b_IMMER, gspm3b1_IMMER, gspm3b2_IMMER, gspm3b3_IMMER, rotocast_IMMER,
+                gspm2b_UNITS_IMMER, gspm3b1_UNITS_IMMER, gspm3b2_UNITS_IMMER, gspm3b3_UNITS_IMMER, rotocast_UNITS_IMMER;
+        ImageView edit;
 
 
         public Viewholder(@NonNull View itemView) {
@@ -102,6 +117,18 @@ public class Energy_Rcv_Adaptor extends FirestoreRecyclerAdapter<Energy_cons_mod
             gspm3b2units = itemView.findViewById(R.id.energy_rcv_3b2_units);
             gspm3b3units = itemView.findViewById(R.id.energy_rcv_3b3_units);
             rotocastunits = itemView.findViewById(R.id.energy_rcv_rc_units);
+            gspm2b_IMMER = itemView.findViewById(R.id.energy_rcv_2b_Immer);
+            gspm3b1_IMMER = itemView.findViewById(R.id.energy_rcv_3b1_Immer);
+            gspm3b2_IMMER = itemView.findViewById(R.id.energy_rcv_3b2_Immer);
+            gspm3b3_IMMER = itemView.findViewById(R.id.energy_rcv_3b3_Immer);
+            rotocast_IMMER = itemView.findViewById(R.id.energy_rcv_rc_Immer);
+            gspm2b_UNITS_IMMER = itemView.findViewById(R.id.energy_rcv_2b_Immer_units);
+            gspm3b1_UNITS_IMMER = itemView.findViewById(R.id.energy_rcv_3b1_Immer_units);
+            gspm3b2_UNITS_IMMER = itemView.findViewById(R.id.energy_rcv_3b2_Immer_units);
+            gspm3b3_UNITS_IMMER = itemView.findViewById(R.id.energy_rcv_3b3_Immer_units);
+            rotocast_UNITS_IMMER = itemView.findViewById(R.id.energy_rcv_rc_Immer_units);
+            edit=itemView.findViewById(R.id.edit_energy_reading);
+
         }
     }
 }
