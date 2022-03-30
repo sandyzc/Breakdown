@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="8dp"
+    android:gravity="center"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Date : "
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/energy_rcv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/edit_energy_reading"
+                android:layout_width="13dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="end"
+                android:src="@drawable/ic_baseline_edit_24" />
+
+            <TextView
+                android:id="@+id/energy_rcv_namw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+
+                android:fontFamily="@font/muli"
+                android:gravity="end"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="10dp" />
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/primary" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="2"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="HPDC"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="IP-1 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="start"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip1_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="ip-2 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip2_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="ip-3 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_ip3_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <View
+
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/primary"
+                android:gravity="center" />
+
+            <!-- Gspm Row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Gspm"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+
+                    />
+                <!--2b-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="2b : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_2b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_2b_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <!--3bench-1-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="3b1 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b1_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <!--3B1-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="3b2 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b2_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <!--3Bench3-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="sans-serif"
+                        android:text="3b3 : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_3b3_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/primary" />
+
+                <!--3Bench3-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="sans-serif"
+                        android:text="RotCas : "
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_rc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/energy_rcv_rc_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="end"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/primary" />
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="Immersion Heater"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/primary" />
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:gravity="center|top"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|top"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="sans-serif"
+                            android:text="2 Bench : "
+                            android:textAllCaps="true"
+                            android:textColor="@color/primary"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_2b_Immer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_2b_Immer_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:gravity="end"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/primary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="sans-serif"
+                            android:text="3b1 : "
+                            android:textAllCaps="true"
+                            android:textColor="@color/primary"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b1_Immer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b1_Immer_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:gravity="end"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/primary" />
+
+                    <!--3B1-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="sans-serif"
+                            android:text="3b2 : "
+                            android:textAllCaps="true"
+                            android:textColor="@color/primary"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b2_Immer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b2_Immer_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:gravity="end"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/primary"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|top"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="sans-serif"
+                            android:text="3b3 : "
+                            android:textAllCaps="true"
+                            android:textColor="@color/primary"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b3_Immer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_3b3_Immer_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:gravity="end"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/primary" />
+
+                    <!--3Bench3-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text="RotCas : "
+                            android:textAllCaps="true"
+                            android:textColor="@color/primary"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_rc_Immer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/energy_rcv_rc_Immer_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:gravity="end"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
