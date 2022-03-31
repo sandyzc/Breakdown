@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import com.anychart.enums.MarkerType;
 import com.anychart.enums.TooltipPositionMode;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -138,6 +140,7 @@ public class Energy_Entry extends AppCompatActivity {
         TextInputEditText reading = dialog.findViewById(R.id.energy_reading);
         TextInputEditText energy_date = dialog.findViewById(R.id.energy_reading_date);
         ImageView selectDateButton = dialog.findViewById(R.id.change_energy_date);
+        TextView warning= dialog.findViewById(R.id.energy_dialog_warning);
 
 
         if (model != null && model.getTs() != null) {
@@ -162,7 +165,7 @@ public class Energy_Entry extends AppCompatActivity {
 
         DatePickerTimeline datePickerTimeline = dialog.findViewById(R.id.datePickerTimeline);
 
-        set_datePickerTimelne(datePickerTimeline,energy_date);
+        set_datePickerTimelne(datePickerTimeline,energy_date,reading,warning,save);
 
 
         selectDateButton.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +199,7 @@ public class Energy_Entry extends AppCompatActivity {
 
                     savelog(spinner.getSelectedItem().toString(), Long.valueOf(reading.getText().toString()), date);
                     dialog.dismiss();
+                    date=new Date();
 
                 }
             }
@@ -206,6 +210,7 @@ public class Energy_Entry extends AppCompatActivity {
             public void onClick(View v) {
 
                 dialog.dismiss();
+                date=new Date();
             }
         });
         dialog.show();
@@ -648,6 +653,11 @@ public class Energy_Entry extends AppCompatActivity {
                 }
 
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                return;
+            }
         });
     }
 
@@ -885,7 +895,8 @@ public class Energy_Entry extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void set_datePickerTimelne(DatePickerTimeline datePickerTimeline,TextInputEditText energy_date) {
+    private void set_datePickerTimelne(DatePickerTimeline datePickerTimeline,TextInputEditText energy_date,
+                                       TextInputEditText reading,TextView warning, Button save) {
 
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -893,6 +904,9 @@ public class Energy_Entry extends AppCompatActivity {
         int currentYear = calendar.get(Calendar.YEAR);
         int currentMonth = calendar.get(Calendar.MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH) - 2;
+        int today= calendar.get(Calendar.DAY_OF_MONTH);
+        int currentMonthchec = calendar.get(Calendar.MONTH);
+
 
         datePickerTimeline.setInitialDate(currentYear, currentMonth, currentDay);
 
@@ -900,18 +914,38 @@ public class Energy_Entry extends AppCompatActivity {
             @Override
             public void onDateSelected(int year, int month, int day, int dayOfWeek) {
 
+
+
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, day);
 
 
-                SimpleDateFormat localDateFormat;
-                localDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-                String date1 = localDateFormat.format(calendar.getTime());
+                if (day>today|| month>currentMonthchec){
 
-                energy_date.setText(date1);
+                    warning.setVisibility(View.GONE);
+                    reading.setVisibility(View.GONE);
+                    save.setClickable(false);
+                    Toast.makeText(Energy_Entry.this, "Sorry Folks....! Cannot Update For future date", Toast.LENGTH_LONG).show();
+                }else {
 
-                Toast.makeText(Energy_Entry.this, "Date :" + date1, Toast.LENGTH_SHORT).show();
+                    if (reading.getVisibility()==View.GONE){
+                        reading.setVisibility(View.VISIBLE);
+                    }
+
+                    save.setClickable(true);
+                    warning.setVisibility(View.VISIBLE);
+                    reading.getText().clear();
+
+                    SimpleDateFormat localDateFormat;
+                    localDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                    String date1 = localDateFormat.format(calendar.getTime());
+
+                    energy_date.setText(date1);
+                    date=calendar.getTime();
+                }
+
                 // Do Something
             }
 

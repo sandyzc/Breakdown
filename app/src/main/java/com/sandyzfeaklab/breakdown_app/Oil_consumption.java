@@ -41,7 +41,6 @@ public class Oil_consumption extends AppCompatActivity {
             oilcons_cost, textView16, textView14, textView17;
     Button gspm, hpdc, coreshop;
     RecyclerView rcView;
-    CollectionReference reference1 = FirebaseFirestore.getInstance().collection("Energy_readings");
     CollectionReference reference = FirebaseFirestore.getInstance().collection("oil Consump");
 
 
@@ -251,6 +250,21 @@ public class Oil_consumption extends AppCompatActivity {
                         setResult(RESULT_OK, intent);
                         startActivity(intent);
                         return true;
+                    case R.id.Melt_Oil_cons_:
+                        bundle.putString("Area", "Melting");
+                        bundle.putString("type", "save");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Others:
+                        bundle.putString("Area", "Others");
+                        bundle.putString("type", "save");
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
+                        return true;
+
 
                 }
 

@@ -94,6 +94,9 @@ public class AddOildetails extends AppCompatActivity {
         if (area_selected.equals("Melting")) {
             dept_adap = ArrayAdapter.createFromResource(AddOildetails.this, R.array.Melting_oil, android.R.layout.simple_spinner_item);
         }
+        if (area_selected.equals("Others")) {
+            dept_adap = ArrayAdapter.createFromResource(AddOildetails.this, R.array.Others, android.R.layout.simple_spinner_item);
+        }
 
         dept_adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

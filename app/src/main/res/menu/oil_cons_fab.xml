@@ -19,4 +19,8 @@
         android:id="@+id/Melt_Oil_cons_"
         android:title="Melting" />
 
+    <item
+        android:id="@+id/Others"
+        android:title="Others" />
+
 </menu>

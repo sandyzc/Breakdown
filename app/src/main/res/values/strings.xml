@@ -66,6 +66,11 @@
 
     </string-array>
 
+    <string-array name="Others">
+        <item>Tool Shop</item>
+
+    </string-array>
+
     <string-array name="HPDC">
         <item>hpdc1</item>
         <item>hpdc2</item>

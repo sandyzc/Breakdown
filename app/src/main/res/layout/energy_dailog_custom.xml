@@ -125,6 +125,20 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:id="@+id/energy_dialog_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Note: You are updating Reading for previous date"
+        >
+
+
+
+
+    </TextView>
 
     <LinearLayout
         android:layout_marginTop="10dp"
