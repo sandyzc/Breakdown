@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Breakdown">
         <activity
+            android:name=".Material_list"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.Breakdown.NoActionBar" />
+        <activity
             android:name=".Energy_Reading_Entry"
             android:exported="false" />
         <activity

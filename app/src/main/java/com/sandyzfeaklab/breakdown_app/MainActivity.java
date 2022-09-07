@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         pending_butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Pending_activity.class);
+                Intent intent = new Intent(MainActivity.this,Material_list.class);
                 startActivity(intent);
             }
         });
