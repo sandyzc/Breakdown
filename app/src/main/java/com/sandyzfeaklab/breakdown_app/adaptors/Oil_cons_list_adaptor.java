@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,14 +20,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.sandyzfeaklab.breakdown_app.AddOildetails;
-import com.sandyzfeaklab.breakdown_app.EditPending_Activity;
-import com.sandyzfeaklab.breakdown_app.Oil_consumption;
+import com.sandyzfeaklab.breakdown_app.activities.AddOildetails;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Oil_cons_list_adaptor extends FirestoreRecyclerAdapter<OIl_Consump_model, Oil_cons_list_adaptor.ViewHolder> {
     /**

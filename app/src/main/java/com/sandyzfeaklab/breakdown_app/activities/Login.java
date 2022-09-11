@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import static android.content.ContentValues.TAG;
 
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sandyzfeaklab.breakdown_app.R;
+import com.sandyzfeaklab.breakdown_app.SaveUserInfo;
 
 public class Login extends AppCompatActivity {
 

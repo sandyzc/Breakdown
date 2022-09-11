@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.adaptors.Oil_cons_list_adaptor;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 

@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.sandyzfeaklab.breakdown_app.MainActivity;
 import com.sandyzfeaklab.breakdown_app.database.Material_List;
 import com.sandyzfeaklab.breakdown_app.database.Material_Repository;
 
@@ -17,6 +16,8 @@ public class Material_ViewModel extends AndroidViewModel {
     private LiveData<List<Material_List>> allMaterials;
     private LiveData<List<Material_List>> desc_search_Materials;
     private LiveData<List<Material_List>> sap_code_Materials;
+    private LiveData<List<Material_List>> category_Materials;
+    private LiveData<List<Material_List>> machine_Materials;
 
 
     public Material_ViewModel(@NonNull Application application) {
@@ -24,6 +25,7 @@ public class Material_ViewModel extends AndroidViewModel {
 
         repository = new Material_Repository(application);
         allMaterials= repository.allMaterials();
+
 
     }
 
@@ -36,6 +38,18 @@ public class Material_ViewModel extends AndroidViewModel {
 
         return desc_search_Materials;
     }
+
+
+
+    public LiveData<List<Material_List> > materials_with_cat_machine (String category, String machine){
+
+        category_Materials=repository.getMaterial_cat_machine(category,machine);
+
+        return category_Materials;
+
+    }
+
+
 
     public LiveData<List<Material_List> > searchWithSapcode(String sapCode){
         sap_code_Materials=repository.getSearched_Material_sap_code(sapCode);

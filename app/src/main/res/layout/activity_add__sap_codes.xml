@@ -7,14 +7,14 @@
 
         <variable
             name="setAdapter"
-            type="com.sandyzfeaklab.breakdown_app.Add_Sap_codes" />
+            type="com.sandyzfeaklab.breakdown_app.activities.Add_Sap_codes" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/nemak"
-    tools:context=".Add_Sap_codes">
+    tools:context=".activities.Add_Sap_codes">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

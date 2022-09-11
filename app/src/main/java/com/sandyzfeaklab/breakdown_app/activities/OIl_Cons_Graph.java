@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import android.annotation.SuppressLint;
 
@@ -31,6 +31,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 import com.sandyzfeaklab.breakdown_app.databinding.ActivityOilConsGraphBinding;
 

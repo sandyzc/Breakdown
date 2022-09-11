@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Material_list">
+    tools:context=".activities.materials.Material_list_Activity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -14,22 +14,24 @@
         />
 
     <io.github.yavski.fabspeeddial.FabSpeedDial
-        android:id="@+id/material_list_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="8dp"
-        app:fabBackgroundTint="#592946"
+        android:layout_gravity="bottom|end"
         app:fabGravity="bottom_end"
+       app:fabDrawable="@drawable/filter"
+        app:fabBackgroundTint="@color/primary"
+        app:miniFabTitleBackgroundTint="@color/primary"
+        app:miniFabTitleTextColor="@color/white"
         app:fabMenu="@menu/material_filter_menu"
-        app:layout_constraintBottom_toBottomOf="@+id/material_list_rcv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="@+id/material_list_rcv"
-        app:layout_constraintTop_toTopOf="@+id/material_list_rcv"
-        app:layout_constraintVertical_bias="0.918"
-        app:miniFabBackgroundTint="#592946"
-        app:miniFabTitleBackgroundTint="#592946"
-        app:miniFabTitleTextColor="#ffffff"
-        app:srcCompat="@drawable/filter" />
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.941"
+        app:miniFabBackgroundTint="@android:color/white"
+        app:miniFabDrawableTint="?attr/colorPrimaryDark"
+       />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

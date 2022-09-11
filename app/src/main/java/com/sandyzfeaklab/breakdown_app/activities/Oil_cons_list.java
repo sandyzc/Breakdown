@@ -1,18 +1,17 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toolbar;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.adaptors.Oil_cons_list_adaptor;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 

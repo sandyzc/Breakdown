@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sandyzfeaklab.breakdown_app.activities.MainActivity;
 import com.sandyzfeaklab.breakdown_app.dataModel.User_Info;
 
 import java.util.Objects;

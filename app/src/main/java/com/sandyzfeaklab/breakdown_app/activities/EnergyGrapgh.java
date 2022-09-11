@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import android.os.Bundle;
 

@@ -13,6 +13,8 @@ public class Material_List {
     private String sap_code;
     @NonNull
     private String description;
+
+
     private int stock;
     private String sub_assembly;
     private String image;
@@ -21,12 +23,42 @@ public class Material_List {
     private String used_in_2;
     private String used_in_3;
     private String used_in_4;
-    private String used_in_5;
-    private String used_in_6;
-    private String used_in_7;
-    private String used_in_8;
-    private String used_in_9;
-    private String used_in_10;
+    private String location;
+    private String station;
+    private String gen_desc;
+    private String catergory;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getStation() {
+        return station;
+    }
+
+    public void setStation(String station) {
+        this.station = station;
+    }
+
+    public String getGen_desc() {
+        return gen_desc;
+    }
+
+    public void setGen_desc(String gen_desc) {
+        this.gen_desc = gen_desc;
+    }
+
+    public String getCatergory() {
+        return catergory;
+    }
+
+    public void setCatergory(String catergory) {
+        this.catergory = catergory;
+    }
 
     public void setSap_code(String sap_code) {
         this.sap_code = sap_code;
@@ -66,30 +98,6 @@ public class Material_List {
 
     public void setUsed_in_4(String used_in_4) {
         this.used_in_4 = used_in_4;
-    }
-
-    public void setUsed_in_5(String used_in_5) {
-        this.used_in_5 = used_in_5;
-    }
-
-    public void setUsed_in_6(String used_in_6) {
-        this.used_in_6 = used_in_6;
-    }
-
-    public void setUsed_in_7(String used_in_7) {
-        this.used_in_7 = used_in_7;
-    }
-
-    public void setUsed_in_8(String used_in_8) {
-        this.used_in_8 = used_in_8;
-    }
-
-    public void setUsed_in_9(String used_in_9) {
-        this.used_in_9 = used_in_9;
-    }
-
-    public void setUsed_in_10(String used_in_10) {
-        this.used_in_10 = used_in_10;
     }
 
     public String getSap_code() {
@@ -132,27 +140,5 @@ public class Material_List {
         return used_in_4;
     }
 
-    public String getUsed_in_5() {
-        return used_in_5;
-    }
 
-    public String getUsed_in_6() {
-        return used_in_6;
-    }
-
-    public String getUsed_in_7() {
-        return used_in_7;
-    }
-
-    public String getUsed_in_8() {
-        return used_in_8;
-    }
-
-    public String getUsed_in_9() {
-        return used_in_9;
-    }
-
-    public String getUsed_in_10() {
-        return used_in_10;
-    }
 }

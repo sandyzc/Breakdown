@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 import com.sandyzfeaklab.breakdown_app.dataModel.DateInputMask;
 

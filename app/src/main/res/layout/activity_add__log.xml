@@ -6,7 +6,7 @@
 	android:layout_height="match_parent"
 
 
-	tools:context=".Add_Log">
+	tools:context=".activities.Add_Log">
 
 
 

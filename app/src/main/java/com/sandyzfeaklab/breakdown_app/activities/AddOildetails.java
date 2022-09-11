@@ -1,4 +1,4 @@
-package com.sandyzfeaklab.breakdown_app;
+package com.sandyzfeaklab.breakdown_app.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.dataModel.OIl_Consump_model;
 
 import java.text.ParseException;
