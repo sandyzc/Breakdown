@@ -45,12 +45,12 @@ public class MaterialWithMachine extends AppCompatActivity {
     public void clicked_on_fill(View view) {
 
         Bundle bundle =new Bundle();
-        bundle.putString("machine","FILL");
+        bundle.putString("m/c","FILL");
 
         CircularReveal.presentActivity(new CircularReveal.Builder(
                 MaterialWithMachine.this,
                 view,
-                new Intent(MaterialWithMachine.this, MaterialWithCategory.class).putExtras(bundle),1000
+                new Intent(MaterialWithMachine.this, Material_list_Activity.class).putExtras(bundle),1000
         ));
 
 

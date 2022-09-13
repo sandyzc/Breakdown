@@ -3,11 +3,17 @@
 
 
     <item
-        android:id="@+id/HPDC_oil"
-        android:title="Filter By Machine" />
+        android:id="@+id/mat_menu_pne"
+        android:title="Pneumatic" />
     <item
-        android:id="@+id/GSPM_Oil_cons"
-        android:title="Search with SAP CODE" />
+        android:id="@+id/mat_menu_ele"
+        android:title="Elec &amp; Electronics" />
+    <item
+        android:id="@+id/mat_menu_mech"
+        android:title="Mechanical" />
+    <item
+        android:id="@+id/mat_menu_hyd"
+        android:title="Hydraulic" />
 
 
 </menu>
