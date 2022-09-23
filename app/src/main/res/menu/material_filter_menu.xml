@@ -4,14 +4,19 @@
 
     <item
         android:id="@+id/mat_menu_pne"
-        android:title="Pneumatic" />
+        android:title="Pneumatic"
+        android:icon="@drawable/pne"
+        />
     <item
         android:id="@+id/mat_menu_ele"
+        android:icon="@drawable/elec"
         android:title="Elec &amp; Electronics" />
     <item
+android:icon="@drawable/mech"
         android:id="@+id/mat_menu_mech"
         android:title="Mechanical" />
     <item
+        android:icon="@drawable/hyd"
         android:id="@+id/mat_menu_hyd"
         android:title="Hydraulic" />
 

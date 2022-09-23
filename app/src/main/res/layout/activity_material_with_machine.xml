@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/primary"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    tools:context=".activities.materials.MaterialWithMachine">
+    tools:context=".activities.materials.Material_with_machin_kt">
 
-    <Button
-        android:id="@+id/fill_cellmat"
+    <com.mcdev.splitbuttonlibrary.SplitButton
+        android:id="@+id/split_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FILL"
-        android:onClick="clicked_on_fill"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="112dp"
+        android:elevation="@dimen/cardview_default_elevation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

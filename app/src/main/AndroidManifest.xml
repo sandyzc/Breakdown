@@ -16,14 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Breakdown">
-        <activity
-            android:name=".MaterialWithSattion"
-            android:exported="false" />
+
         <activity
             android:name=".activities.materials.MaterialWithCategory"
             android:exported="false" />
         <activity
-            android:name=".activities.materials.MaterialWithMachine"
+            android:name=".activities.materials.Material_with_machin_kt"
             android:exported="false"
             android:theme="@style/Theme.Breakdown.NoActionBar" />
         <activity

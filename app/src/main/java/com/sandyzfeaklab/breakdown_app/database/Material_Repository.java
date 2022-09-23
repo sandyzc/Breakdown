@@ -16,6 +16,7 @@ public class Material_Repository {
 
     //TODO implement category list
 
+
     public Material_Repository(Application application) {
         Material_Database database = Material_Database.getInstance(application);
         material_list_dao = database.material_list_dao();

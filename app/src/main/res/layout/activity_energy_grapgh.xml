@@ -11,10 +11,9 @@
          TextureView, etc. -->
 
     <com.anychart.AnyChartView
-        android:id="@+id/energy_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+android:id="@+id/energyGraph"
         />
 
 </FrameLayout>

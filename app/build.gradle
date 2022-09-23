@@ -85,7 +85,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.4.0')
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.4'
     implementation 'io.github.yavski:fab-speed-dial:1.0.6'
-
+    implementation "com.github.kojofosu:SplitButton:1.1"
 
         def lifecycle_version = "2.6.0-alpha01"
         def arch_version = "2.1.0"

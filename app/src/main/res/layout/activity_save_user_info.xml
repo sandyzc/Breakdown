@@ -30,7 +30,6 @@
 
 
         <RelativeLayout
-            android:id="@+id/det"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp">
@@ -140,7 +139,6 @@
                 app:cardCornerRadius="5dp">
 
                 <Button
-                    android:id="@+id/save_user_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:transitionName="transition_login"

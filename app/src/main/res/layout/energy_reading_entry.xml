@@ -29,7 +29,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_2b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -66,7 +65,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -103,7 +101,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -140,7 +137,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -177,7 +173,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_rc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -214,7 +209,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_2b_immer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -251,7 +245,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b1_immer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -288,7 +281,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b2_immer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -325,7 +317,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_3b3_immer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -362,7 +353,6 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/energy_rc_immer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"

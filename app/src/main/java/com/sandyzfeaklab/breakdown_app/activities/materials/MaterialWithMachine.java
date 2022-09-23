@@ -14,18 +14,40 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.mcdev.splitbuttonlibrary.SplitButton;
+import com.mcdev.splitbuttonlibrary.SplitMenu;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.activities.MainActivity;
 import com.tombayley.activitycircularreveal.CircularReveal;
 import com.vivekkaushik.datepicker.DatePickerTimeline;
 
+import java.util.List;
+
 public class MaterialWithMachine extends AppCompatActivity {
     private Dialog dialog;
+
+    private SplitButton splitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material_with_machine);
+
+        List<SplitMenu> splitMenus = null;
+
+
+        splitMenus.add(new SplitMenu(0,"Fill",R.drawable.mech,null,null));
+        splitMenus.add(new SplitMenu(0,"Fill-2",R.drawable.mech,null,null));
+        splitMenus.add(new SplitMenu(0,"Fill-3",R.drawable.mech,null,null));
+
+        splitButton= findViewById(R.id.split_btn);
+
+        splitButton.setBgColor(R.color.white);
+        splitButton.setTextColor(R.color.primary);
+        splitButton.setMenuItems(splitMenus,0);
+
+
+
     }
 
     public void show_station_dialog() {

@@ -77,7 +77,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/gen_report"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/themeColor"
@@ -143,7 +142,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/send_gen_report"
                     style="@android:style/Widget.Material.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,26 +1,12 @@
 <resources>
     <string name="app_name">Maintenance</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_data_input">Data_input</string>
     <string name="equipment_name">Equipment Name :</string>
 
@@ -216,27 +202,6 @@
         <item>Sand conveyor unit</item>
     </string-array>
 
-    <string-array name="FinishingHPDC">
-        <item>Trimming1</item>
-        <item>Trimming2</item>
-        <item>Shotblasting1</item>
-        <item>Shotblasting2</item>
-        <item>BandSaw1</item>
-        <item>BandSaw2</item>
-
-    </string-array>
-
-    <string-array name="FinishingHPDC_ope">
-        <item>Infeed conveyor</item>
-        <item>Robot - Loading </item>
-        <item>Robot - Un Loading </item>
-        <item>Trimming Press</item>
-        <item>Loading Poke yoke</item>
-        <item>Unloading Poke Yoke</item>
-        <item>Dust Collector System</item>
-        <item>Shot blasting machine</item>
-
-    </string-array>
     <string-array name="FinishingGSPM">
         <item>Fillcell1</item>
         <item>Fillcell2</item>
@@ -298,20 +263,6 @@
 
     </string-array>
 
-    <string-array name="Area">
-        <item>Melting</item>
-        <item>HPDC</item>
-        <item>GSPM</item>
-        <item>Coldbox</item>
-        <item>Hotbox</item>
-        <item>SandReclamation</item>
-        <item>FinishingHPDC</item>
-        <item>FinishingGSPM</item>
-        <item>Heat_Treatment</item>
-
-
-    </string-array>
-
     <string-array name="Shift">
         <item>A</item>
         <item>B</item>
@@ -330,29 +281,8 @@
     </string-array>
 
 
-    <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="problem_description">Problem Description :</string>
     <string name="title_activity_add__log"></string>
-    <string name="title_activity_p_en_act">PEn_act</string>
-    <string name="title_activity_updata">updata</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_oil_consumption">OIl_consumption</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_activity_oil_cons_graph">OIl_Cons_Graph</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_energy_grapgh">EnergyGrapgh</string>
-    <string name="title_activity_main2">MainActivity2</string>
 </resources>

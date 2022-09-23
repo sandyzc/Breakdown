@@ -1,21 +1,27 @@
 package com.sandyzfeaklab.breakdown_app.activities;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sandyzfeaklab.breakdown_app.Energy_Entry;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.activities.materials.MaterialWithMachine;
+import com.sandyzfeaklab.breakdown_app.activities.materials.Material_list_Activity;
+import com.sandyzfeaklab.breakdown_app.activities.materials.Material_with_machin_kt;
 import com.tombayley.activitycircularreveal.CircularReveal;
 
 import java.util.Objects;
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mtbf_butt, material_search, oil_cons_activity, pending_butt, logout;
 
     private FirebaseAuth mAuth;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +79,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                CircularReveal.presentActivity(new CircularReveal.Builder(
-                        MainActivity.this,
-                        v,
-                        new Intent(MainActivity.this, MaterialWithMachine.class),1000
-                ));
+                material_search_button_clicked_dialog();
+
+//                CircularReveal.presentActivity(new CircularReveal.Builder(
+//                        MainActivity.this,
+//                        v,
+//                        new Intent(MainActivity.this, Material_with_machin_kt.class),1000
+//                ));
 
             }
         });
@@ -116,5 +125,42 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, Energy_Entry.class);
         startActivity(intent);
+    }
+
+    //TODO Download DB option and progress bar need to implement
+
+
+    private void material_search_button_clicked_dialog(){
+
+        //TODO text validation need to implement
+        //TODO implement search feature
+
+        dialog= new Dialog(this);
+        dialog.setContentView(R.layout.search_options_dialog);
+        TextInputEditText sap_code_enterd= dialog.findViewById(R.id.search_sap_code);
+        TextInputEditText desc_enterd= dialog.findViewById(R.id.search_desc);
+        Button search_butt= dialog.findViewById(R.id.search_SAP_Button);
+        Button search_with_machine= dialog.findViewById(R.id.search_with_machine_but);
+
+
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_back));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        search_butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(MainActivity.this, Material_list_Activity.class);
+                startActivity(intent);
+
+            }
+        });
+        dialog.show();
+
+
+
+
     }
 }

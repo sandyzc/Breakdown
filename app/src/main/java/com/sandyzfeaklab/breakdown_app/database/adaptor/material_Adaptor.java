@@ -68,4 +68,10 @@ public class material_Adaptor extends RecyclerView.Adapter<material_Adaptor.Mate
        this.material_lists =atttach_material_lists;
        notifyDataSetChanged();
     }
+
+    void filter (List<Material_List> filterdlist){
+        this.material_lists=filterdlist;
+
+        notifyDataSetChanged();
+    }
 }

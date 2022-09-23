@@ -8,7 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
-        android:id="@+id/material_cat_pne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="material_cat_pne"
@@ -17,7 +16,6 @@
         />
 
     <Button
-        android:id="@+id/material_cat_ele"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="material_cat_ele"
@@ -26,7 +24,6 @@
         />
 
     <Button
-        android:id="@+id/material_cat_mech"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="material_cat_mech"
@@ -35,7 +32,6 @@
          />
 
     <Button
-        android:id="@+id/material_cat_hyd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

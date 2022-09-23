@@ -28,8 +28,6 @@
     <item
         android:id="@+id/Finishing"
         android:title="Finising" />
-    <item
-        android:id="@+id/General"
-        android:title="General" />
+    <item android:title="General" />
 
 </menu>

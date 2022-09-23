@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
     @Database(entities = Material_List.class, version = 1)
     public abstract class Material_Database extends RoomDatabase {
 
+        //TODO need to update the DB from server
         private static Material_Database instance;
 
         public abstract Material_list_DAO material_list_dao();

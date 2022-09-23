@@ -1,20 +1,20 @@
 package com.sandyzfeaklab.breakdown_app.activities.materials;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.sandyzfeaklab.breakdown_app.R;
-import com.sandyzfeaklab.breakdown_app.activities.AddOildetails;
-import com.sandyzfeaklab.breakdown_app.activities.Oil_consumption;
 import com.sandyzfeaklab.breakdown_app.database.Material_List;
 import com.sandyzfeaklab.breakdown_app.database.Viewmodel.Material_ViewModel;
 import com.sandyzfeaklab.breakdown_app.database.adaptor.material_Adaptor;
@@ -27,6 +27,7 @@ import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 public class Material_list_Activity extends AppCompatActivity {
     private Material_ViewModel viewModel;
     private RecyclerView rcView;
+    final material_Adaptor adaptor = new material_Adaptor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,10 @@ public class Material_list_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_material_list);
 
 
-        Bundle bundle = getIntent().getExtras();
-
-        String category = bundle.getString("CAT");
-        String machine = bundle.getString("m/c");
+//        Bundle bundle = getIntent().getExtras();
+//
+//        String category = bundle.getString("CAT");
+//        String machine = bundle.getString("m/c");
 
         rcView = findViewById(R.id.material_list_rcv);
         rcView.setHasFixedSize(true);
@@ -45,7 +46,6 @@ public class Material_list_Activity extends AppCompatActivity {
         rcView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
 
-        final material_Adaptor adaptor = new material_Adaptor();
 
 
         viewModel = ViewModelProviders.of(this).get(Material_ViewModel.class);
@@ -60,11 +60,51 @@ public class Material_list_Activity extends AppCompatActivity {
             }
         });
 
-        fabInit(machine, adaptor);
+      //  fabInit(machine, adaptor);
 
 
     }
 
+    private void search_db(String search_query){
+
+        String query="%"+search_query+"%";
+        viewModel.searchWithDesription(query).observe(this, new Observer<List<Material_List>>() {
+            @Override
+            public void onChanged(List<Material_List> material_lists) {
+                adaptor.setMaterial_lists(material_lists);
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_view, menu);
+        MenuItem item = menu.findItem(R.id.menu_search);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) item.getActionView();
+
+
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText!=null){
+                        search_db(newText);
+                }
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
+
+    }
 
     private void fabInit(String machine, material_Adaptor adaptor) {
         FabSpeedDial fabSpeedDial = findViewById(R.id.mat_list_filter_fab);
