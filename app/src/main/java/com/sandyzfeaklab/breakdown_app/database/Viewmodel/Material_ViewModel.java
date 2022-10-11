@@ -12,20 +12,21 @@ import com.sandyzfeaklab.breakdown_app.database.Material_Repository;
 import java.util.List;
 
 public class Material_ViewModel extends AndroidViewModel {
-    private Material_Repository repository;
-    private LiveData<List<Material_List>> allMaterials;
-    private LiveData<List<Material_List>> desc_search_Materials;
-    private LiveData<List<Material_List>> sap_code_Materials;
-    private LiveData<List<Material_List>> category_Materials;
-    private LiveData<List<Material_List>> machine_Materials;
+    private final Material_Repository repository;
+    private final LiveData<List<Material_List>> allMaterials;
 
 
     public Material_ViewModel(@NonNull Application application) {
         super(application);
 
         repository = new Material_Repository(application);
-        allMaterials= repository.allMaterials();
+        allMaterials = repository.allMaterials();
 
+
+    }
+
+    public LiveData<List<Material_List>> getMachine_Materials(String machine) {
+        return repository.getmachineList(machine);
 
     }
 
@@ -33,27 +34,26 @@ public class Material_ViewModel extends AndroidViewModel {
         return allMaterials;
     }
 
-    public LiveData<List<Material_List> > searchWithDesription(String description){
-        desc_search_Materials=repository.getSearched_Material_desc(description);
+    public LiveData<List<Material_List>> searchWithDesription(String description) {
 
-        return desc_search_Materials;
+        return repository.getSearched_Material_desc(description);
     }
 
 
+    public LiveData<List<Material_List>>searchview(String desc, String sapcode){
 
-    public LiveData<List<Material_List> > materials_with_cat_machine (String category, String machine){
+        return repository.serchviewlist(sapcode,desc);
+    }
 
-        category_Materials=repository.getMaterial_cat_machine(category,machine);
+    public LiveData<List<Material_List>> materials_with_cat_machine(String category, String machine) {
 
-        return category_Materials;
+        return repository.getMaterial_cat_machine(category, machine);
 
     }
 
 
+    public LiveData<List<Material_List>> searchWithSapcode(String sapCode) {
 
-    public LiveData<List<Material_List> > searchWithSapcode(String sapCode){
-        sap_code_Materials=repository.getSearched_Material_sap_code(sapCode);
-
-        return sap_code_Materials;
+        return repository.getSearched_Material_sap_code(sapCode);
     }
 }

@@ -1,13 +1,12 @@
 package com.sandyzfeaklab.breakdown_app.activities.materials;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -28,6 +27,9 @@ public class Material_list_Activity extends AppCompatActivity {
     private Material_ViewModel viewModel;
     private RecyclerView rcView;
     final material_Adaptor adaptor = new material_Adaptor();
+    androidx.appcompat.widget.SearchView searchView;
+    String machine, sapCodeSearched, descSearched, activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,15 @@ public class Material_list_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_material_list);
 
 
-//        Bundle bundle = getIntent().getExtras();
-//
-//        String category = bundle.getString("CAT");
-//        String machine = bundle.getString("m/c");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            machine = bundle.getString("machine");
+            sapCodeSearched = bundle.getString("sapCode");
+            descSearched = bundle.getString("desc");
+            activity = bundle.getString("activity");
+
+        }
+
 
         rcView = findViewById(R.id.material_list_rcv);
         rcView.setHasFixedSize(true);
@@ -46,46 +53,16 @@ public class Material_list_Activity extends AppCompatActivity {
         rcView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
 
-
-
         viewModel = ViewModelProviders.of(this).get(Material_ViewModel.class);
 
 
         rcView.setAdapter(adaptor);
 
-        viewModel.getAllMaterials().observe(this, new Observer<List<Material_List>>() {
-            @Override
-            public void onChanged(List<Material_List> material_lists) {
-                adaptor.setMaterial_lists(material_lists);
-            }
-        });
+        setlist(activity,machine,sapCodeSearched,descSearched);
 
-      //  fabInit(machine, adaptor);
+        searchView = findViewById(R.id.searchview1);
 
-
-    }
-
-    private void search_db(String search_query){
-
-        String query="%"+search_query+"%";
-        viewModel.searchWithDesription(query).observe(this, new Observer<List<Material_List>>() {
-            @Override
-            public void onChanged(List<Material_List> material_lists) {
-                adaptor.setMaterial_lists(material_lists);
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_view, menu);
-        MenuItem item = menu.findItem(R.id.menu_search);
-        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) item.getActionView();
-
-
-        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -93,16 +70,79 @@ public class Material_list_Activity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText!=null){
-                        search_db(newText);
+                if (newText != null) {
+
+                    search_db(newText);
                 }
 
                 return false;
             }
         });
 
-        return super.onCreateOptionsMenu(menu);
+    }
 
+    private void search_db(String search_query) {
+
+        String query = "%" + search_query + "%";
+        viewModel.searchview(query,query).observe(this, new Observer<List<Material_List>>() {
+            @Override
+            public void onChanged(List<Material_List> material_lists) {
+                adaptor.setMaterial_lists(material_lists);
+            }
+        });
+    }
+
+
+    private void setlist(String activity, String machine, String sapCodeSearched, String descSearched) {
+
+
+
+        if (activity.equals("MACHINE")) {
+
+            Toast.makeText(this, "with machine", Toast.LENGTH_LONG).show();
+            viewModel.getMachine_Materials(machine).observe(this, new Observer<List<Material_List>>() {
+                @Override
+                public void onChanged(List<Material_List> material_lists) {
+                    adaptor.setMaterial_lists(material_lists);
+                }
+            });
+
+            fabInit(machine,adaptor);
+
+        } else {
+
+            if (sapCodeSearched.length()>0) {
+
+                searchView.setVisibility(View.INVISIBLE);
+
+                Toast.makeText(this, "sap code search", Toast.LENGTH_LONG).show();
+                viewModel.searchWithSapcode(sapCodeSearched).observe(this, new Observer<List<Material_List>>() {
+                    @Override
+                    public void onChanged(List<Material_List> material_lists) {
+                        adaptor.setMaterial_lists(material_lists);
+                    }
+                });
+            } else if (descSearched.length()>1) {
+
+                Toast.makeText(this, "desc", Toast.LENGTH_LONG).show();
+                String query = "%" + descSearched + "%";
+                viewModel.searchWithDesription(query).observe(this, new Observer<List<Material_List>>() {
+                    @Override
+                    public void onChanged(List<Material_List> material_lists) {
+                        adaptor.setMaterial_lists(material_lists);
+                    }
+                });
+            } else {
+
+                viewModel.getAllMaterials().observe(this, new Observer<List<Material_List>>() {
+                    @Override
+                    public void onChanged(List<Material_List> material_lists) {
+                        adaptor.setMaterial_lists(material_lists);
+                    }
+                });
+            }
+
+        }
 
     }
 
@@ -121,7 +161,8 @@ public class Material_list_Activity extends AppCompatActivity {
                             @Override
                             public void onChanged(List<Material_List> material_lists) {
                                 adaptor.setMaterial_lists(material_lists);
-                                getSupportActionBar().setTitle("Elec & Electronics");
+                                adaptor.notifyDataSetChanged();
+
                             }
                         });
                         return true;
@@ -130,7 +171,8 @@ public class Material_list_Activity extends AppCompatActivity {
                             @Override
                             public void onChanged(List<Material_List> material_lists) {
                                 adaptor.setMaterial_lists(material_lists);
-                                getSupportActionBar().setTitle("Hydraulic");
+                                adaptor.notifyDataSetChanged();
+
                             }
                         });
                         return true;
@@ -139,7 +181,8 @@ public class Material_list_Activity extends AppCompatActivity {
                             @Override
                             public void onChanged(List<Material_List> material_lists) {
                                 adaptor.setMaterial_lists(material_lists);
-                                getSupportActionBar().setTitle("Mechanical");
+                                adaptor.notifyDataSetChanged();
+
                             }
                         });
                         return true;
@@ -148,7 +191,8 @@ public class Material_list_Activity extends AppCompatActivity {
                             @Override
                             public void onChanged(List<Material_List> material_lists) {
                                 adaptor.setMaterial_lists(material_lists);
-                                getSupportActionBar().setTitle("Pneumatic");
+                                adaptor.notifyDataSetChanged();
+
                             }
                         });
                         return true;

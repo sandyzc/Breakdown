@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "com.sandyzfeaklab.Breakdown_app"
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 32
         versionCode 1
         versionName "1.1"
         multiDexEnabled true
@@ -54,8 +54,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.1'
     implementation 'androidx.navigation:navigation-ui:2.5.1'
     implementation 'androidx.preference:preference:1.2.0'
-    implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
-    implementation 'com.google.firebase:firebase-firestore:24.3.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+    implementation 'com.google.firebase:firebase-firestore:24.3.1'
     implementation 'com.google.firebase:firebase-database:20.0.6'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.firebase:firebase-analytics:21.1.1'
@@ -85,9 +85,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.4.0')
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.4'
     implementation 'io.github.yavski:fab-speed-dial:1.0.6'
-    implementation "com.github.kojofosu:SplitButton:1.1"
 
-        def lifecycle_version = "2.6.0-alpha01"
+    def lifecycle_version = "2.6.0-alpha01"
         def arch_version = "2.1.0"
 
         // ViewModel
@@ -102,7 +101,7 @@ dependencies {
 
         // Annotation processor
         annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
 
 
         implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

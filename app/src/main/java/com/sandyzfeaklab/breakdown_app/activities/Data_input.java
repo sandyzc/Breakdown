@@ -165,7 +165,6 @@ public class Data_input extends AppCompatActivity {
                         beforepic.setImageBitmap(bitmap);
 
                         BEFORE_URI = getPathFromURI(intent.getData());
-                        ;
 
                     } catch (IOException e) {
                         e.printStackTrace();

@@ -70,6 +70,8 @@ public class Add_Sap_codes extends AppCompatActivity {
 
                                 flatDialog.dismiss();
 
+
+
                                 myRef.child(String.valueOf(flatDialog.getFirstTextField())).child("0").child("sap_description").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {

@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_margin="8dp"
     android:elevation="8dp"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:elevation="8dp"
         android:orientation="vertical">
 
@@ -78,16 +79,54 @@
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="5dp"
             android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/material_stock_card_layout"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotomono"
+                android:gravity="top"
+                android:text="Gen Description"
+                android:textColor="@color/themeColor"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/material_card_gen_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="top"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/black" />
+
+        </LinearLayout>
+
 
         <LinearLayout
 

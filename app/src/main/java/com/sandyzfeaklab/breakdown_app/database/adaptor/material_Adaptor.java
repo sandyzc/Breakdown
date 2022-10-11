@@ -3,6 +3,7 @@ package com.sandyzfeaklab.breakdown_app.database.adaptor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,11 +38,19 @@ public class material_Adaptor extends RecyclerView.Adapter<material_Adaptor.Mate
 
         Material_List current_list = material_lists.get(position);
 
+        if (current_list.getGen_desc()==null){
+            holder.gendesc.setVisibility(View.GONE);
+
+
+        }else {
+            holder.material_card_gen_description.setText(current_list.getGen_desc());
+        }
+
         holder.equipment_used_in.setText(current_list.getMachine() + ","+current_list.getUsed_in_1()+","+current_list.getUsed_in_2()+","
         +current_list.getUsed_in_3());
         holder.material_description.setText(current_list.getDescription());
         holder.sapcode.setText(current_list.getSap_code());
-        holder.stock.setText("STOCK : "+current_list.getStock());
+        holder.stock.setText("STOCK : "+current_list.getStock()+" "+ current_list.getLocation());
 
     }
 
@@ -52,7 +61,8 @@ public class material_Adaptor extends RecyclerView.Adapter<material_Adaptor.Mate
 
     public class MaterialHolder extends RecyclerView.ViewHolder {
 
-        TextView sapcode,stock,material_description,equipment_used_in;
+        TextView sapcode,stock,material_description,equipment_used_in,material_card_gen_description;
+        LinearLayout gendesc;
 
         public MaterialHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +71,8 @@ public class material_Adaptor extends RecyclerView.Adapter<material_Adaptor.Mate
             stock=itemView.findViewById(R.id.material_card_stock);
             material_description=itemView.findViewById(R.id.material_card_description);
             equipment_used_in=itemView.findViewById(R.id.material_card_equipment);
+            gendesc=itemView.findViewById(R.id.material_stock_card_layout);
+            material_card_gen_description=itemView.findViewById(R.id.material_card_gen_description);
         }
     }
 

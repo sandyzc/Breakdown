@@ -7,32 +7,60 @@
     tools:context=".activities.materials.Material_list_Activity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/material_list_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <io.github.yavski.fabspeeddial.FabSpeedDial
         android:id="@+id/mat_list_filter_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:fabGravity="bottom_end"
-       app:fabDrawable="@drawable/filter"
         app:fabBackgroundTint="@color/primary"
-        app:miniFabTitleBackgroundTint="@color/primary"
-        app:miniFabTitleTextColor="@color/white"
+        app:fabDrawable="@drawable/filter"
+        app:fabGravity="bottom_end"
         app:fabMenu="@menu/material_filter_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941"
+        app:layout_constraintVertical_bias="0.87"
         app:miniFabBackgroundTint="@android:color/white"
+        app:miniFabTitleBackgroundTint="@color/primary"
+        app:miniFabTitleTextColor="@color/white"
 
-       />
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="10dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchview1"
+            android:layout_width="match_parent"
+            app:iconifiedByDefault="false"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/material_list_rcv"
+            app:layout_constraintTop_toTopOf="@+id/material_list_rcv"
+            app:layout_constraintVertical_bias="0.898"
+            tools:layout_editor_absoluteX="-4dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

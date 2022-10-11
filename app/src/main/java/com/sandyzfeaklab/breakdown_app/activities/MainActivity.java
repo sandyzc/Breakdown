@@ -21,8 +21,6 @@ import com.sandyzfeaklab.breakdown_app.Energy_Entry;
 import com.sandyzfeaklab.breakdown_app.R;
 import com.sandyzfeaklab.breakdown_app.activities.materials.MaterialWithMachine;
 import com.sandyzfeaklab.breakdown_app.activities.materials.Material_list_Activity;
-import com.sandyzfeaklab.breakdown_app.activities.materials.Material_with_machin_kt;
-import com.tombayley.activitycircularreveal.CircularReveal;
 
 import java.util.Objects;
 
@@ -152,11 +150,44 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent= new Intent(MainActivity.this, Material_list_Activity.class);
-                startActivity(intent);
+                String sap,desc;
+
+
+
+                    Bundle bundle= new Bundle();
+
+                    if (sap_code_enterd!=null){
+                        bundle.putString("sapCode",sap_code_enterd.getText().toString());
+                    }
+                    if (desc_enterd!=null){
+                        bundle.putString("desc",desc_enterd.getText().toString());
+                    }
+
+                        bundle.putString("activity","MAINACTIVITY");
+
+
+                        Intent intent= new Intent(MainActivity.this, Material_list_Activity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+
+
+
+
+
 
             }
         });
+
+        search_with_machine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, MaterialWithMachine.class);
+                startActivity(intent);
+            }
+        });
+
+
         dialog.show();
 
 

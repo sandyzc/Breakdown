@@ -46,7 +46,7 @@ public class Recycler_Adaptor extends FirestoreRecyclerAdapter<DataInput_Model, 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     private ArrayList<DataInput_Model> data;
-    private HashSet<Integer> unfoldedIndexes = new HashSet<>();
+    private final HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private DocumentReference documentReference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

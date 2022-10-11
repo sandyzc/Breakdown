@@ -7,9 +7,9 @@ import android.widget.EditText;
 
 public class DateInputMask implements TextWatcher {
     private String current = "";
-    private String ddmmyyyy = "DDMMYYYY";
-    private Calendar cal = Calendar.getInstance();
-    private EditText input;
+    private final String ddmmyyyy = "DDMMYYYY";
+    private final Calendar cal = Calendar.getInstance();
+    private final EditText input;
 
     public DateInputMask(EditText input) {
         this.input = input;

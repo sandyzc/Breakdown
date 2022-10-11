@@ -285,4 +285,5 @@
     <string name="title_activity_add__log"></string>
     <string name="title_activity_oil_cons_graph">OIl_Cons_Graph</string>
     <string name="title_activity_energy_grapgh">EnergyGrapgh</string>
+
 </resources>

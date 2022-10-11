@@ -17,9 +17,9 @@ import com.sandyzfeaklab.breakdown_app.dataModel.DataInput_Model;
 
 public class Pending_activity extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     Recycler_Adaptor adaptor;
-    private CollectionReference notebookRef = db.collection("log");
+    private final CollectionReference notebookRef = db.collection("log");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

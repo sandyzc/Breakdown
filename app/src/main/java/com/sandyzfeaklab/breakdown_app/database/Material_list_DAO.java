@@ -9,7 +9,7 @@ import java.util.List;
 @Dao
 public interface Material_list_DAO {
 
-    @Query("SELECT * FROM spares_master WHERE description LIKE :search")
+    @Query("SELECT * FROM spares_master WHERE description LIKE  :search")
     LiveData<List<Material_List>> search_with_desc(String search);
 
 
@@ -21,6 +21,14 @@ public interface Material_list_DAO {
 
     @Query("SELECT * FROM spares_master ORDER BY sap_code")
     LiveData<List<Material_List>> getAllMaterials();
+
+    @Query("SELECT * FROM spares_master WHERE machine LIKE :machine")
+    LiveData<List<Material_List>> machine_list(String machine);
+
+    @Query("SELECT * FROM spares_master WHERE description LIKE :desc or sap_code LIKE :sapcode ")
+    LiveData<List<Material_List>> search_view(String desc, String sapcode);
+
+
 
 
 }

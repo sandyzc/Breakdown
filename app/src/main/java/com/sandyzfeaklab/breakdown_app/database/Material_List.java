@@ -9,12 +9,10 @@ import androidx.room.PrimaryKey;
 public class Material_List {
 
     @NonNull
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     private String sap_code;
     @NonNull
     private String description;
-
-
     private int stock;
     private String sub_assembly;
     private String image;
