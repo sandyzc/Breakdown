@@ -58,9 +58,11 @@ public class Material_list_Activity extends AppCompatActivity {
 
         rcView.setAdapter(adaptor);
 
+        searchView = findViewById(R.id.searchview1);
+
         setlist(activity,machine,sapCodeSearched,descSearched);
 
-        searchView = findViewById(R.id.searchview1);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -72,7 +74,9 @@ public class Material_list_Activity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if (newText != null) {
 
-                    search_db(newText);
+                    String query = "%"+ newText +"%";
+
+                    search_db(query);
                 }
 
                 return false;
@@ -83,13 +87,20 @@ public class Material_list_Activity extends AppCompatActivity {
 
     private void search_db(String search_query) {
 
-        String query = "%" + search_query + "%";
-        viewModel.searchview(query,query).observe(this, new Observer<List<Material_List>>() {
+        viewModel.searchview(search_query, search_query).observe(this, new Observer<List<Material_List>>() {
             @Override
             public void onChanged(List<Material_List> material_lists) {
                 adaptor.setMaterial_lists(material_lists);
             }
         });
+
+//        viewModel.filtered(search_query).observe(this, new Observer<List<Material_List>>() {
+//                    @Override
+//                    public void onChanged(List<Material_List> material_lists) {
+//                        adaptor.setMaterial_lists(material_lists);
+//                    }
+//                }
+//        );
     }
 
 
@@ -111,7 +122,7 @@ public class Material_list_Activity extends AppCompatActivity {
 
         } else {
 
-            if (sapCodeSearched.length()>0) {
+            if (sapCodeSearched.length()>1) {
 
                 searchView.setVisibility(View.INVISIBLE);
 

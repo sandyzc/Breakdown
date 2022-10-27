@@ -3,6 +3,7 @@ package com.sandyzfeaklab.breakdown_app.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "spares_master")

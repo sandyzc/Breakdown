@@ -40,6 +40,12 @@ public class Material_Repository {
 
     }
 
+//    public LiveData<List<Material_List>>filtered(String desc){
+//
+//        return material_list_dao.filterd(desc);
+//
+//    }
+
 
     public LiveData<List<Material_List>> getmachineList(String machine) {
 

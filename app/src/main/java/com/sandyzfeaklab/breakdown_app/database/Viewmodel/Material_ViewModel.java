@@ -30,6 +30,12 @@ public class Material_ViewModel extends AndroidViewModel {
 
     }
 
+
+//    public LiveData<List<Material_List>> filtered(String filter) {
+//        return repository.filtered(filter);
+//
+//    }
+
     public LiveData<List<Material_List>> getAllMaterials() {
         return allMaterials;
     }

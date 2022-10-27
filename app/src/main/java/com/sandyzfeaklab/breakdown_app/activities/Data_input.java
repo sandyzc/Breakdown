@@ -495,8 +495,8 @@ public class Data_input extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Data_input.this, Add_Sap_codes.class);
-                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
+//                Intent intent = new Intent(Data_input.this, Add_Sap_codes.class);
+//                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
             }
         });
 

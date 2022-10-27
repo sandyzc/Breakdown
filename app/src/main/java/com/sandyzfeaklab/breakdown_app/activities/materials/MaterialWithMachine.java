@@ -51,12 +51,27 @@ public class MaterialWithMachine extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Bundle bundle= new Bundle();
+                bundle.putString("activity","MACHINE");
+                bundle.putString("machine","HPDC");
+
+                Intent intent = new Intent(MaterialWithMachine.this, Material_list_Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
         gspm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle= new Bundle();
+                bundle.putString("activity","MACHINE");
+                bundle.putString("machine","GSPM");
+
+                Intent intent = new Intent(MaterialWithMachine.this, Material_list_Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });
@@ -65,6 +80,13 @@ public class MaterialWithMachine extends AppCompatActivity {
         coreshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle= new Bundle();
+                bundle.putString("activity","MACHINE");
+                bundle.putString("machine","Core Shop");
+
+                Intent intent = new Intent(MaterialWithMachine.this, Material_list_Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });

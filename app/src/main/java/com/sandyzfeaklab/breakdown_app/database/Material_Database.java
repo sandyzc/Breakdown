@@ -6,7 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-    @Database(entities = Material_List.class, version = 1)
+import java.io.File;
+
+@Database(entities = Material_List.class, version = 1)
     public abstract class Material_Database extends RoomDatabase {
 
         //TODO need to update the DB from server
@@ -23,6 +25,16 @@ import androidx.room.RoomDatabase;
                         .build();
             }
             return instance;
+        }
+
+        public static synchronized void updateDatabae(Context context, File localefile){
+            if (instance==null){
+                instance= Room.databaseBuilder(context.getApplicationContext(),
+                                Material_Database.class, "spares.db").createFromFile(localefile)
+                        .fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
+                        .build();
+            }
         }
 
 
